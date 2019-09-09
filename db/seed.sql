@@ -6,7 +6,10 @@ hash text,
 profile_pic text,
 user_points int,
 user_rating int,
-shipping_address text);
+street text,
+city varchar,
+state varchar(30),
+zip int);
 
 create table games (
 game_id int unique,
