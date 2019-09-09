@@ -1,12 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import {HashRouter, withRouter} from "react-router-dom"
+import routes from "./routes"
 
-function App() {
-  return (
-    <div className="App">
+class App extends Component {
+
+  render() {
+    return (
+      <HashRouter>
+      <div className="App">
+        {routes}
     </div>
+      </HashRouter>
   );
 }
+}
 
-export default App;
+export default withRouter(App);
