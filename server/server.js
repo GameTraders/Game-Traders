@@ -31,3 +31,5 @@ massive(CONNECTION_STRING).then(db => {
 
 // USER ENPOINTS
 app.post('/auth/register', aCtrl.register)
+app.post('/auth/login', aCtrl.login)
+app.delete('/auth/logout', aCtrl.logout)
