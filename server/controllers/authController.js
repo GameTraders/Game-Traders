@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 module.exports = {
   register: async (req, res) => {
     const db = req.app.get("db");
-    const { usernameReg: username, email, passwordReg: password, street, city, state, zip, profile_pic } = req.body;
+    const { usernameReg: username, email, passwordReg: password, street, city, state, zip } = req.body;
+    const profile_pic = `https://robohash.org/${username}`
     //tested in postman, returns immediately if condition is met
     const user = await db.find_email([email]);
     if (user.length > 0) {
