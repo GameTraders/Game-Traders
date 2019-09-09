@@ -3,8 +3,8 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const aCtrl = require('./controllers/authController')
-// const socket = require('socket.io')
-// const ssl = require('./controllers/socketController')
+const socket = require('socket.io')
+const ssl = require('./controllers/socketController')
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env || 4400
 
 const app = express()
@@ -20,7 +20,13 @@ app.use(session({
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
 
-    app.listen(SERVER_PORT, () => console.log(`Cruising on PORT ${SERVER_PORT}`))
+    const io = socket(app.listen(SERVER_PORT, () => console.log(`Cruising on PORT ${SERVER_PORT}`)))
+
+    // SOCKETS
+    io.on('connection', socket => {
+        console.log(('A new user just connected'));
+        ssl.setSocketListeners(socket, db, io)
+    })
 })
 
 // USER ENPOINTS
