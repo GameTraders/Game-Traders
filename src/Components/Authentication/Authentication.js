@@ -33,9 +33,9 @@ export default class Authentication extends Component {
         )
     }
     Register = ()=> {
-        const {usernameReg, passwordReg, confirm_passwordReg, profile_pic,
+        const {usernameReg, passwordReg, profile_pic, email,
         street, city, state, zip} = this.state
-        Axios.post('/auth/register', {usernameReg, passwordReg, confirm_passwordReg, profile_pic,
+        Axios.post('/auth/register', {usernameReg, passwordReg, profile_pic, email,
             street, city, state, zip})
             .then(
                 this.props.history.push("/home")
@@ -72,7 +72,7 @@ render() {
                     </div>
                     <div className="Authentication_Container2">
                         <h4>Email</h4>
-                        <input onChange={(e)=> {this.handleChange("email", e.target.value)}} className="Authentication_Input" type="Password" placeholder="Email" />
+                        <input onChange={(e)=> {this.handleChange("email", e.target.value)}} className="Authentication_Input" type="text" placeholder="Email" />
                     </div>
                     <div className="Authentication_Container2">
                         <h4>Password</h4>
@@ -85,7 +85,7 @@ render() {
                     </div>
                     <div className="Authentication_Container2">
                         <h4>Profile Url</h4>
-                        <input onChange={(e)=> {this.handleChange("profile_pic", e.target.value)}} className="Authentication_Input" type="Password" placeholder="Profile Pic Url" />
+                        <input onChange={(e)=> {this.handleChange("profile_pic", e.target.value)}} className="Authentication_Input" type="text" placeholder="Profile Pic Url" />
                     </div>
                 </div>
                 <div className="Authentication_User_Right">
@@ -95,7 +95,7 @@ render() {
                     </div>
                     <div className="Authentication_Container2">
                         <h4>City</h4>
-                        <input onChange={(e)=> {this.handleChange("city", e.target.value)}} className="Authentication_Input" type="Password" placeholder="City" />
+                        <input onChange={(e)=> {this.handleChange("city", e.target.value)}} className="Authentication_Input" type="text" placeholder="City" />
                     </div>
                     <div className="Authentication_Container2">
                         <h4>State</h4>
@@ -103,7 +103,7 @@ render() {
                     </div>
                     <div className="Authentication_Container2">
                         <h4>Zip</h4>
-                        <input onChange={(e)=> {this.handleChange("zip", e.target.value)}} className="Authentication_Input" type="Password" placeholder="Zip Code" />
+                        <input onChange={(e)=> {this.handleChange("zip", e.target.value)}} className="Authentication_Input" type="text" placeholder="Zip Code" />
                     </div>
                 <button onClick={this.Register} className="Authentication_Button2">
                     <h3 className="Register_Button_h3">Register</h3>
