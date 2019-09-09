@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 module.exports = {
   register: async (req, res) => {
     const db = req.app.get("db");
-    const { username, email, password, shipping_address, profile_pic } = req.body;
+    const { usernameReg: username, email, passwordReg: password, street, city, state, zip, profile_pic } = req.body;
     //tested in postman, returns immediately if condition is met
     const user = await db.find_email([email]);
     if (user.length > 0) {
@@ -12,7 +12,7 @@ module.exports = {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
     //tested in postman, inserts data correctly
-    db.insert_user_info({ email, username, hash, shipping_address, profile_pic})
+    db.insert_user_info({ email, username, hash, street, city, state, zip, profile_pic})
       .then(result => {
         req.session.user = result[0];
         res
