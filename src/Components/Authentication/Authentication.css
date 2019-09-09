@@ -1,0 +1,136 @@
+.Authentication_Outer {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(160, 160, 160);
+    display: flex;
+    color: #E5E5E5;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.Authentication_Logo {
+    height: 80%;
+    width: 30%;
+    margin: 0 0 30% 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2vh 0;
+}
+
+.Authentication_NavBar {
+    height: 69px;
+    width: 100%;
+    display: flex;
+    background-color: #2E2E2E;
+    border-radius: 5px;
+    text-shadow: 2px 1px #2E2E2E;
+    justify-content: space-between;
+}
+
+.Authentication_Button {
+    background-color: #22CEF9;
+    height: 30px;
+    width: 50px;
+    margin: 0 0 5px 0;
+    border: none;
+    border-radius: 5px 0px 5px 0;
+    border-bottom: 2px solid #2E2E2E;
+    border-right: 1px solid #2E2E2E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #E5E5E5;
+}
+
+.Authentication_Button,
+h4 {
+    position: relative;
+    bottom: 3px;
+}
+
+.Authentication_Login {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.Authentication_Container,
+h4 {
+    margin: 10px 0 0 0;
+    text-align: left;
+}
+
+.Authentication_Input {
+    border-radius: 5px;
+    background-color: #E5E5E5;
+    border: none;
+    margin: 0 0 5px 0;
+}
+
+.Authentication_Register {
+    height: 80vh;
+    width: 50vw;
+    background-color: #AED429;
+    margin: 5vh;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px rgb(0, 0, 0);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.Authentication_Container2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.Authentication_User_Left {
+    height: 80%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Authentication_User_Right {
+    height: 80%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Authentication_Input {
+    height: 15px;
+    width: 150px;
+}
+
+.Authentication_Button2 {
+    background-color: #FC9B00;
+    height: 40px;
+    width: 100px;
+    margin: 10px 0 5px 0;
+    border: none;
+    border-radius: 5px 0px 5px 0;
+    border-bottom: 2px solid #2E2E2E;
+    border-right: 1px solid #2E2E2E;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #2E2E2E;
+    position: relative;
+    left: 20%;
+}
+
+.Register_Button_h3 {
+    position: relative;
+    bottom: 5px;
+}
+
+.passwords_Dont_Match {
+    color: red;
+    margin: 0;
+}
