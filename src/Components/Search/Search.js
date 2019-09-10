@@ -3,7 +3,11 @@ import axios from "axios"
 
 export default class Search extends Component {
     state = {
-        gamename: ""
+        gamename: "",
+        games: []
+    }
+    componentDidMount() {
+        this.getname()
     }
 
     handleChange(key, e) {
@@ -13,9 +17,11 @@ export default class Search extends Component {
     }
     getname = async () => {
         const name = this.state.gamename
-        console.log(name)
         const results = await axios.post("/api/games", {name})
-        console.log(results)
+      this.setState({
+          games: results.data.results
+      })
+      console.log(this.state)
     }
     render() {
 
@@ -24,6 +30,12 @@ export default class Search extends Component {
                 <h5>Dashboard</h5>
                 <input onChange={(e)=>{this.handleChange("gamename", e.target.value)}} type="text" placeholder="Search by Game Name"/>
                 <button onClick={this.getname}>Get by name</button>
+                {this.state.games.length > 0 ? this.state.games.map((el,i)=> (
+                    <div>
+                        <h4>{el.name}</h4>
+                        <img src={el.background_image} alt=""/>
+                    </div>
+                )) : <h4>Loading</h4>}
             </div>
         )
     }
