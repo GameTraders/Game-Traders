@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 
+
 module.exports = {
   register: async (req, res) => {
     const db = req.app.get("db");
@@ -51,5 +52,6 @@ module.exports = {
       req.session.destroy()
     //   console.log(req.session)
       res.status(200).send({message: 'logged out', loggedIn: false})
-  }
+  },
+
 };

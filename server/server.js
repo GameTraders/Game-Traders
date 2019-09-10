@@ -3,6 +3,7 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const aCtrl = require('./controllers/authController')
+const gCtrl = require('./controllers/gameController')
 const socket = require('socket.io')
 const ssl = require('./controllers/socketController')
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env || 4400
@@ -33,3 +34,6 @@ massive(CONNECTION_STRING).then(db => {
 app.post('/auth/register', aCtrl.register)
 app.post('/auth/login', aCtrl.login)
 app.delete('/auth/logout', aCtrl.logout)
+
+//API REQUESTS
+app.post('/api/games', gCtrl.getGameName)
