@@ -41,6 +41,7 @@ app.get('/api/wishlist/:user_id', ctrl.getUserWishlist)
 app.get('/api/messages/:room_id', ssl.getMessages)
 app.post('/api/newGames/:user_id', ctrl.saveNewGame)
 app.post('/api/wishlist/:user_id', ctrl.addToWishlist)
+app.put('/api/updateUsers/:user_id', ctrl.updateUserProfile)
 
 //API REQUESTS
 app.post('/api/games', gCtrl.getGameName)
