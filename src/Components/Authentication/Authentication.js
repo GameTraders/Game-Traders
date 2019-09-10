@@ -1,9 +1,8 @@
 import React, {Component} from "react"
 import "./Authentication.css"
 import Axios from "axios"
-
-
-
+import swal from "sweetalert"
+import {TweenMax, Power1} from "gsap"
 
 
 export default class Authentication extends Component {
@@ -21,6 +20,10 @@ export default class Authentication extends Component {
         zip: ''
 
     }
+    componentDidMount() {
+        TweenMax.to(document.getElementsByClassName("Authentication_Register", 1.2, {opacity: 1, scale: 2, ease: Power1.easeIn}))
+    }
+
     handleChange = (key, e) => {
         this.setState({
             [key]: e
@@ -28,11 +31,17 @@ export default class Authentication extends Component {
     }
     Login = ()=> {
         const {username, password} = this.state
-        Axios.post("/auth/login", {username, password}).then(
+        Axios.post("/auth/login", {username, password}).then(res=> {
+            const user = res.data.user
+            console.log(user)
             this.props.history.push("/home")
-        )
+        }
+        ).catch(res=> {
+            swal("Sorry!", "Invalid username or password", "error")
+        })
     }
     Register = ()=> {
+
         const {usernameReg, passwordReg, profile_pic, email,
         street, city, state, zip} = this.state
         Axios.post('/auth/register', {usernameReg, passwordReg, profile_pic, email,
