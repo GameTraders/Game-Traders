@@ -1,8 +1,10 @@
 import './Dashboard.css'
 import React, {Component} from "react"
+import axios from 'axios';
 
 export default class Dashboard extends Component{
     state = {
+        gameName: '',
         checkBox: true,
         games: [{
             name: "Halo Infinite",
@@ -198,17 +200,37 @@ cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-
 points: 60
 }]
     }
+
+    handleChange(key, e) {
+        this.setState({
+            [key]: e
+        })
+    }
+    getName = async () => {
+        const name = this.state.gameName
+        console.log(name)
+        const results = await axios.post("/api/games", {name})
+        console.log('results:', results)
+        this.setState({
+            games: results.data
+        })
+    }
+
     render() {
+        // console.log(object);
+        let cover = "https://i.redd.it/uk00vkrvfkb11.png"
+        let points = "??"
         let miniGames = this.state.games.map((e, i) => {
             return (
                 <div key={i} className="home-game-mini">
                         <h4 className="home-mini-name">
-                            {e.name.length > 5 ? `${e.name.substring(0, 6)}...` : `${e.name}` }
+                            {e.name.length > 15 ? `${e.name.substring(0, 16)}...` : `${e.name}` }
                         </h4>
                         <h4 className="mini-name-hover">{e.name}</h4>
                         <div className="home-mini-dispay">
-                            <img className="home-mini-cover-art" alt="" src={e.cover} />
-                            <div className="home-game-mini-points">{e.points}</div>
+                            <img className="home-mini-cover-art" alt="" src={cover} />
+                            <div className="game-details">hello</div>
+                            <div className="home-game-mini-points">{points}</div>
                         </div>
                 </div>
             )
@@ -221,12 +243,12 @@ points: 60
                             <h1>Game Traders</h1>
                         </div>
                         <div className="Dashboard-search-container">
-                            <button onClick={this.Login} className="Authentication_Button">
+                            <button onClick={this.getName} className="Authentication_Button">
                                 <h4>Search</h4>
                             </button>
                             <div className="Authentication_Username_Container">
                                 <h4>Search</h4>
-                                <input onChange={(e)=> {this.handleChange("username", e.target.value)}} className="Authentication_Input" type="text" placeholder="Username" />
+                                <input onChange={(e)=> {this.handleChange("gameName", e.target.value)}} className="Authentication_Input" type="text" placeholder="Search by Game Name" />
                             </div>
                             <div className="check-container"  >
                                 <div className="filter-option">

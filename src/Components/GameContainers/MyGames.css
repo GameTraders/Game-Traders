@@ -104,7 +104,7 @@
   .add-game-icon{
       position: absolute;
       left: calc(50% - 24px);
-      bottom: 27px;
+      bottom: 9px;
       transition: transform .3s ease-in-out;
   }
 
