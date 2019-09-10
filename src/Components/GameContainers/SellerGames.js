@@ -34,8 +34,10 @@ class SellerGames extends Component {
                           {e.name.length > 5 ? `${e.name.substring(0, 6)}...` : `${e.name}` }
                       </h4>
                       <h4 className="mini-name-hover">{e.name}</h4>
-                      <img className="mini-cover-art" alt="" src={e.cover_art} />
-                      <div className="game-mini-points">{e.points}</div>
+                      <div className="home-mini-dispay">
+                        <img className="mini-cover-art" alt="" src={e.cover_art} />
+                        <div className="game-mini-points">{e.points}</div>
+                      </div>
               </div>
           )
       })

@@ -21,19 +21,20 @@
   .game-mini{
       position: relative;
       z-index: 0;
+      display: flex;
+      flex-direction: column;
       width: 69px;
-      height: 111px;
+      height: 120px;
       margin-right: 18px;
       transition: transform .3s ease-in-out;
       transform-origin: top left;
       margin-bottom: 9px;
       transition: transform .3s ease-in-out, background-color .4s ease-in-out;
       animation: 1.1s ease-out 0s 1 slideInFromRight;
-      box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
   }
 
   .game-mini:hover{
-    transform: scale(1.8);
+    transform: scale(1.8) translateY(-20%) translateX(-10%);
     transform-origin: top left;
     z-index: 1;
   }
@@ -53,7 +54,7 @@
 
   .game-mini:hover .mini-name-hover{
       display: block;
-      width: 150px;
+      width: 50px;
       text-align: left;
       color: #FC9B00;
       padding-left: 3px;
@@ -80,11 +81,12 @@
       width: 69px;
       height: 93px;
       border-radius: 3px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
   }
 
   .game-mini-points{
       position: absolute;
-      bottom: 3px;
+      bottom: 6px;
       left: 3px;
       color: #FC9B00;
       font-weight: bold;

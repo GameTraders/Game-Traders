@@ -10,6 +10,7 @@ export default (
     <Switch>
         <Route component = {Authentication}  path = "/" exact/>
         <Route component = {Dashboard}  path = "/home" exact/>
+        <Route component = {Trader}  path = "/trader" exact/>
         <Route component = {Search}  path = "/search" />
         <Route component = {UserProfile} path = '/userProfile/:user_id'/>
         <Route component = {Trader} path = '/trader'/>

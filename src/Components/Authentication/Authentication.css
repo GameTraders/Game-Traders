@@ -1,7 +1,7 @@
 .Authentication_Outer {
     height: 100vh;
     width: 100vw;
-    background-color: rgb(160, 160, 160);
+    background-color: #2E2E2E;
     display: flex;
     color: #E5E5E5;
     flex-direction: column;
@@ -19,14 +19,22 @@
     margin: 2vh 0;
 }
 
+.Authentication_Logo h1{
+    color: #FC9B00;
+}
+
 .Authentication_NavBar {
+    align-items: center;
     height: 69px;
     width: 100%;
     display: flex;
     background-color: #2E2E2E;
     border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
     text-shadow: 2px 1px #2E2E2E;
     justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
 }
 
 .Authentication_Button {
@@ -51,8 +59,7 @@ h4 {
 }
 
 .Authentication_Login {
-    height: 100%;
-    width: 50%;
+    width: 40%;
     display: flex;
     justify-content: space-around;
     align-items: flex-end;

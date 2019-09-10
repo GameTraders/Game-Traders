@@ -1,24 +1,30 @@
 import React, {Component} from "react"
 import "./Authentication.css"
 import Axios from "axios"
-import swal from "sweetalert"
+// import swal from "sweetalert"
 import {TweenMax, Power1} from "gsap"
+import { connect } from "react-redux";
+import {login} from '../../ducks/userReducer'
 
 
-export default class Authentication extends Component {
-    state = {
-        username: "",
-        usernameReg: "",
-        email: "",
-        password: "",
-        passwordReg: "",
-        confirm_passwordReg: '',
-        profile_pic: "",
-        street: '',
-        city: '',
-        state: '',
-        zip: ''
+class Authentication extends Component {
+    constructor(props){
+        super(props)
+    
+        this.state = {
+            username: "",
+            usernameReg: "",
+            email: "",
+            password: "",
+            passwordReg: "",
+            confirm_passwordReg: '',
+            profile_pic: "",
+            street: '',
+            city: '',
+            state: '',
+            zip: ''
 
+        }
     }
     componentDidMount() {
         TweenMax.to(document.getElementsByClassName("Authentication_Register", 1.2, {opacity: 1, scale: 2, ease: Power1.easeIn}))
@@ -31,14 +37,8 @@ export default class Authentication extends Component {
     }
     Login = ()=> {
         const {username, password} = this.state
-        Axios.post("/auth/login", {username, password}).then(res=> {
-            const user = res.data.user
-            console.log(user)
+        this.props.login(username, password)
             this.props.history.push("/home")
-        }
-        ).catch(res=> {
-            swal("Sorry!", "Invalid username or password", "error")
-        })
     }
     Register = ()=> {
 
@@ -123,3 +123,12 @@ render() {
     )
 }
 }
+
+const mapStateToProps = reduxState => {
+    return reduxState;
+  };
+  
+  export default connect(
+    mapStateToProps,
+    {login}
+  )(Authentication);
