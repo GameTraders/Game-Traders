@@ -9,6 +9,14 @@ module.exports = {
             res.status(200).send(result)
         })
     },
+    updateUserProfile: (req, res) => {
+        const db = req.app.get('db')
+        const {user_id} = req.params
+        const {username, email, profile_pic, city, state, zip, street} = req.body
+        db.update_user_profile({username, email, profile_pic,city,state, zip, street, user_id}).then(result => {
+            res.status(200).send(result)
+        })
+    },
     getUserGames: (req, res) => {
         //tested and working with postman
         const db = req.app.get('db')

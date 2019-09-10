@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
 
-export default class Dashboard extends Component {
+export default class Search extends Component {
     state = {
         gamename: ""
     }
