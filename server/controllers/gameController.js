@@ -11,7 +11,7 @@ module.exports = {
                 'Accept': 'application/json',
                 'user-key': API_KEY
             },
-            data: `fields age_ratings,artworks,category,cover,name,platforms,similar_games,total_rating,total_rating_count,url; search "${name}";`
+            data: `fields age_ratings,artworks,category,cover,name,platforms,similar_games,total_rating,total_rating_count,url; search "${name}"; limit 50;`
         })
         console.log(results.data)
         res.status(200).send(results.data)
