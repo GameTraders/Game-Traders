@@ -1,3 +1,8 @@
+DROP TABLE wishlist;
+DROP TABLE game_list;
+DROP TABLE games;
+
+
 create table gt_users (
 username Varchar,
 user_id serial primary key,
@@ -13,12 +18,12 @@ zip int);
 
 create table games (
 game_id int unique,
-name varchar,
-cover_art text,
-first_release_date varchar,
-age_rating varchar,
+game_name varchar,
+background_image text,
+released varchar,
+genre varchar,
 platforms varchar,
-igdb_link text,
+metacritic INT,
 id serial primary key);
 
 create table game_list (
