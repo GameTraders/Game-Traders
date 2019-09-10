@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .add-points-btn:hover, .confirm:hover, .chat-submit:hover, .up:hover, .down:hover{
+    transform: scale(1.1);
+  }
+
+  h1{
+      color: #E5E5E5;
+  }
+
+  p{
+      font-weight: bold;
+  }
+
+  .game-title{
+      font-size: 18px;
+      color: #FC9B00;
+  }
+
+  .Trader{
+      background: #2E2E2E;
+      height: calc(100vh - 69px);
+      margin-top: 69px;
+      width: 100vw;
+      overflow: hidden;
+  }
+
+  .trade-container{
+      background: #2E2E2E;
+      height: 56vh;
+      display: flex;
+      justify-content: space-between;
+  }
+
+  .trade-section{
+      background: #2E2E2E;
+      display: flex;
+      width: 900px;
+      justify-content: space-between;
+      border: 3px solid orange;
+      border-radius: 9px;
+      margin: 3px;
+  }
+
+  .selected-trade{
+      position: relative;
+      margin: 18px;
+      width: 233px;
+  }
+
+  .selected-game{
+      width: 100%;
+      height: calc(100% - 21px);
+      border-radius: 9px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+  }
+
+  .game-points{
+      display: flex;
+      align-items: flex-end;
+      position: absolute;
+      left: 9px;
+      bottom: 9px;
+      color: #FC9B00;
+      font-size: 36px;
+      font-weight: bold;
+      border-radius: 9px;
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: rgba(0, 0, 0, 0.65) 6px 9px 14px 6px;
+  }
+
+  .up-down-pts{
+      display: flex;
+      flex-direction: column;
+      color: #E5E5E5;
+  }
+
+  .trade-chat{
+    display: flex;
+    flex-direction: column;
+    background: #2E2E2E;
+    margin: 18px;
+    width: 300px;
+    padding: 9px;
+    border-radius: 9px;
+}
+
+.chat-messages{
+    height: 100%;
+}
+
+.each-user-message{
+    background: #AED429;
+    border-radius: 6px;
+    border-bottom-left-radius: 0px;
+    margin-right: 36px;
+    display: flex;
+    margin-bottom: 3px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+}
+
+.each-seller-message{
+    background: #28AB53;
+    border-radius: 6px;
+    border-bottom-right-radius: 0px;
+    margin-left: 36px;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 3px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+}
+
+.message-content{
+    text-align: left;
+    padding-left: 9px;
+}
+
+.chat-input{
+    background: #FC9B00;
+    color: #2E2E2E;
+    font-weight: bold;
+    padding-left: 3px;
+    width: 69%;
+    height: 18px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+}
+
+.chat-submit{
+    width: 31%;
+    padding: 3px;
+    border-radius: 6px;
+    border: 1px solid #FC9B00;
+    background: rgba(0, 0, 0, 0);
+    color: #FC9B00;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+}
+
+.chat-confirmation{
+    display: flex;
+    justify-content: space-around; 
+}
+
+.confirm{
+    padding: 3px;
+    border-radius: 6px;
+    border: 1px solid #22CEF9;
+    background: rgba(0, 0, 0, 0);
+    color: #22CEF9;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+}
+
+span{
+    font-size: 18px;
+}
+
+  .user-section, .seller-section{
+      background: #2E2E2E;
+      width: 169px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 18px;
+      padding: 9px;
+      border-radius: 9px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+  }
+
+  .seller-section{
+      background: #22CEF9;
+      background: #28AB53;
+      background: #AED429;
+      background: #E5E5E5;
+      background: #FC9B00;
+      background: #2E2E2E;
+  }
+
+  .games{
+      background: #28AB53;
+      display: flex;
+      justify-content: space-between;
+      height: calc(44vh - 69px);
+  }
+
+  .profile-pic{
+      width: 69px;
+      border-radius: 50%;
+      background: #22CEF9;
+  }
+
+  .chat-profile-pic{
+      width: 33px;
+      height: 33px;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 50%;
+      border-top-right-radius: 0px;
+      background: #22CEF9;
+  }
+
+  .chat-seller-profile-pic{
+      width: 33px;
+      height: 33px;
+      border-top-right-radius: 6px;
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      background: #22CEF9;
+  }
+
+  .username{
+      color: #AED429;
+  }
+
+  .seller-username{
+    color: #28AB53;
+  }
+
+  .user-points{
+      display: flex;
+  }
+
+  .user-rating{
+      color: #22CEF9;
+      font-size: 33px;
+  }
+
+  .user-points h1{
+      font-size: 66px;
+  }
+
+  .point-adder{
+      display: flex;
+      flex-direction: column;
+      margin: 18px 3px 18px 3px;
+  }
+
+  .add-points-btn{
+      margin-left: 6px;
+  }
