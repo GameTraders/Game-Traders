@@ -11,15 +11,15 @@ class Dashboard extends Component{
         super()
         this.state = {
         gameName: '',
-        mRatedCheckBox: true,
-        x360CheckBox: true,
-        xOneCheckBox: true,
-        ps2CheckBox: true,
-        ps3CheckBox: true,
-        ps4CheckBox: true,
-        wiiCheckBox: true,
-        switchCheckBox: true,
-        gameBoyCheckBox: true,
+        // mRatedCheckBox: true,
+        // x360CheckBox: true,
+        // xOneCheckBox: true,
+        // ps2CheckBox: true,
+        // ps3CheckBox: true,
+        // ps4CheckBox: true,
+        // wiiCheckBox: true,
+        // switchCheckBox: true,
+        // gameBoyCheckBox: true,
         games: []
         }
     }
@@ -64,7 +64,7 @@ class Dashboard extends Component{
         const {profile_pic} = this.props.user
         console.log('user', this.props.user);
         let points = "??"
-        const {mRatedCheckBox, x360CheckBox, xOneCheckBox, ps2CheckBox, ps3CheckBox, ps4CheckBox, wiiCheckBox, switchCheckBox, gameBoyCheckBox } = this.state
+        // const {mRatedCheckBox, x360CheckBox, xOneCheckBox, ps2CheckBox, ps3CheckBox, ps4CheckBox, wiiCheckBox, switchCheckBox, gameBoyCheckBox } = this.state
         return(
             <div className="Dashboard">
                 <div className="Dashboard_NavBar">

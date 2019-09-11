@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.add-points-btn:hover {
+    transform: scale(1.1);
+}
+h1{
+    color: #E5E5E5;
+}
+h3 {
+    color: white;
+}
+p {
+    font-weight: bold;
+}
+.userInfo {
+    background: #2E2E2E;
+    width: 169px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px;
+    padding: 9px;
+    border-radius: 9px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+}
+.pointsHave {
+    display: flex;
+}
+.pointsHave h1 {
+    font-size: 66px;
+}
+.pointsAdd {
+    display: flex;
+    flex-direction: column;
+    margin: 18px 3px 18px 3px
+}
+.profileContainer{
+    background: #2E2E2E;
+    height: 56vh;
+    display: flex;
+    justify-content: space-between;
+}
+.pastTrades {
+    background: #2E2E2E;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
+    border: 3px solid #AED429;
+    padding: 9px;
+    border-radius: 9px;
+    overflow: scroll;
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px; */
+}
+.secondDiv {
+    /* border: 3px solid #28AB53; */
+    margin: 18px;
+    border-radius: 9px;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+
+}
+.actualTrades {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 18px;
+}
+.pastTradeBox {
+    display: flex;
+}
+.currentTrades {
+    background: #2E2E2E;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
+    border: 3px solid orange;
+    padding: 9px;
+    border-radius: 9px;
+    overflow: scroll;
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px; */
+}
+.userFriends {
+    background: #2E2E2E;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
+    border: 3px solid #22CEF9;
+    padding: 9px;
+    border-radius: 9px;
+    overflow: scroll;
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px; */
+}
+.tradeArrows {
+    width: 30px;
+    height: auto;
+    padding-top: 50px;
+    margin-right: 18px;
+}
+.bottom-section {
+    background: #28AB53;
+      display: flex;
+      justify-content: space-between;
+      /* height: calc(44vh - 69px); */
+}
+.actualTrades > h4 {
+    margin-right: 18px;
+}
+/* 
+.userProfile{
+    display: flex;
+    flex-direction: column;
+} */
