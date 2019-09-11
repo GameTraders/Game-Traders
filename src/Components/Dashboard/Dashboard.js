@@ -1,13 +1,18 @@
 import './Dashboard.css'
 import React, { Component } from "react"
 import axios from 'axios';
+import { connect } from "react-redux";
+import {Link} from 'react-router-dom'
 
-export default class Dashboard extends Component {
-    state = {
+class Dashboard extends Component{
+    constructor() {
+        super()
+        this.state = {
         gameName: '',
         checkBox: true,
         games: []
 
+    }
     }
 
     handleChange(key, e) {
@@ -32,7 +37,8 @@ export default class Dashboard extends Component {
     }
 
     render() {
-        // console.log(object);
+        const {user} = this.props
+        console.log('user', this.props.user);
         let cover = "https://i.redd.it/uk00vkrvfkb11.png"
         let points = "??"
         const { checkBox } = this.state
@@ -50,10 +56,16 @@ export default class Dashboard extends Component {
                             <h4>Search</h4>
                             <input onChange={(e) => { this.handleChange("gameName", e.target.value) }} className="Authentication_Input" type="text" placeholder="Search by Game Name" />
                         </div>
-                        <div className="check-container"  >
-                            <div className="filter-option">
-                                <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({ checkBox: !checkBox })} />
-                                <p>M - Rated</p>
+                        <div className="nav-links">
+                            <Link to={{pathname: `/post/${user.user_id}`, state: user}} ><h1>Profile</h1></Link>
+                        </div>
+                        <div className="Dashboard-search-container">
+                            <button onClick={this.getName} className="Authentication_Button">
+                                <h4>Search</h4>
+                            </button>
+                            <div className="Authentication_Username_Container">
+                                <h4>Search</h4>
+                                <input onChange={(e)=> {this.handleChange("gameName", e.target.value)}} className="Authentication_Input" type="text" placeholder="Search by Game Name" />
                             </div>
                             <div className="filter-option">
                                 <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({ checkBox: !checkBox })} />
@@ -115,4 +127,13 @@ export default class Dashboard extends Component {
         )
     }
 }
+
+const mapStateToProps = reduxState => {
+    return reduxState;
+  };
+  
+  export default connect(
+    mapStateToProps,
+    null
+  )(Dashboard);
 
