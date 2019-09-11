@@ -37,11 +37,11 @@ module.exports = {
         const db = req.app.get('db')
         const {user_id} = req.params
         const {game_id, game_name, background_image, released, platforms, genre, metacritic} = req.body
-        db.save_new_game({game_id, game_name, background_image, released, platforms, genre, metacritic}).then(result => {
-            res.sendStatus(200)
+        db.save_new_game({game_id, game_name, background_image, released, platforms, genre, metacritic}).then(res => {
+            res.status(200).send()
         })
         db.save_game_id({user_id, game_id}).then(newGame => {
-            res.sendStatus(200)
+            res.status(200).send(newGame)
         })
 
     },

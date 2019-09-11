@@ -61,17 +61,16 @@ class Dashboard extends Component{
 
     addToWishList = async(e) => {
         const {user_id} = this.props.user
-        const {id} = e
+        const {id: game_id, game_name, background_image, released, platforms, genre, metacritic } = e
          console.log('game to add:', e);
-         await axios.post(`/api/newGames/${user_id}`, {})
-         await axios.post(`/api/wishList/${user_id}`, {id})
+         await axios.post(`/api/newGames/${user_id}`, {game_id, game_name, background_image, released, platforms, genre, metacritic })
+        //  await axios.post(`/api/wishList/${user_id}`, {id})
     }
 
     render() {
         console.log('games:', this.state.games);
         const {profile_pic} = this.props.user
         console.log('user', this.props.user);
-        let points = "??"
         // const {mRatedCheckBox, x360CheckBox, xOneCheckBox, ps2CheckBox, ps3CheckBox, ps4CheckBox, wiiCheckBox, switchCheckBox, gameBoyCheckBox } = this.state
         return(
             <div className="Dashboard">
@@ -142,8 +141,8 @@ class Dashboard extends Component{
                                <h4 className="mini-name-hover">{e.slug}</h4>
                                <div className="home-mini-dispay">
                                    <img className="home-mini-cover-art" alt="" src={e.background_image} />
-                                   <div className="game-details">{e.metacritic}</div>
-                                   <div className="home-game-mini-points">{points}</div>
+                                   {/* <div className="game-details">{e.metacritic}</div> */}
+                                   <div className="home-game-mini-points">{e.metacritic}%</div>
                                </div>
                            </div>
                        )
