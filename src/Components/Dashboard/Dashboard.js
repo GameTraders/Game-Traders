@@ -220,6 +220,9 @@ points: 60
             games: results.data
         })
     }
+    addToWishlist = () => {
+        
+    }
 
     render() {
         const {user} = this.props
