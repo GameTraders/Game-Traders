@@ -49,9 +49,9 @@ module.exports = {
   },
   logout: (req, res) => {
     // tested in post man and correctly destroys the session
-    //   console.log(req.session)
+      console.log(req.session)
       req.session.destroy()
-    //   console.log(req.session)
+      console.log(req.session)
       res.status(200).send({message: 'logged out', loggedIn: false})
   },
 

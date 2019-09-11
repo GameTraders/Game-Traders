@@ -3,207 +3,39 @@ import React, {Component} from "react"
 import axios from 'axios';
 import { connect } from "react-redux";
 import {Link} from 'react-router-dom'
+import { Power, FormSearch } from 'grommet-icons';
+import {logout} from '../../ducks/userReducer'
 
 class Dashboard extends Component{
     constructor() {
         super()
         this.state = {
         gameName: '',
-        checkBox: true,
-        games: [{
-            name: "Halo Infinite",
-            cover: "https://i.redd.it/uk00vkrvfkb11.png",
-            points: 40
-        },{
-          name: "Rocket League",
-          cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-          points: 50
-      },{
-          name: "GTA 5",
-          cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-          points: 45
-      },{
-          name: "Zelda",
-          cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-          points: 60
-      },{
-          name: "Halo Infinite",
-          cover: "https://i.redd.it/uk00vkrvfkb11.png",
-          points: 40
-      },{
-        name: "Rocket League",
-        cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-        points: 50
-    },{
-        name: "GTA 5",
-        cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-        points: 45
-    },{
-        name: "Zelda",
-        cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-        points: 60
-    },{
-      name: "Halo Infinite",
-      cover: "https://i.redd.it/uk00vkrvfkb11.png",
-      points: 40
-  },{
-    name: "Rocket League",
-    cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-    points: 50
-  },{
-    name: "GTA 5",
-    cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-    points: 45
-  },{
-    name: "Zelda",
-    cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-    points: 60
-  },{
-    name: "Halo Infinite",
-    cover: "https://i.redd.it/uk00vkrvfkb11.png",
-    points: 40
-},{
-  name: "Rocket League",
-  cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-  points: 50
-},{
-  name: "GTA 5",
-  cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-  points: 45
-},{
-  name: "Zelda",
-  cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-  points: 60
-},{
-  name: "Halo Infinite",
-  cover: "https://i.redd.it/uk00vkrvfkb11.png",
-  points: 40
-},{
-name: "Rocket League",
-cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-points: 50
-},{
-name: "GTA 5",
-cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-points: 45
-},{
-name: "Zelda",
-cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-points: 60
-},{
-name: "Halo Infinite",
-cover: "https://i.redd.it/uk00vkrvfkb11.png",
-points: 40
-},{
-name: "Rocket League",
-cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-points: 50
-},{
-name: "GTA 5",
-cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-points: 45
-},{
-name: "Zelda",
-cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-points: 60
-},{
-    name: "Halo Infinite",
-    cover: "https://i.redd.it/uk00vkrvfkb11.png",
-    points: 40
-},{
-  name: "Rocket League",
-  cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-  points: 50
-},{
-  name: "GTA 5",
-  cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-  points: 45
-},{
-  name: "Zelda",
-  cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-  points: 60
-},{
-  name: "Halo Infinite",
-  cover: "https://i.redd.it/uk00vkrvfkb11.png",
-  points: 40
-},{
-name: "Rocket League",
-cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-points: 50
-},{
-name: "GTA 5",
-cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-points: 45
-},{
-name: "Zelda",
-cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-points: 60
-},{
-name: "Halo Infinite",
-cover: "https://i.redd.it/uk00vkrvfkb11.png",
-points: 40
-},{
-name: "Rocket League",
-cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-points: 50
-},{
-name: "GTA 5",
-cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-points: 45
-},{
-name: "Zelda",
-cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-points: 60
-},{
-name: "Halo Infinite",
-cover: "https://i.redd.it/uk00vkrvfkb11.png",
-points: 40
-},{
-name: "Rocket League",
-cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-points: 50
-},{
-name: "GTA 5",
-cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-points: 45
-},{
-name: "Zelda",
-cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-points: 60
-},{
-name: "Halo Infinite",
-cover: "https://i.redd.it/uk00vkrvfkb11.png",
-points: 40
-},{
-name: "Rocket League",
-cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-points: 50
-},{
-name: "GTA 5",
-cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-points: 45
-},{
-name: "Zelda",
-cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-points: 60
-},{
-name: "Halo Infinite",
-cover: "https://i.redd.it/uk00vkrvfkb11.png",
-points: 40
-},{
-name: "Rocket League",
-cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-points: 50
-},{
-name: "GTA 5",
-cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-points: 45
-},{
-name: "Zelda",
-cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-points: 60
-}]
+        // mRatedCheckBox: true,
+        // x360CheckBox: true,
+        // xOneCheckBox: true,
+        // ps2CheckBox: true,
+        // ps3CheckBox: true,
+        // ps4CheckBox: true,
+        // wiiCheckBox: true,
+        // switchCheckBox: true,
+        // gameBoyCheckBox: true,
+        games: []
+        }
     }
+
+    componentDidMount() {
+        this.getName()
+    }
+
+    getName = async () => {
+        const name = this.state.gameName
+        console.log(name)
+        const results = await axios.post("/api/games", { name })
+        console.log('results:', results.data.results)
+        this.setState({
+            games: results.data.results
+        })
     }
 
     handleChange(key, e) {
@@ -216,96 +48,99 @@ points: 60
         console.log(name)
         const results = await axios.post("/api/games", {name})
         console.log('results:', results)
+        const games = results.data.results
+        console.log('games before setstate:', games)
         this.setState({
-            games: results.data
+            games
         })
+    }
+    logout = ()=> {
+        this.props.logout()
+            this.props.history.push("/")
     }
 
     render() {
-        const {user} = this.props
+        console.log('games:', this.state.games);
+        const {profile_pic} = this.props.user
         console.log('user', this.props.user);
-        let cover = "https://i.redd.it/uk00vkrvfkb11.png"
         let points = "??"
-        let miniGames = this.state.games.map((e, i) => {
-            return (
-                <div key={i} className="home-game-mini">
-                        <h4 className="home-mini-name">
-                            {e.name.length > 15 ? `${e.name.substring(0, 16)}...` : `${e.name}` }
-                        </h4>
-                        <h4 className="mini-name-hover">{e.name}</h4>
-                        <div className="home-mini-dispay">
-                            <img className="home-mini-cover-art" alt="" src={cover} />
-                            <div className="game-details">hello</div>
-                            <div className="home-game-mini-points">{points}</div>
-                        </div>
-                </div>
-            )
-        })
-        const {checkBox} = this.state
+        // const {mRatedCheckBox, x360CheckBox, xOneCheckBox, ps2CheckBox, ps3CheckBox, ps4CheckBox, wiiCheckBox, switchCheckBox, gameBoyCheckBox } = this.state
         return(
             <div className="Dashboard">
                 <div className="Dashboard_NavBar">
+                <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
                         <div className="Dashboard_Logo">
-                            <h1>Game Traders</h1>
+                            <Link className="link" to="/about" ><h1>Game Traders</h1></Link>
                         </div>
                         <div className="nav-links">
-                            <Link to={{pathname: `/post/${user.user_id}`, state: user}} ><h1>Profile</h1></Link>
+                            <Link className="link" to={{pathname: `/userProfile/${this.props.user.user_id}`}} ><img className="user-pic" alt="" src={profile_pic} /></Link>
+                            {/* <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1> */}
+                            {/* <Link to={{pathname: `/userProfile/${this.props.user.user_id}`, state: this.props.user}} ><h1 className="link" ><User size="large" color="#28AB53" /></h1></Link> */}
                         </div>
                         <div className="Dashboard-search-container">
-                            <button onClick={this.getName} className="Authentication_Button">
-                                <h4>Search</h4>
-                            </button>
-                            <div className="Authentication_Username_Container">
-                                <h4>Search</h4>
-                                <input onChange={(e)=> {this.handleChange("gameName", e.target.value)}} className="Authentication_Input" type="text" placeholder="Search by Game Name" />
-                            </div>
-                            <div className="check-container"  >
+                                <button onClick={this.getName} className="game-search-submit"><FormSearch color="#FC9B00" /></button>
+                                <input onChange={(e)=> {this.handleChange("gameName", e.target.value)}} className="game-search-input" type="text" placeholder="Search by Game Name" />
+                            {/* <div className="check-container"  >
                                 <div className="filter-option">
-                                    <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({checkBox: !checkBox})} />
+                                    <input className="check" checked={mRatedCheckBox} type="checkbox" onChange={() => this.setState({mRatedCheckBox: !mRatedCheckBox})} />
                                     <p>M - Rated</p>
                                 </div>
                                 <div className="filter-option">
-                                    <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({checkBox: !checkBox})} />
+                                    <input className="check" checked={x360CheckBox} type="checkbox" onChange={() => this.setState({x360CheckBox: !x360CheckBox})} />
                                     <p>XBox 360</p>
                                 </div>
                                 <div className="filter-option">
-                                    <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({checkBox: !checkBox})} />
+                                    <input className="check" checked={xOneCheckBox} type="checkbox" onChange={() => this.setState({xOneCheckBox: !xOneCheckBox})} />
                                     <p>XBox One</p>
                                 </div>
                             </div>
                             <div className="check-container"  >
                                 <div className="filter-option">
-                                    <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({checkBox: !checkBox})} />
+                                    <input className="check" checked={ps2CheckBox} type="checkbox" onChange={() => this.setState({ps2CheckBox: !ps2CheckBox})} />
                                     <p>PlayStation 2</p>
                                 </div>
                                 <div className="filter-option">
-                                    <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({checkBox: !checkBox})} />
+                                    <input className="check" checked={ps3CheckBox} type="checkbox" onChange={() => this.setState({ps3CheckBox: !ps3CheckBox})} />
                                     <p>PlayStation 3</p>
                                 </div>
                                 <div className="filter-option">
-                                    <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({checkBox: !checkBox})} />
+                                    <input className="check" checked={ps4CheckBox} type="checkbox" onChange={() => this.setState({ps4CheckBox: !ps4CheckBox})} />
                                     <p>PlayStation 4</p>
                                 </div>
                             </div>
                             <div className="check-container"  >
                                 <div className="filter-option">
-                                    <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({checkBox: !checkBox})} />
+                                    <input className="check" checked={wiiCheckBox} type="checkbox" onChange={() => this.setState({wiiCheckBox: !wiiCheckBox})} />
                                     <p>Wii</p>
                                 </div>
                                 <div className="filter-option">
-                                    <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({checkBox: !checkBox})} />
+                                    <input className="check" checked={switchCheckBox} type="checkbox" onChange={() => this.setState({switchCheckBox: !switchCheckBox})} />
                                     <p>Nintendo Switch</p>
                                 </div>
                                 <div className="filter-option">
-                                    <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({checkBox: !checkBox})} />
+                                    <input className="check" checked={gameBoyCheckBox} type="checkbox" onChange={() => this.setState({gameBoyCheckBox: !gameBoyCheckBox})} />
                                     <p>PlayStation 4</p>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                 </div>
                 <div className="dashboard-container">
-                    {miniGames}
-                </div>
+                   {this.state.games.length > 0 ? this.state.games.map((e, i) => {
+                       return (
+                           <div key={i} className="home-game-mini">
+                               <h4 className="home-mini-name">
+                                   {e.name.length > 15 ? `${e.name.substring(0, 16)}...` : `${e.name}`}
+                               </h4>
+                               <h4 className="mini-name-hover">{e.slug}</h4>
+                               <div className="home-mini-dispay">
+                                   <img className="home-mini-cover-art" alt="" src={e.background_image} />
+                                   <div className="game-details">{e.metacritic}</div>
+                                   <div className="home-game-mini-points">{points}</div>
+                               </div>
+                           </div>
+                       )
+                   }) : <h4>Loading</h4>}
+               </div>
             </div>
         )
     }
@@ -317,6 +152,6 @@ const mapStateToProps = reduxState => {
   
   export default connect(
     mapStateToProps,
-    null
+    {logout}
   )(Dashboard);
 
