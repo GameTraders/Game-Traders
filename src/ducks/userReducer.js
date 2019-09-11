@@ -7,6 +7,7 @@ const initialState = {
 }
 
 const LOGIN = "LOGIN"
+const LOGOUT = "LOGOUT"
 
 export function login (username, password) {
     let user = Axios
@@ -22,6 +23,13 @@ export function login (username, password) {
     }
 }
 
+export function logout() {
+    Axios.delete('/auth/logout')
+    return {
+        type: LOGOUT
+    }
+}
+
 export default function(state = initialState, action) {
     let{type, payload} = action
 
@@ -32,6 +40,8 @@ export default function(state = initialState, action) {
             return { ...state }
         case LOGIN + "_FULFILLED":
             return { user: payload, loggedIn: true }
+        case LOGOUT:
+            return { ...state, user: {}, loggedIn: false }
         default: return state
     }
 }

@@ -5,6 +5,8 @@ import Dashboard from "./Components/Dashboard/Dashboard.js"
 import Search from "./Components/Search/Search"
 import UserProfile from './Components/Profiles/UserProfile'
 import Trader from './Components/Trader/Trader'
+import About from './Components/About/About'
+import AddPoints from './Components/Wizards/AddPoints/AddPoints'
 
 export default (
     <Switch>
@@ -14,5 +16,7 @@ export default (
         <Route component = {Search}  path = "/search" />
         <Route component = {UserProfile} path = '/userProfile/:user_id'/>
         <Route component = {Trader} path = '/trader'/>
+        <Route component = {About} path = '/about'/>
+        <Route component = {AddPoints} path = '/add-points'/>
     </Switch>
 )
