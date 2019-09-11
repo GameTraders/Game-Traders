@@ -1,9 +1,13 @@
 import './Dashboard.css'
 import React, {Component} from "react"
 import axios from 'axios';
+import { connect } from "react-redux";
+import {Link} from 'react-router-dom'
 
-export default class Dashboard extends Component{
-    state = {
+class Dashboard extends Component{
+    constructor() {
+        super()
+        this.state = {
         gameName: '',
         checkBox: true,
         games: [{
@@ -200,6 +204,7 @@ cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-
 points: 60
 }]
     }
+    }
 
     handleChange(key, e) {
         this.setState({
@@ -217,7 +222,8 @@ points: 60
     }
 
     render() {
-        // console.log(object);
+        const {user} = this.props
+        console.log('user', this.props.user);
         let cover = "https://i.redd.it/uk00vkrvfkb11.png"
         let points = "??"
         let miniGames = this.state.games.map((e, i) => {
@@ -241,6 +247,9 @@ points: 60
                 <div className="Dashboard_NavBar">
                         <div className="Dashboard_Logo">
                             <h1>Game Traders</h1>
+                        </div>
+                        <div className="nav-links">
+                            <Link to={{pathname: `/post/${user.user_id}`, state: user}} ><h1>Profile</h1></Link>
                         </div>
                         <div className="Dashboard-search-container">
                             <button onClick={this.getName} className="Authentication_Button">
@@ -301,4 +310,13 @@ points: 60
         )
     }
 }
+
+const mapStateToProps = reduxState => {
+    return reduxState;
+  };
+  
+  export default connect(
+    mapStateToProps,
+    null
+  )(Dashboard);
 
