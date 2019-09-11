@@ -8,6 +8,9 @@ export default class Trades extends Component {
     good: []
 };
 
+
+
+
 render() {
 
     const { best, great, good } = this.state
@@ -37,11 +40,19 @@ render() {
                 </div>
                 <div className="Trades_Display_Users">
                     {best.length > 0 ? best.map((el, i) => (
-                        <div key={i} className="Trades_Profile_Outer">
-                           <img className="Trades_Profile_Pic" src={el.profile_pic} alt=""/>
-                            <h4>{el.username}</h4>
+                        <div key={i} className="Trades_Card_Outer">
+                           <img className="profile-pic" src={el.profile_pic} alt=""/>
+                            <h4 className="seller-username">{el.username}</h4>
                            <h4>Rating: {el.metacritic}%</h4>
                            <h4>Trades: {el.trade_count}</h4>
+                           <div className="Trades_User_games">
+                           {el.games.map(el => (
+                               <div>
+                               <img className="Trades_Individual_Games"  src={el} alt=""/>
+                               <h6>Game Name</h6>
+                               </div>
+                           ))}
+                           </div>
                         </div>
                     )) : <h1>No Matches</h1>}
                 </div>
