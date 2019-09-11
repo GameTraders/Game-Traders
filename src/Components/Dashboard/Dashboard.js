@@ -1,7 +1,7 @@
 import './Dashboard.css'
 import React, { Component } from "react"
 import axios from 'axios';
-import {Dragable} from "gsap/all"
+import { TimelineMax, TweenLite, Draggable, Power3, Bounce } from "gsap/all";
 
 export default class Dashboard extends Component {
     state = {
@@ -18,7 +18,19 @@ export default class Dashboard extends Component {
     }
     componentDidMount() {
         this.getName()
+        this.createDraggable()
     }
+    createDraggable() {
+        Draggable.create(".dashboard-container", {
+            type: "x,y",
+            edgeResistance: 0.15,
+            bounds: ".App",
+            throwProps: true,
+            onDrag: function () {
+            }
+        })
+    }
+
     getName = async () => {
         const name = this.state.gameName
         console.log(name)
@@ -93,7 +105,6 @@ export default class Dashboard extends Component {
                     </div>
                 </div>
                 <div className="dashboard-container">
-                    <div className="dashboard-searched-games">
                         {this.state.games.length > 0 ? this.state.games.map((e, i) => {
                             return (
                                 <div key={i} className="home-game-mini">
@@ -110,7 +121,6 @@ export default class Dashboard extends Component {
                             )
                         }) : <h4>Loading</h4>}
                     </div>
-                </div>
             </div>
         )
     }

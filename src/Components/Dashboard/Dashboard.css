@@ -65,6 +65,7 @@
     flex-wrap: wrap;
     overflow-y: auto;
     padding-bottom: 90px;
+    display: flex;
 }
 
 .home-game-mini:hover {
