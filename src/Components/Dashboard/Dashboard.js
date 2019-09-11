@@ -1,63 +1,66 @@
-import './Dashboard.css'
-import React, {Component} from "react"
-import axios from 'axios';
+import "./Dashboard.css";
+import React, { Component } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
-import {Link} from 'react-router-dom'
-import { Power, FormSearch } from 'grommet-icons';
-import {logout} from '../../ducks/userReducer'
+import { Link } from "react-router-dom";
+import { Power, FormSearch } from "grommet-icons";
+import { logout } from "../../ducks/userReducer";
 
-class Dashboard extends Component{
-    constructor() {
-        super()
-        this.state = {
-        gameName: '',
-        // mRatedCheckBox: true,
-        // x360CheckBox: true,
-        // xOneCheckBox: true,
-        // ps2CheckBox: true,
-        // ps3CheckBox: true,
-        // ps4CheckBox: true,
-        // wiiCheckBox: true,
-        // switchCheckBox: true,
-        // gameBoyCheckBox: true,
-        games: []
-        }
-    }
+class Dashboard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      gameName: "",
+      // mRatedCheckBox: true,
+      // x360CheckBox: true,
+      // xOneCheckBox: true,
+      // ps2CheckBox: true,
+      // ps3CheckBox: true,
+      // ps4CheckBox: true,
+      // wiiCheckBox: true,
+      // switchCheckBox: true,
+      // gameBoyCheckBox: true,
+      ps4: "",
+      xboxOne: "",
+      nintendoSwitch: "",
+      games: []
+    };
+  }
 
-    componentDidMount() {
-        this.getName()
-    }
+  componentDidMount() {
+    this.getName();
+  }
 
-    getName = async () => {
-        const name = this.state.gameName
-        console.log(name)
-        const results = await axios.post("/api/games", { name })
-        console.log('results:', results.data.results)
-        this.setState({
-            games: results.data.results
-        })
-    }
+  getName = async () => {
+    const name = this.state.gameName;
+    console.log(name);
+    const results = await axios.post("/api/games", { name });
+    console.log("results:", results.data.results);
+    this.setState({
+      games: results.data.results
+    });
+  };
 
-    handleChange(key, e) {
-        this.setState({
-            [key]: e
-        })
-    }
-    getName = async () => {
-        const name = this.state.gameName
-        console.log(name)
-        const results = await axios.post("/api/games", {name})
-        console.log('results:', results)
-        const games = results.data.results
-        console.log('games before setstate:', games)
-        this.setState({
-            games
-        })
-    }
-    logout = ()=> {
-        this.props.logout()
-            this.props.history.push("/")
-    }
+  handleChange(key, e) {
+    this.setState({
+      [key]: e
+    });
+  }
+  getName = async () => {
+    const name = this.state.gameName;
+    console.log(name);
+    const results = await axios.post("/api/games", { name });
+    console.log("results:", results);
+    const games = results.data.results;
+    console.log("games before setstate:", games);
+    this.setState({
+      games
+    });
+  };
+  logout = () => {
+    this.props.logout();
+    this.props.history.push("/");
+  };
 
     addToWishList = async(e) => {
         const {user_id} = this.props.user
@@ -129,36 +132,79 @@ class Dashboard extends Component{
                                     <p>PlayStation 4</p>
                                 </div>
                             </div> */}
-                        </div>
+          </div>
+        </div>
+        <div className="dashboard-container">
+          {this.state.games.length > 0 ? (
+            this.state.games.map((e, i) => {
+              return (
+                <div
+                  key={i}
+                  className="home-game-mini"
+                  style={{ position: "relative" }}
+                >
+                  <h4 className="home-mini-name">
+                    {e.name.length > 15
+                      ? `${e.name.substring(0, 16)}...`
+                      : `${e.name}`}
+                  </h4>
+                  <h4 className="mini-name-hover">{e.slug}</h4>
+                  <div className="home-mini-dispay">
+                    <img
+                      className="home-mini-cover-art"
+                      alt=""
+                      src={e.background_image}
+                    />
+                    <div className="home-game-mini-points">{e.metacritic}</div>
+                  </div>
+                  <div
+                    className="wishDropdown"
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      background: "blue",
+                      position: "absolute",
+                      bottom: "-100px",
+                      left: "30px",
+                      zIndex: '1'
+                    }}
+                  >
+                    <p>Playstation</p>
+                    <input
+                      type="checkbox"
+                      onChange={() => this.setState({ ps4: "Playstation 4" })}
+                    />
+                    <p>Xbox</p>
+                    <input
+                      type="checkbox"
+                      onChange={() => this.setState({ xboxOne: "Xbox One" })}
+                    />
+                    <p>Nintendo</p>
+                    <input
+                      type="checkbox"
+                      onChange={() =>
+                        this.setState({ nintendoSwitch: "Nintendo Switch" })
+                      }
+                    />
+                  </div>
                 </div>
-                <div className="dashboard-container">
-                   {this.state.games.length > 0 ? this.state.games.map((e, i) => {
-                       return (
-                           <div key={i} onClick={() => this.addToWishList(e)} className="home-game-mini">
-                               <h4 className="home-mini-name">
-                                   {e.name.length > 15 ? `${e.name.substring(0, 16)}...` : `${e.name}`}
-                               </h4>
-                               <h4 className="mini-name-hover">{e.slug}</h4>
-                               <div className="home-mini-dispay">
-                                   <img className="home-mini-cover-art" alt="" src={e.background_image} />
-                                   {/* <div className="game-details">{e.metacritic}</div> */}
-                                   <div className="home-game-mini-points">{e.metacritic}%</div>
-                               </div>
-                           </div>
-                       )
-                   }) : <h4>Loading</h4>}
-               </div>
-            </div>
-        )
-    }
+              );
+            })
+          ) : (
+            <h4>Loading</h4>
+          )}
+        </div>
+        <div className="ownDropdown"></div>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = reduxState => {
-    return reduxState;
-  };
-  
-  export default connect(
-    mapStateToProps,
-    {logout}
-  )(Dashboard);
+  return reduxState;
+};
 
+export default connect(
+  mapStateToProps,
+  { logout }
+)(Dashboard);
