@@ -38,8 +38,7 @@ export default class Search extends Component {
         console.log(this.state)
     }
     render() {
-        // eslint-disable-next-line
-        let cover = "https://i.redd.it/uk00vkrvfkb11.png"
+        // let cover = "https://i.redd.it/uk00vkrvfkb11.png"
         let points = "??"
 
         return (

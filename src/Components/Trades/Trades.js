@@ -14,7 +14,7 @@ export default class Trades extends Component {
 render() {
 
     const { best, great, good } = this.state
-        console.log(great, good)
+     console.log(great, good);
     return (
 
         <div className="Trades_Outer">

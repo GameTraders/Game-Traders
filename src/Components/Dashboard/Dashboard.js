@@ -64,48 +64,35 @@ class Dashboard extends Component {
     this.props.history.push("/");
   };
 
-  render() {
-      console.log('console:', this.state.console)
-    console.log("games:", this.state.games);
-    const { profile_pic } = this.props.user;
-    console.log("user", this.props.user);
-    let points = "??";
-    // const {mRatedCheckBox, x360CheckBox, xOneCheckBox, ps2CheckBox, ps3CheckBox, ps4CheckBox, wiiCheckBox, switchCheckBox, gameBoyCheckBox } = this.state
-    
-    return (
-      <div className="Dashboard">
-        <div className="Dashboard_NavBar">
-          <h1 className="link" onClick={this.logout}>
-            <Power size="large" color="#AED429" />
-          </h1>
-          <div className="Dashboard_Logo">
-            <Link className="link" to="/about">
-              <h1>Game Traders</h1>
-            </Link>
-          </div>
-          <div className="nav-links">
-            <Link
-              className="link"
-              to={{ pathname: `/userProfile/${this.props.user.user_id}` }}
-            >
-              <img className="user-pic" alt="" src={profile_pic} />
-            </Link>
-            {/* <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1> */}
-            {/* <Link to={{pathname: `/userProfile/${this.props.user.user_id}`, state: this.props.user}} ><h1 className="link" ><User size="large" color="#28AB53" /></h1></Link> */}
-          </div>
-          <div className="Dashboard-search-container">
-            <button onClick={this.getName} className="game-search-submit">
-              <FormSearch color="#FC9B00" />
-            </button>
-            <input
-              onChange={e => {
-                this.handleChange("gameName", e.target.value);
-              }}
-              className="game-search-input"
-              type="text"
-              placeholder="Search by Game Name"
-            />
-            {/* <div className="check-container"  >
+    addToWishList = async(e) => {
+        const {user_id} = this.props.user
+        const {id: game_id, game_name, background_image, released, platforms, genre, metacritic } = e
+         console.log('game to add:', e);
+         await axios.post(`/api/newGames/${user_id}`, {game_id, game_name, background_image, released, platforms, genre, metacritic })
+        //  await axios.post(`/api/wishList/${user_id}`, {id})
+    }
+
+    render() {
+        console.log('games:', this.state.games);
+        const {profile_pic} = this.props.user
+        console.log('user', this.props.user);
+        // const {mRatedCheckBox, x360CheckBox, xOneCheckBox, ps2CheckBox, ps3CheckBox, ps4CheckBox, wiiCheckBox, switchCheckBox, gameBoyCheckBox } = this.state
+        return(
+            <div className="Dashboard">
+                <div className="Dashboard_NavBar">
+                <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
+                        <div className="Dashboard_Logo">
+                            <Link className="link" to="/about" ><h1>Game Traders</h1></Link>
+                        </div>
+                        <div className="nav-links">
+                            <Link className="link" to={{pathname: `/userProfile/${this.props.user.user_id}`}} ><img className="user-pic" alt="" src={profile_pic} /></Link>
+                            {/* <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1> */}
+                            {/* <Link to={{pathname: `/userProfile/${this.props.user.user_id}`, state: this.props.user}} ><h1 className="link" ><User size="large" color="#28AB53" /></h1></Link> */}
+                        </div>
+                        <div className="Dashboard-search-container">
+                                <button onClick={this.getName} className="game-search-submit"><FormSearch color="#FC9B00" /></button>
+                                <input onChange={(e)=> {this.handleChange("gameName", e.target.value)}} className="game-search-input" type="text" placeholder="Search by Game Name" />
+                            {/* <div className="check-container"  >
                                 <div className="filter-option">
                                     <input className="check" checked={mRatedCheckBox} type="checkbox" onChange={() => this.setState({mRatedCheckBox: !mRatedCheckBox})} />
                                     <p>M - Rated</p>
@@ -170,8 +157,7 @@ class Dashboard extends Component {
                       alt=""
                       src={e.background_image}
                     />
-                    <div className="game-details">{e.metacritic}</div>
-                    <div className="home-game-mini-points">{points}</div>
+                    <div className="home-game-mini-points">{e.metacritic}</div>
                   </div>
                   <AddWish state={e}/>
                 </div>
