@@ -80,7 +80,7 @@ class Dashboard extends Component{
                         <div className="Dashboard-search-container">
                                 <button onClick={this.getName} className="game-search-submit"><FormSearch color="#FC9B00" /></button>
                                 <input onChange={(e)=> {this.handleChange("gameName", e.target.value)}} className="game-search-input" type="text" placeholder="Search by Game Name" />
-                            <div className="check-container"  >
+                            {/* <div className="check-container"  >
                                 <div className="filter-option">
                                     <input className="check" checked={mRatedCheckBox} type="checkbox" onChange={() => this.setState({mRatedCheckBox: !mRatedCheckBox})} />
                                     <p>M - Rated</p>
@@ -121,7 +121,7 @@ class Dashboard extends Component{
                                     <input className="check" checked={gameBoyCheckBox} type="checkbox" onChange={() => this.setState({gameBoyCheckBox: !gameBoyCheckBox})} />
                                     <p>PlayStation 4</p>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                 </div>
                 <div className="dashboard-container">
