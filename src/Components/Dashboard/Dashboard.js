@@ -59,6 +59,14 @@ class Dashboard extends Component{
             this.props.history.push("/")
     }
 
+    addToWishList = async(e) => {
+        const {user_id} = this.props.user
+        const {id} = e
+         console.log('game to add:', e);
+         await axios.post(`/api/newGames/${user_id}`, {})
+         await axios.post(`/api/wishList/${user_id}`, {id})
+    }
+
     render() {
         console.log('games:', this.state.games);
         const {profile_pic} = this.props.user
@@ -127,7 +135,7 @@ class Dashboard extends Component{
                 <div className="dashboard-container">
                    {this.state.games.length > 0 ? this.state.games.map((e, i) => {
                        return (
-                           <div key={i} className="home-game-mini">
+                           <div key={i} onClick={() => this.addToWishList(e)} className="home-game-mini">
                                <h4 className="home-mini-name">
                                    {e.name.length > 15 ? `${e.name.substring(0, 16)}...` : `${e.name}`}
                                </h4>
