@@ -1,7 +1,6 @@
 import './Dashboard.css'
 import React, { Component } from "react"
 import axios from 'axios';
-import { TimelineMax, TweenLite, Draggable, Power3, Bounce } from "gsap/all";
 
 export default class Dashboard extends Component {
     state = {
@@ -18,18 +17,9 @@ export default class Dashboard extends Component {
     }
     componentDidMount() {
         this.getName()
-        this.createDraggable()
+
     }
-    createDraggable() {
-        Draggable.create(".dashboard-container", {
-            type: "x,y",
-            edgeResistance: 0.15,
-            bounds: ".App",
-            throwProps: true,
-            onDrag: function () {
-            }
-        })
-    }
+
 
     getName = async () => {
         const name = this.state.gameName
@@ -105,22 +95,22 @@ export default class Dashboard extends Component {
                     </div>
                 </div>
                 <div className="dashboard-container">
-                        {this.state.games.length > 0 ? this.state.games.map((e, i) => {
-                            return (
-                                <div key={i} className="home-game-mini">
-                                    <h4 className="home-mini-name">
-                                        {e.name.length > 15 ? `${e.name.substring(0, 16)}...` : `${e.name}`}
-                                    </h4>
-                                    <h4 className="mini-name-hover">{e.slug}</h4>
-                                    <div className="home-mini-dispay">
-                                        <img className="home-mini-cover-art" alt="" src={e.background_image} />
-                                        <div className="game-details">{e.metacritic}</div>
-                                        <div className="home-game-mini-points">{points}</div>
-                                    </div>
+                    {this.state.games.length > 0 ? this.state.games.map((e, i) => {
+                        return (
+                            <div key={i} className="home-game-mini">
+                                <h4 className="home-mini-name">
+                                    {e.name.length > 15 ? `${e.name.substring(0, 16)}...` : `${e.name}`}
+                                </h4>
+                                <h4 className="mini-name-hover">{e.slug}</h4>
+                                <div className="home-mini-dispay">
+                                    <img className="home-mini-cover-art" alt="" src={e.background_image} />
+                                    <div className="game-details">{e.metacritic}</div>
+                                    <div className="home-game-mini-points">{points}</div>
                                 </div>
-                            )
-                        }) : <h4>Loading</h4>}
-                    </div>
+                            </div>
+                        )
+                    }) : <h4>Loading</h4>}
+                </div>
             </div>
         )
     }
