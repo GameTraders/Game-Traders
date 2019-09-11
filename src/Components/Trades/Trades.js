@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
 import "./Trades.css"
 export default class Trades extends Component {
     state = {
@@ -14,6 +14,7 @@ export default class Trades extends Component {
 render() {
 
     const { best, great, good } = this.state
+        console.log(great, good)
     return (
 
         <div className="Trades_Outer">
