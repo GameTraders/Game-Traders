@@ -1,9 +1,12 @@
 import "./Trader.css";
 import React, { Component } from "react";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
+import AddPoints from '../Wizards/AddPoints/AddPoints'
 import MyGames from '../GameContainers/MyGames'
 import SellerGames from '../GameContainers/SellerGames'
-import { AddCircle, Up, Down } from 'grommet-icons';
+import { AddCircle, Up, Down, Home, Power } from 'grommet-icons';
+import {Link} from 'react-router-dom'
+import {logout} from '../../ducks/userReducer'
 
 class Trader extends Component {
   constructor() {
@@ -26,7 +29,13 @@ class Trader extends Component {
     };
   }
 
+  logout = ()=> {
+      this.props.logout()
+          this.props.history.push("/")
+  }
+
   render() {
+    const {user} = this.props
 
     let messages = this.state.messages.map((e, i) => {
       return (
@@ -47,11 +56,28 @@ class Trader extends Component {
 
     return (
       <div className="Trader">
+
+      <AddPoints />
+
+        <div className="Dashboard_NavBar">
+                <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
+        
+          <div className="Dashboard_Logo">
+              <Link className="link" to="/about" ><h1>Game Traders</h1></Link>
+          </div>
+
+          <div className="nav-links">
+            <Link className="link" to={{pathname: `/userProfile/${user.user_id}`}} ><img className="user-pic" alt="" src={user.profile_pic} /></Link>
+            <Link to="/home" ><h1><Home size="large" color="#AED429" /></h1></Link>
+          </div>
+
+      </div>
+
         <div className="trade-container" >
             <div className="user-section" >
                 <div className="user-rating" >96%</div>
-                <img className="profile-pic" alt="" src="https://robohash.org/hello" />
-                <h3 className="username">Blake</h3>
+                <Link className="link" to={{pathname: `/userProfile/${user.user_id}`}} ><img className="profile-pic" alt="" src={user.profile_pic} /></Link>
+                <h3 className="username">{user.username}</h3>
                 <p className="trade-count">22 Trades</p>
                 <div className="user-points">
                     <h1>44</h1>
@@ -108,13 +134,11 @@ class Trader extends Component {
   }
 }
 
-export default Trader
+const mapStateToProps = reduxState => {
+  return reduxState;
+};
 
-// const mapStateToProps = reduxState => {
-//   return reduxState;
-// };
-
-// export default connect(
-//   mapStateToProps,
-//   null
-// )(Trader);
+export default connect(
+  mapStateToProps,
+  {logout}
+)(Trader);

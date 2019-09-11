@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+.link {
+    text-decoration: none;
+    padding-left: 6px;
+}
+
+.user-pic {
+    width: 66px;
+}
+
 .Dashboard_NavBar {
     align-items: center;
     height: 69px;
@@ -25,6 +34,28 @@
     justify-content: space-around;
     align-items: flex-end;
     align-items: center;
+}
+
+.game-search-input {
+    background: #FC9B00;
+    color: #2E2E2E;
+    font-weight: bold;
+    padding-left: 3px;
+    width: 169px;
+    height: 18px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+}
+
+.game-search-submit {
+    width: 33px;
+    padding-top: 3px;
+    border-radius: 6px;
+    border: 1px solid #FC9B00;
+    background: rgba(0, 0, 0, 0);
+    color: #FC9B00;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
 }
 
 .filter-option {
@@ -59,13 +90,12 @@
     height: calc(100vh - 69px);
     display: flex;
     padding: 18px;
-    /* margin-right: 36px; */
+    padding-right: 36px;
     position: relative;
     padding-top: 27px;
     flex-wrap: wrap;
     overflow-y: auto;
-    padding-bottom: 90px;
-    display: flex;
+    padding-bottom: 133px;
 }
 
 .home-game-mini:hover {
@@ -161,17 +191,20 @@
     display: none;
 }
 
-.home-mini-dispay {
-    position: relative;
-    z-index: 3;
-}
-
-.Dashboard::-webkit-scrollbar {
+.dashboard-container::-webkit-scrollbar {
     display: none;
 }
 
-.Dashboard::-webkit-scrollbar {
+.dashboard-container::-webkit-scrollbar {
     display: none;
+}
+
+.nav-links {
+    width: 133px;
+    margin-right: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 @keyframes slideInFromRight {

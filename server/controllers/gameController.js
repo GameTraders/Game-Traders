@@ -1,6 +1,5 @@
 require('dotenv').config()
 const axios = require("axios")
-const {API_KEY} = process.env
 module.exports = {
     getGameName: async (req,res) => {
         const {name} = req.body

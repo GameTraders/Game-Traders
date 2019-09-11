@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .AddPoints{
+    background: rgba(46, 46, 46, 0.96);
+    position: fixed;
+    top: calc(50% - 300px);
+    left: calc(50% - 300px);
+    width: 600px;
+    height: 600px;
+    z-index: 4;
+    border-radius: 9px;
+    border: 6px solid #FC9B00;
+    /* display: none; */
+  }
