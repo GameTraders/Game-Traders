@@ -1,26 +1,26 @@
 import './Dashboard.css'
-import React, {Component} from "react"
+import React, { Component } from "react"
 import axios from 'axios';
 import { connect } from "react-redux";
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Power, FormSearch } from 'grommet-icons';
-import {logout} from '../../ducks/userReducer'
+import { logout } from '../../ducks/userReducer'
 
-class Dashboard extends Component{
+class Dashboard extends Component {
     constructor() {
         super()
         this.state = {
-        gameName: '',
-        // mRatedCheckBox: true,
-        // x360CheckBox: true,
-        // xOneCheckBox: true,
-        // ps2CheckBox: true,
-        // ps3CheckBox: true,
-        // ps4CheckBox: true,
-        // wiiCheckBox: true,
-        // switchCheckBox: true,
-        // gameBoyCheckBox: true,
-        games: []
+            gameName: '',
+            // mRatedCheckBox: true,
+            // x360CheckBox: true,
+            // xOneCheckBox: true,
+            // ps2CheckBox: true,
+            // ps3CheckBox: true,
+            // ps4CheckBox: true,
+            // wiiCheckBox: true,
+            // switchCheckBox: true,
+            // gameBoyCheckBox: true,
+            games: []
         }
     }
 
@@ -43,10 +43,16 @@ class Dashboard extends Component{
             [key]: e
         })
     }
+    componentDidMount() {
+        this.getName()
+
+    }
+
+
     getName = async () => {
         const name = this.state.gameName
         console.log(name)
-        const results = await axios.post("/api/games", {name})
+        const results = await axios.post("/api/games", { name })
         console.log('results:', results)
         const games = results.data.results
         console.log('games before setstate:', games)
@@ -54,33 +60,33 @@ class Dashboard extends Component{
             games
         })
     }
-    logout = ()=> {
+    logout = () => {
         this.props.logout()
-            this.props.history.push("/")
+        this.props.history.push("/")
     }
 
     render() {
         console.log('games:', this.state.games);
-        const {profile_pic} = this.props.user
+        const { profile_pic } = this.props.user
         console.log('user', this.props.user);
         let points = "??"
         // const {mRatedCheckBox, x360CheckBox, xOneCheckBox, ps2CheckBox, ps3CheckBox, ps4CheckBox, wiiCheckBox, switchCheckBox, gameBoyCheckBox } = this.state
-        return(
+        return (
             <div className="Dashboard">
                 <div className="Dashboard_NavBar">
-                <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
-                        <div className="Dashboard_Logo">
-                            <Link className="link" to="/about" ><h1>Game Traders</h1></Link>
-                        </div>
-                        <div className="nav-links">
-                            <Link className="link" to={{pathname: `/userProfile/${this.props.user.user_id}`}} ><img className="user-pic" alt="" src={profile_pic} /></Link>
-                            {/* <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1> */}
-                            {/* <Link to={{pathname: `/userProfile/${this.props.user.user_id}`, state: this.props.user}} ><h1 className="link" ><User size="large" color="#28AB53" /></h1></Link> */}
-                        </div>
-                        <div className="Dashboard-search-container">
-                                <button onClick={this.getName} className="game-search-submit"><FormSearch color="#FC9B00" /></button>
-                                <input onChange={(e)=> {this.handleChange("gameName", e.target.value)}} className="game-search-input" type="text" placeholder="Search by Game Name" />
-                            {/* <div className="check-container"  >
+                    <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
+                    <div className="Dashboard_Logo">
+                        <Link className="link" to="/about" ><h1>Game Traders</h1></Link>
+                    </div>
+                    <div className="nav-links">
+                        <Link className="link" to={{ pathname: `/userProfile/${this.props.user.user_id}` }} ><img className="user-pic" alt="" src={profile_pic} /></Link>
+                        {/* <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1> */}
+                        {/* <Link to={{pathname: `/userProfile/${this.props.user.user_id}`, state: this.props.user}} ><h1 className="link" ><User size="large" color="#28AB53" /></h1></Link> */}
+                    </div>
+                    <div className="Dashboard-search-container">
+                        <button onClick={this.getName} className="game-search-submit"><FormSearch color="#FC9B00" /></button>
+                        <input onChange={(e) => { this.handleChange("gameName", e.target.value) }} className="game-search-input" type="text" placeholder="Search by Game Name" />
+                        {/* <div className="check-container"  >
                                 <div className="filter-option">
                                     <input className="check" checked={mRatedCheckBox} type="checkbox" onChange={() => this.setState({mRatedCheckBox: !mRatedCheckBox})} />
                                     <p>M - Rated</p>
@@ -122,25 +128,40 @@ class Dashboard extends Component{
                                     <p>PlayStation 4</p>
                                 </div>
                             </div> */}
-                        </div>
+                        {/* </div>
+                        <div className="check-container"  >
+                            <div className="filter-option">
+                                <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({ checkBox: !checkBox })} />
+                                <p>Wii</p>
+                            </div>
+                            <div className="filter-option">
+                                <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({ checkBox: !checkBox })} />
+                                <p>Nintendo Switch</p>
+                            </div>
+                            <div className="filter-option">
+                                <input className="check" checked={checkBox} type="checkbox" onChange={() => this.setState({ checkBox: !checkBox })} />
+                                <p>PlayStation 4</p>
+                            </div>
+                        </div> */}
+                    </div>
                 </div>
                 <div className="dashboard-container">
-                   {this.state.games.length > 0 ? this.state.games.map((e, i) => {
-                       return (
-                           <div key={i} className="home-game-mini">
-                               <h4 className="home-mini-name">
-                                   {e.name.length > 15 ? `${e.name.substring(0, 16)}...` : `${e.name}`}
-                               </h4>
-                               <h4 className="mini-name-hover">{e.slug}</h4>
-                               <div className="home-mini-dispay">
-                                   <img className="home-mini-cover-art" alt="" src={e.background_image} />
-                                   <div className="game-details">{e.metacritic}</div>
-                                   <div className="home-game-mini-points">{points}</div>
-                               </div>
-                           </div>
-                       )
-                   }) : <h4>Loading</h4>}
-               </div>
+                    {this.state.games.length > 0 ? this.state.games.map((e, i) => {
+                        return (
+                            <div key={i} className="home-game-mini">
+                                <h4 className="home-mini-name">
+                                    {e.name.length > 15 ? `${e.name.substring(0, 16)}...` : `${e.name}`}
+                                </h4>
+                                <h4 className="mini-name-hover">{e.slug}</h4>
+                                <div className="home-mini-dispay">
+                                    <img className="home-mini-cover-art" alt="" src={e.background_image} />
+                                    <div className="game-details">{e.metacritic}</div>
+                                    <div className="home-game-mini-points">{points}</div>
+                                </div>
+                            </div>
+                        )
+                    }) : <h4>Loading</h4>}
+                </div>
             </div>
         )
     }
@@ -148,10 +169,10 @@ class Dashboard extends Component{
 
 const mapStateToProps = reduxState => {
     return reduxState;
-  };
-  
-  export default connect(
+};
+
+export default connect(
     mapStateToProps,
-    {logout}
-  )(Dashboard);
+    { logout }
+)(Dashboard);
 
