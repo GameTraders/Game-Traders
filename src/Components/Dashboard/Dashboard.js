@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Power, FormSearch } from "grommet-icons";
 import { logout } from "../../ducks/userReducer";
+import AddWish from '../Wizards/AddGame/AddWish'
 
 class Dashboard extends Component {
   constructor() {
@@ -20,9 +21,10 @@ class Dashboard extends Component {
       // wiiCheckBox: true,
       // switchCheckBox: true,
       // gameBoyCheckBox: true,
-      ps4: "",
-      xboxOne: "",
-      nintendoSwitch: "",
+      ps4Checked: false,
+      xboxChecked: false,
+      switchChecked: false,
+     console: '',
       games: []
     };
   }
@@ -157,36 +159,7 @@ class Dashboard extends Component {
                     />
                     <div className="home-game-mini-points">{e.metacritic}</div>
                   </div>
-                  <div
-                    className="wishDropdown"
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      background: "blue",
-                      position: "absolute",
-                      bottom: "-100px",
-                      left: "30px",
-                      zIndex: '1'
-                    }}
-                  >
-                    <p>Playstation</p>
-                    <input
-                      type="checkbox"
-                      onChange={() => this.setState({ ps4: "Playstation 4" })}
-                    />
-                    <p>Xbox</p>
-                    <input
-                      type="checkbox"
-                      onChange={() => this.setState({ xboxOne: "Xbox One" })}
-                    />
-                    <p>Nintendo</p>
-                    <input
-                      type="checkbox"
-                      onChange={() =>
-                        this.setState({ nintendoSwitch: "Nintendo Switch" })
-                      }
-                    />
-                  </div>
+                  <AddWish state={e}/>
                 </div>
               );
             })
