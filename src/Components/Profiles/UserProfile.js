@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import { AddCircle, Transaction } from 'grommet-icons';
 import MyGames from '../GameContainers/MyGames'
+import WishList from '../GameContainers/WishList'
+import {connect} from 'react-redux'
 
-export default class UserProfile extends Component {
+class UserProfile extends Component {
   state = {
     username: "",
     email: "",
@@ -15,6 +17,10 @@ export default class UserProfile extends Component {
     street: "",
     zip: 0
   };
+
+  componentDidMount(){
+    console.log('profile');
+  }
   getUserInfo = () => {
     axios.get(`/api/users/${this.props.match.params.user_id}`).then(res => {
       console.log(res.data);
@@ -32,6 +38,9 @@ export default class UserProfile extends Component {
     });
   };
   render() {
+    // const {username} = this.props.history.match
+    console.log('props object', this.props.user)
+    const {user} = this.props
     return (
       <div className="userProfile">
         <div className="profileContainer">
@@ -39,7 +48,7 @@ export default class UserProfile extends Component {
             User Info
             <div className="user-rating">96%</div>
             <img className='profile-pic' src="https://robohash.org/hello" alt=""/>
-            <h3 className='username'>Blake</h3>
+            <h3 className='username'>{user.username}</h3>
             <p className='trade-count'>22 Trades</p>
             <div>
                 <h1>44</h1>
@@ -71,10 +80,15 @@ export default class UserProfile extends Component {
                   <div className='friend'>Friend 2</div>
               </div>
           </div>
-          <MyGames/>
-          <div className="wishList">Wishlist</div>
+          <section className="games" ><MyGames/><WishList/></section>
+          
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (reduxState) => {
+  return reduxState
+}
+export default connect(mapStateToProps, null)(UserProfile)
