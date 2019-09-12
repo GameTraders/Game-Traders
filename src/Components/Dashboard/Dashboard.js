@@ -33,15 +33,13 @@ class Dashboard extends Component {
     this.getName();
   }
 
-  getName = async () => {
-    const name = this.state.gameName;
-    console.log(name);
-    const results = await axios.post("/api/games", { name });
-    console.log("results:", results.data.results);
-    this.setState({
-      games: results.data.results
-    });
-  };
+  // getName = async () => {
+  //   const name = this.state.gameName;
+  //   const results = await axios.post("/api/games", { name });
+  //   this.setState({
+  //     games: results.data.results
+  //   });
+  // };
 
   handleChange(key, e) {
     this.setState({
@@ -50,11 +48,9 @@ class Dashboard extends Component {
   }
   getName = async () => {
     const name = this.state.gameName;
-    console.log(name);
     const results = await axios.post("/api/games", { name });
-    console.log("results:", results);
+    console.log(results)
     const games = results.data.results;
-    console.log("games before setstate:", games);
     this.setState({
       games
     });
@@ -64,18 +60,15 @@ class Dashboard extends Component {
     this.props.history.push("/");
   };
 
-    // addToWishList = async(e) => {
-    //     const {user_id} = this.props.user
-    //     const {id: game_id, game_name, background_image, released, platforms, genre, metacritic } = e
-    //      console.log('game to add:', e);
-    //      await axios.post(`/api/newGames/${user_id}`, {game_id, game_name, background_image, released, platforms, genre, metacritic })
-    //     //  await axios.post(`/api/wishList/${user_id}`, {id})
-    // }
+    addToWishList = async(e) => {
+        const {user_id} = this.props.user
+        const {id: game_id, game_name, background_image, released, platforms, genre, metacritic } = e
+         await axios.post(`/api/newGames/${user_id}`, {game_id, game_name, background_image, released, platforms, genre, metacritic })
+        //  await axios.post(`/api/wishList/${user_id}`, {id})
+    }
 
     render() {
-        console.log('games:', this.state.games);
         const {profile_pic} = this.props.user
-        console.log('user', this.props.user);
         // const {mRatedCheckBox, x360CheckBox, xOneCheckBox, ps2CheckBox, ps3CheckBox, ps4CheckBox, wiiCheckBox, switchCheckBox, gameBoyCheckBox } = this.state
         return(
             <div className="Dashboard">
@@ -116,10 +109,12 @@ class Dashboard extends Component {
                     />
                     {
                       e.clip !== null ? 
-                    <video className="home-mini-cover-clip" alt="" controls>
+                      <div className="home-mini-cover-clip">
+                    <video className="home-mini-cover-video" alt="" controls>
                       <source src={e.clip.clips[Object.keys(e.clip.clips)[2]]}
                       type="video/mp4" />}
                     </video>
+                      </div>
                     :
                     <div className="home-mini-display">
                       <img className="home-mini-cover-clip" alt="" src={e.background_image} />

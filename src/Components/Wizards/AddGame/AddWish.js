@@ -14,8 +14,6 @@ export default class AddWish extends Component {
         }
     }
     render() {
-      console.log(this.state.console)
-      console.log("props", this.props.state)
         const {ps4Checked, xboxChecked, switchChecked}= this.state
         return(
             <div className="wishDropdown" >

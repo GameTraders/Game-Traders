@@ -47,3 +47,12 @@ message_id INT,
 user_id INT,
 id SERIAL PRIMARY KEY
 );
+
+insert into games (game_id, game_name, background_image, released, genre, platforms, metacritic)
+values (1234, 'Halo Reach', 'https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Halo-_Reach_box_art.png/220px-Halo-_Reach_box_art.png', '11-06-08', 'FPS', 'Xbox One', 88),
+(8888, 'Call of Duty: Black Ops 4', 'https://images-na.ssl-images-amazon.com/images/I/817f1bj7kkL._AC_UL320_SR240,320_.jpg', '12-04-16', 'FPS', 'Xbox One', 92),
+(6666, 'Borderlands 3', 'https://media.gamestop.com/i/gamestop/10175066/Borderlands-3?$zoom$', '08-13-17', 'strategy', 'Playstation 4', 85),
+(3333, 'Far Cry 4', 'http://smhttp.37594.nexcesscdn.net/8012676/gameonephcdn/pub/media/catalog/product/cache/image/620x678/e9c3970ab036de70892d86c6d221abfe/f/a/far-cry-4-ph-ps4.jpg', '09-17-2016', 'war', 'Playstation 4', 91)
+
+insert into game_list (user_id, game_id, points)
+values (7, 1234, 55), (7, 3333, 40)
