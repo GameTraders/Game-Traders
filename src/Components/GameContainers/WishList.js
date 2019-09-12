@@ -1,74 +1,37 @@
 import "./MyGames.css";
 import React, { Component } from "react";
-// import { connect } from "react-redux";
+import axios from 'axios'
+import {connect} from 'react-redux'
 
 class WishList extends Component {
   constructor() {
     super();
     this.state = {
-      games: [{
-          name: "Halo Infinite",
-          cover: "https://i.redd.it/uk00vkrvfkb11.png",
-          points: 40
-      },{
-        name: "Rocket League",
-        cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-        points: 50
-    },{
-        name: "GTA 5",
-        cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-        points: 45
-    },{
-        name: "Zelda",
-        cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-        points: 60
-    },{
-        name: "Halo Infinite",
-        cover: "https://i.redd.it/uk00vkrvfkb11.png",
-        points: 40
-    },{
-      name: "Rocket League",
-      cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-      points: 50
-  },{
-      name: "GTA 5",
-      cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-      points: 45
-  },{
-      name: "Zelda",
-      cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-      points: 60
-  },{
-    name: "Halo Infinite",
-    cover: "https://i.redd.it/uk00vkrvfkb11.png",
-    points: 40
-},{
-  name: "Rocket League",
-  cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-  points: 50
-},{
-  name: "GTA 5",
-  cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-  points: 45
-},{
-  name: "Zelda",
-  cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-  points: 60
-}]
+      games: [],
+      wishlist: []
     };
+  }
+  componentDidMount() {
+    console.log(this.props.user)
+    axios.get(`/api/wishlist/${this.props.user.user_id}`).then(res => {
+      this.setState({
+          wishlist: res.data
+      })
+    })
   }
 
   render() {
-      let miniGames = this.state.games.map((e, i) => {
+    console.log('wishlist', this.state.wishlist)
+      let miniGames = this.state.wishlist.map((e, i) => {
           return (
               <div key={i} className="my-game-mini">
                       <h4 className="mini-name">
-                          {e.name.length > 5 ? `${e.name.substring(0, 6)}...` : `${e.name}` }
+                          {e.game_name.length > 5 ? `${e.game_name.substring(0, 6)}...` : `${e.game_name}` }
                       </h4>
-                      <h4 className="mini-name-hover">{e.name}</h4>
+                      <h4 className="mini-name-hover">{e.game_name}</h4>
                       <div className="home-mini-dispay">
-                        <img className="mini-cover-art" alt="" src={e.cover} />
-                        <div className="game-mini-points">{e.points}</div>
+                        <img className="mini-cover-art" alt="" src={e.background_image} />
+                        <div className="game-mini-points">{e.metacritic}</div>
                       </div>
               </div>
           )
@@ -86,13 +49,13 @@ class WishList extends Component {
   }
 }
 
-export default WishList
 
-// const mapStateToProps = reduxState => {
-//   return reduxState;
-// };
 
-// export default connect(
-//   mapStateToProps,
-//   null
-// )(Trader);
+const mapStateToProps = reduxState => {
+  return reduxState;
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(WishList);

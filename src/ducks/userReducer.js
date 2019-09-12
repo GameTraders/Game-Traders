@@ -1,5 +1,4 @@
 import Axios from 'axios'
-import swal from "sweetalert"
 
 const initialState = {
     user: {},
@@ -8,7 +7,6 @@ const initialState = {
 
 const LOGIN = "LOGIN"
 const LOGOUT = "LOGOUT"
-const UPDATE_USER = "UPDATE_USER"
 
 
 export function login (username, password) {

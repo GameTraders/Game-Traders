@@ -44,7 +44,7 @@ class Authentication extends Component {
     Register = () => {
         const { usernameReg, passwordReg, profile_pic, email,
             street, city, state, zip, confirm_passwordReg } = this.state
-        if (passwordReg != confirm_passwordReg) {
+        if (passwordReg !== confirm_passwordReg) {
             swal("Passwords Do Not Match", "Please confirm your password", "error")
             return
         }
