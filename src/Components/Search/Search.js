@@ -25,7 +25,6 @@ export default class Search extends Component {
         this.setState({
             games: results.data.results
         })
-        console.log(this.state)
     }
     render() {
         let points = "??"

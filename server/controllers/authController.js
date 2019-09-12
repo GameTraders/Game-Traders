@@ -43,7 +43,7 @@ module.exports = {
       if (result) {
           delete user[0].hash
           req.session.user = user[0]
-        //   console.log(req.session)
+ 
           return res.status(200).send({message: 'logged in', user: req.session.user, loggedIn: true})
       } else {
           return res.status(401).send({message: 'failed login'})
@@ -51,9 +51,7 @@ module.exports = {
   },
   logout: (req, res) => {
     // tested in post man and correctly destroys the session
-      console.log(req.session)
       req.session.destroy()
-      console.log(req.session)
       res.status(200).send({message: 'logged out', loggedIn: false})
   },
 

@@ -16,7 +16,7 @@ export function login (username, password) {
     .post("/auth/login", {username, password})
     .then(res=> res.data.user)
 
-    console.log(user)
+
     return {
         type: LOGIN,
         payload: user
