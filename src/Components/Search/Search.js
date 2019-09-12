@@ -14,7 +14,6 @@ export default class Search extends Component {
     }
 
 
-
     handleChange(key, e) {
         this.setState({
             [key]: e

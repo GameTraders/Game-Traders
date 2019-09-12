@@ -3,6 +3,29 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.Profile_NavBar {
+    position: fixed;
+    align-items: center;
+    height: 69px;
+    width: 100%;
+    display: flex;
+    background-color: #2E2E2E;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    text-shadow: 2px 1px #2E2E2E;
+    justify-content: space-between;
+    z-index: 3;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+}
+
+.Profile_Logo h1{
+    position: fixed;
+    left: 42%;
+    top: 18px;
+    color: #FC9B00;
+}
 .add-points-btn:hover {
     transform: scale(1.1);
 }
@@ -42,6 +65,7 @@ p {
     height: 56vh;
     display: flex;
     justify-content: space-between;
+    padding-top: 69px;
 }
 .pastTrades {
     background: #2E2E2E;

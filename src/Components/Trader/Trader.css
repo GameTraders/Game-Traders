@@ -4,6 +4,13 @@
     box-sizing: border-box;
   }
 
+  .Trader_Logo h1{
+      position: absolute;
+      left: 42%;
+      top: 18px;
+      color: #FC9B00;
+  }
+
   .add-points-btn:hover, .confirm:hover, .chat-submit:hover, .up:hover, .down:hover, .game-search-submit:hover, .link:hover{
     transform: scale(1.1);
   }
