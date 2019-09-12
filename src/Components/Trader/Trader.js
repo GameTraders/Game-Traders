@@ -62,12 +62,12 @@ class Trader extends Component {
         <div className="Dashboard_NavBar">
                 <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
         
-          <div className="Dashboard_Logo">
+          <div className="Trader_Logo">
               <Link className="link" to="/about" ><h1>Game Traders</h1></Link>
           </div>
 
           <div className="nav-links">
-            <Link className="link" to={{pathname: `/userProfile/${user.user_id}`}} ><img className="user-pic" alt="" src={user.profile_pic} /></Link>
+            {/* <Link className="link" to={{pathname: `/userProfile/${user.user_id}`}} ><img className="user-pic" alt="" src={user.profile_pic} /></Link> */}
             <Link to="/home" ><h1><Home size="large" color="#AED429" /></h1></Link>
           </div>
 

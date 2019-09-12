@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { AddCircle, Transaction } from 'grommet-icons';
+import { AddCircle, Transaction, Home, Power } from 'grommet-icons';
 import MyGames from '../GameContainers/MyGames'
 import WishList from '../GameContainers/WishList'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import './UserProfile.css'
 
 class UserProfile extends Component {
@@ -100,6 +101,18 @@ getUserInfo = () => {
     })
     return (
       <div className="userProfile">
+      <div className="Profile_NavBar">
+                        <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
+
+                      <div className="Profile_Logo">
+                          <Link className="link" to="/about" ><h1>Game Traders</h1></Link>
+                      </div>
+
+                      <div className="nav-links">
+                          <Link to="/home" ><h1><Home size="large" color="#AED429" /></h1></Link>
+                      </div>
+
+      </div>
         <div className="profileContainer">
           <div className="userInfo">
             User Info
