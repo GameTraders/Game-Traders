@@ -81,7 +81,7 @@
 .dashboard-container {
     height: calc(100vh - 69px);
     display: flex;
-    padding: 18px 66px 166px 36px;
+    padding: 18px 66px 220px 36px;
     /* padding-right: 36px; */
     position: relative;
     /* padding-top: 27px; */
@@ -90,7 +90,7 @@
     /* padding-bottom: 99px; */
 }
 
-  .home-game-mini:hover{
+.home-game-mini:hover {
     transform: scale(1.6) translateY(-3%) translateX(-9%);
     transform-origin: top left;
     z-index: 1;
@@ -102,7 +102,7 @@
     display: flex;
     flex-direction: column;
     width: 169px;
-    height: 220px;
+    height: 250px;
     margin-right: 18px;
     transition: transform .3s ease-in-out;
     transform-origin: top left;
@@ -111,7 +111,7 @@
     animation: 1.1s ease-out 0s 1 slideInFromRight;
 }
 
-.home-game-mini:hover .wishDropdown{
+.home-game-mini:hover .wishDropdown {
     transition: transform .6s ease-in-out;
     transform: translateY(112px);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
@@ -143,11 +143,16 @@
     -webkit-text-stroke-color: #2E2E2E;
 }
 
-.home-game-mini:hover .home-mini-cover-clip{
+.home-game-mini:hover .home-mini-cover-clip {
     display: block;
+    height: 130px;
 }
 
-.home-game-mini:hover .home-mini-cover-art{
+.home-mini-cover-video {
+    height: 95px;
+}
+
+.home-game-mini:hover .home-mini-cover-art {
     display: none;
 }
 
@@ -160,8 +165,9 @@
     color: #AED429;
 }
 
-.home-mini-display{
+.home-mini-display {
     position: relative;
+    display: flex;
 }
 
 .home-mini-cover-art {
@@ -171,6 +177,7 @@
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
 }
+
 .home-mini-cover-clip {
     display: none;
     height: 93px;
@@ -229,8 +236,8 @@
     right: 0px;
 }
 
-/* WISH DROP DOWN */
 
+/* WISH DROP DOWN */
 
 @keyframes slideInFromRight {
     0% {
