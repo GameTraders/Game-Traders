@@ -12,16 +12,6 @@ export default class Search extends Component {
     componentDidMount() {
         this.getname()
     }
-//     componentDidUpdate() {
-//         Draggable.create(".home-game-mini", {
-//             type: "x,y",
-//             edgeResistance: 0.15,
-//             bounds: ".App",
-//             throwProps: true,
-//             onDrag: function () {
-//             }
-//         })
-// }
 
 
     handleChange(key, e) {
@@ -38,7 +28,6 @@ export default class Search extends Component {
         console.log(this.state)
     }
     render() {
-        // let cover = "https://i.redd.it/uk00vkrvfkb11.png"
         let points = "??"
 
         return (

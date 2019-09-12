@@ -8,14 +8,14 @@ const initialState = {
 
 const LOGIN = "LOGIN"
 const LOGOUT = "LOGOUT"
+const UPDATE_USER = "UPDATE_USER"
+
 
 export function login (username, password) {
     let user = Axios
     .post("/auth/login", {username, password})
     .then(res=> res.data.user)
-    .catch(res=> {
-        swal("Sorry!", "Invalid username or password", "error")
-    })
+
     console.log(user)
     return {
         type: LOGIN,
