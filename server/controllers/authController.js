@@ -4,12 +4,14 @@ const bcrypt = require("bcrypt");
 module.exports = {
   register: async (req, res) => {
     const db = req.app.get("db");
-    const { usernameReg: username, email, passwordReg: password, street, city, state, zip } = req.body;
-    const profile_pic = `https://robohash.org/${username}`
+    let { usernameReg: username, email, passwordReg: password, street, city, state, zip, profile_pic } = req.body;
+    if (profile_pic.length === 0) {
+      profile_pic = `https://robohash.org/${username}`
+    }
     //tested in postman, returns immediately if condition is met
-    const user = await db.find_email([email]);
+    const user = await db.find_email_and_username([email,username]);
     if (user.length > 0) {
-      return res.status(400).send({ message: "Email already in use" });
+      return res.status(400).send({ message: "Email or username already in use" });
     }
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
@@ -41,7 +43,7 @@ module.exports = {
       if (result) {
           delete user[0].hash
           req.session.user = user[0]
-        //   console.log(req.session)
+ 
           return res.status(200).send({message: 'logged in', user: req.session.user, loggedIn: true})
       } else {
           return res.status(401).send({message: 'failed login'})
@@ -49,9 +51,7 @@ module.exports = {
   },
   logout: (req, res) => {
     // tested in post man and correctly destroys the session
-      console.log(req.session)
       req.session.destroy()
-      console.log(req.session)
       res.status(200).send({message: 'logged out', loggedIn: false})
   },
 

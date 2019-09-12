@@ -1,5 +1,4 @@
 import Axios from 'axios'
-import swal from "sweetalert"
 
 const initialState = {
     user: {},
@@ -9,14 +8,13 @@ const initialState = {
 const LOGIN = "LOGIN"
 const LOGOUT = "LOGOUT"
 
+
 export function login (username, password) {
     let user = Axios
     .post("/auth/login", {username, password})
     .then(res=> res.data.user)
-    .catch(res=> {
-        swal("Sorry!", "Invalid username or password", "error")
-    })
-    console.log(user)
+
+
     return {
         type: LOGIN,
         payload: user
