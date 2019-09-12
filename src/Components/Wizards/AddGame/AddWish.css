@@ -1,0 +1,60 @@
+.wishDropdown{
+    padding-top: 9px;
+    width: 169px;
+    height: 111px;
+    background: #2E2E2E;
+    position: absolute;
+    bottom: 3px;
+    left: 0px;
+    z-index: -1;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 3px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.wishDropdown h4 {
+    color: #22CEF9;
+    margin-left: 9px;
+}
+
+.check-container{
+    padding: 9px;
+    /* background: red; */
+    display: flex;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-game{
+    /* background: black; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 3px;
+}
+
+.submit-game h5{
+    color: white;
+}
+
+.submit-wish{
+    /* background: purple; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.console-icon{
+    width: 18px;
+    margin-left: 6px;
+}
+

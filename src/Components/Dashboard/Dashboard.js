@@ -80,7 +80,7 @@ class Dashboard extends Component {
         return(
             <div className="Dashboard">
                 <div className="Dashboard_NavBar">
-                <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
+                        <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
                         <div className="Dashboard_Logo">
                             <Link className="link" to="/about" ><h1>Game Traders</h1></Link>
                         </div>
@@ -92,50 +92,8 @@ class Dashboard extends Component {
                         <div className="Dashboard-search-container">
                                 <button onClick={this.getName} className="game-search-submit"><FormSearch color="#FC9B00" /></button>
                                 <input onChange={(e)=> {this.handleChange("gameName", e.target.value)}} className="game-search-input" type="text" placeholder="Search by Game Name" />
-                            {/* <div className="check-container"  >
-                                <div className="filter-option">
-                                    <input className="check" checked={mRatedCheckBox} type="checkbox" onChange={() => this.setState({mRatedCheckBox: !mRatedCheckBox})} />
-                                    <p>M - Rated</p>
-                                </div>
-                                <div className="filter-option">
-                                    <input className="check" checked={x360CheckBox} type="checkbox" onChange={() => this.setState({x360CheckBox: !x360CheckBox})} />
-                                    <p>XBox 360</p>
-                                </div>
-                                <div className="filter-option">
-                                    <input className="check" checked={xOneCheckBox} type="checkbox" onChange={() => this.setState({xOneCheckBox: !xOneCheckBox})} />
-                                    <p>XBox One</p>
-                                </div>
-                            </div>
-                            <div className="check-container"  >
-                                <div className="filter-option">
-                                    <input className="check" checked={ps2CheckBox} type="checkbox" onChange={() => this.setState({ps2CheckBox: !ps2CheckBox})} />
-                                    <p>PlayStation 2</p>
-                                </div>
-                                <div className="filter-option">
-                                    <input className="check" checked={ps3CheckBox} type="checkbox" onChange={() => this.setState({ps3CheckBox: !ps3CheckBox})} />
-                                    <p>PlayStation 3</p>
-                                </div>
-                                <div className="filter-option">
-                                    <input className="check" checked={ps4CheckBox} type="checkbox" onChange={() => this.setState({ps4CheckBox: !ps4CheckBox})} />
-                                    <p>PlayStation 4</p>
-                                </div>
-                            </div>
-                            <div className="check-container"  >
-                                <div className="filter-option">
-                                    <input className="check" checked={wiiCheckBox} type="checkbox" onChange={() => this.setState({wiiCheckBox: !wiiCheckBox})} />
-                                    <p>Wii</p>
-                                </div>
-                                <div className="filter-option">
-                                    <input className="check" checked={switchCheckBox} type="checkbox" onChange={() => this.setState({switchCheckBox: !switchCheckBox})} />
-                                    <p>Nintendo Switch</p>
-                                </div>
-                                <div className="filter-option">
-                                    <input className="check" checked={gameBoyCheckBox} type="checkbox" onChange={() => this.setState({gameBoyCheckBox: !gameBoyCheckBox})} />
-                                    <p>PlayStation 4</p>
-                                </div>
-                            </div> */}
-          </div>
-        </div>
+                        </div>
+                  </div>
         <div className="dashboard-container">
           {this.state.games.length > 0 ? (
             this.state.games.map((e, i) => {
@@ -143,23 +101,33 @@ class Dashboard extends Component {
                 <div
                   key={i}
                   className="home-game-mini"
-                  style={{ position: "relative" }}
                 >
                   <h4 className="home-mini-name">
-                    {e.name.length > 15
+                    {e.name.length > 18
                       ? `${e.name.substring(0, 16)}...`
                       : `${e.name}`}
                   </h4>
-                  <h4 className="mini-name-hover">{e.slug}</h4>
-                  <div className="home-mini-dispay">
+                  <h4 className="mini-name-hover">{e.name}</h4>
+                  <div className="home-mini-display">
                     <img
                       className="home-mini-cover-art"
                       alt=""
                       src={e.background_image}
                     />
-                    <div className="home-game-mini-points">{e.metacritic}</div>
+                    {
+                      e.clip !== null ? 
+                    <video className="home-mini-cover-clip" alt="" controls>
+                      <source src={e.clip.clips[Object.keys(e.clip.clips)[2]]}
+                      type="video/mp4" />}
+                    </video>
+                    :
+                    <div className="home-mini-display">
+                      <img className="home-mini-cover-clip" alt="" src={e.background_image} />
+                    </div>
+                    }
+                    <div className="home-game-mini-points">{e.metacritic}%</div>
+                    <AddWish state={e}/>
                   </div>
-                  <AddWish state={e}/>
                 </div>
               );
             })
