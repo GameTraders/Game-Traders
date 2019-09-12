@@ -1,6 +1,7 @@
 import "./MyGames.css";
 import React, { Component } from "react";
 import { Add } from 'grommet-icons';
+import { Link } from "react-router-dom";
 // import { connect } from "react-redux";
 
 class MyGames extends Component {
@@ -77,8 +78,8 @@ class MyGames extends Component {
     return (
       <div className="MyGames">
           <div className="game-mini-add">
-          <h4 className="mini-name">Game</h4>
-              <div className="add-game" ><Add color='#FC9B00' size='large' className="add-game-icon" /></div>
+              <h4 className="mini-name">Game</h4>
+              <Link to="/home" ><div className="add-game" ><Add color='#FC9B00' size='large' className="add-game-icon" /></div></Link>
           </div>
           {miniGames}
           <div className="my-game-box">My Games</div>

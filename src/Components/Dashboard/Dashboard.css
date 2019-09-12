@@ -229,9 +229,6 @@
     right: 0px;
 }
 
-/* WISH DROP DOWN */
-
-
 @keyframes slideInFromRight {
     0% {
         transform: translateX(100%);

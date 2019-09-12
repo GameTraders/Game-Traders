@@ -64,13 +64,13 @@ class Dashboard extends Component {
     this.props.history.push("/");
   };
 
-    addToWishList = async(e) => {
-        const {user_id} = this.props.user
-        const {id: game_id, game_name, background_image, released, platforms, genre, metacritic } = e
-         console.log('game to add:', e);
-         await axios.post(`/api/newGames/${user_id}`, {game_id, game_name, background_image, released, platforms, genre, metacritic })
-        //  await axios.post(`/api/wishList/${user_id}`, {id})
-    }
+    // addToWishList = async(e) => {
+    //     const {user_id} = this.props.user
+    //     const {id: game_id, game_name, background_image, released, platforms, genre, metacritic } = e
+    //      console.log('game to add:', e);
+    //      await axios.post(`/api/newGames/${user_id}`, {game_id, game_name, background_image, released, platforms, genre, metacritic })
+    //     //  await axios.post(`/api/wishList/${user_id}`, {id})
+    // }
 
     render() {
         console.log('games:', this.state.games);
