@@ -4,6 +4,7 @@ import { AddCircle, Transaction, Home, Power } from 'grommet-icons';
 import MyGames from '../GameContainers/MyGames'
 import WishList from '../GameContainers/WishList'
 import {connect} from 'react-redux'
+import { logout } from "../../ducks/userReducer";
 import {Link} from 'react-router-dom'
 import './UserProfile.css'
 
@@ -81,6 +82,10 @@ getUserInfo = () => {
       zip: res.data.zip
     });
   });
+};
+logout = () => {
+  this.props.logout();
+  this.props.history.push("/");
 };
   
   render() {
@@ -183,4 +188,4 @@ getUserInfo = () => {
 const mapStateToProps = (reduxState) => {
   return reduxState
 }
-export default connect(mapStateToProps, null)(UserProfile)
+export default connect(mapStateToProps, {logout})(UserProfile)

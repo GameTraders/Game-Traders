@@ -1,11 +1,16 @@
 module.exports = {
-    getMessages: (req, res) => {
-        //have not tested in postman yet
-        const db = req.app.get('db')
-        const {room_id} = req.params
-        db.get_messages([room_id]).then(result => {
-            res.status(200).send(result)
+    setSocketListeners: function ( socket, db, io ) {
+        // JOIN ROOM
+        socket.on('join room', data => {
+            const { roomId, userId, traderId, gameImg } = data
+            socket.join(roomId)
+            io.in(roomId).emit('room joined', data)
         })
 
+        // NEW MESSAGE
+        socket.on('send out message', data => {
+            const {roomId} = data
+            io.to(roomId).emit('message received', data )
+        })
     }
 }
