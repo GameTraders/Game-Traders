@@ -85,6 +85,7 @@
 }
 
 .Trades_Card_Outer {
+    color: whitesmoke;
     position: relative;
     height: 90%;
     background: #2E2E2E;
@@ -99,10 +100,15 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
 }
 
+.Trades_Card_Outer::-webkit-scrollbar {
+    display: none;
+}
+
 .Trades_Card_Outer:hover {
     height: 150%;
     position: relative;
     top: 30%;
+    overflow-y: scroll;
 }
 
 .Trades_Profile_Pic {
@@ -119,11 +125,13 @@
     justify-content: space-around;
     font-size: .8rem;
     color: white;
-    margin: 30px 0;
+    margin: 20px 0;
+    flex-wrap: wrap;
 }
 
 .Trades_Individual_Games {
     height: 50px;
     width: 50px;
     background-color: white;
+    margin: 10px;
 }

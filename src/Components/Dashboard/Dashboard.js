@@ -43,10 +43,6 @@ class Dashboard extends Component {
             [key]: e
         })
     }
-    componentDidMount() {
-        this.getName()
-
-    }
 
 
     getName = async () => {
