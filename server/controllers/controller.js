@@ -29,6 +29,7 @@ module.exports = {
         //tested and working with postman
         const db = req.app.get('db')
         const {user_id} = req.params
+        console.log(req.params)
         db.get_user_wishlist([user_id]).then(result => {
             res.status(200).send(result)
         })
@@ -53,6 +54,14 @@ module.exports = {
         const {id} = req.body
         db.add_to_wishlist(user_id, id).then(res => {
             res.sendStatus(200)
+        })
+    },
+    getBestMatchUsers: async (req, res) => {
+        const great = []
+        const db = req.app.get('db')
+        const {game_id} = req.params
+        db.get_trader_ids([game_id]).then(result => {
+            res.status(200).send(result)
         })
     }
 }

@@ -50,5 +50,8 @@
     ]
   },
   "main": "server/server.js",
-  "proxy": "http://localhost:4200"
+  "proxy": "http://localhost:4200",
+  "nodemonConfig": {
+    "ignore": ["src/star", "public/star"]
+  }
 }
