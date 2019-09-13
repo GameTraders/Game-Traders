@@ -48,7 +48,7 @@ module.exports = {
     addToWishlist: async (req, res) => {
         const db = req.app.get('db')
         const { user_id } = req.params
-        const { id, points, name, background_image, released, metacritic } = req.body
+        const { id, name, background_image, released, metacritic } = req.body
         const game = await db.search_for_game(id)
         if (game.length == 0) {
             await db.save_new_game(id, name, background_image, released, metacritic)
@@ -66,12 +66,6 @@ module.exports = {
         }
         await db.add_to_gamelist(user_id, id, points)
         res.status(200).send({ message: "game Added" })
-        const {user_id} = req.params
-        console.log('user_id:', user_id);
-        const {id} = req.body
-        db.add_to_wishlist(user_id, id).then(res => {
-            res.sendStatus(200)
-        })
     },
     getBestMatchUsers: async (req, res) => {
         const great = []
