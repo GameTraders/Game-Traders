@@ -6,6 +6,7 @@ import "./Trades.css";
 import { Home, Power } from "grommet-icons";
 import GTLogo from '../../GTLogo.png'
 import sockets from "../../sockets";
+import { logout } from "../../ducks/userReducer";
 
 
 
@@ -28,16 +29,22 @@ class Trades extends Component {
     });
   }
 
+  logout = () => {
+    this.props.logout();
+    this.props.history.push("/");
+  };
+
   combineAwait = async (el) => {
     console.log('el argument being passed:', el);
-    await this.createRoomId()
-    this.startChat()
+    await this.createRoomId(el)
+    this.startChat(el)
   }
 
-  createRoomId = () => {
-    const { user_id: trader_id } = this.state
-    const { game_id } = this.state
-    const { user_id } = this.state
+  createRoomId = (el) => {
+    console.log({el});
+    const { user_id: trader_id } = el
+    const { game_id } = this.state.game[0]
+    const { user_id } = this.props.user
     const traderString = `${trader_id.toString()}`
     const gameString = `${game_id.toString()}`
     const userString = `${user_id.toString()}`
@@ -52,17 +59,40 @@ class Trades extends Component {
       }
       console.log('creating room...', roomId);
   }
+//   city: "mapleton"
+// email: "Blake.Trapnell103@gmail.com"
+// game_id: 1234
+// hash: "$2b$10$wy6qivubdiasiL5Zmizlp.ZB/UCzyKb4YG345D3GjYb9MDK4hcriG"
+// id: 5
+// points: 55
+// profile_pic: "https://lh3.googleusercontent.com/HsufcdP_1x1FKFUbpd9Qj8RVlqduWVH-anr-97kVyGV0_93hzzD68mUjBUbWikjvHZXerMhUn3dSSoKN6xLa-Ey22Jj8ETCtGGxBuPj0Z2xXyBP4RHLe8A13VsEjE-rJmFtoRflXqJusELQWkFeYB8zgG3kJ_OaEMN2pfwp79lMiLkkS-9GLK6i0jOqTRLC2DNhmtM_v_2Ivs8w0qvtGCr3ydrRKnAGYbwzIXfgL_qvBnyAHvE4zrPz4BkOfUck-0c7sb3YgUwzjbgKj3uBAQhgHudPiowTNgK0z_amUVpiJXV6-Pbp7aXJ86jsIBe_5l6C53MiGcbFGa_wy9-VaRoPYyRITLNltodoTKs9xMsCufb0mJ960JyVGPj58kwuvMdNlATgcVzCUDu__cEmSw_hvbLWMURf7m5eCbS5hDTyXkUyt_UJq2B7PzygWhwUUWPTHCOYtD7eyctuUYV_O8FPN94mdAXxr6eGa6vj5FAtjEEQZ5lTVqpOHE7MkitL2B7PLaDzV8F3RG6YxXZ6Ls-G5WU3EfCrFOx9mK4wOpWq2aGtQVQ3Rg9SzWQj5UNujY-q0hbohuonEhFj9SBA3-yMwhviQhIr0g_y_9oDHy3eUrXzXxLakm9RJMPOlVGF-LgfPDoT34TVYxT-RLFvfBHep8dMCPYAeSVVNKa9gk61M_-n1fXS9mA=w958-h960-no"
+// state: "UT"
+// street: "602w 2925s"
+// user_id: 7
+// user_points: 85
+// user_rating: 66
+// username: "Aceassin"
+// zip: 84664
 
-  startChat = async () => {
+// background_image: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Halo-_Reach_box_art.png/220px-Halo-_Reach_box_art.png"
+// game_id: 1234
+// game_name: "Halo Reach"
+// genre: "FPS"
+// id: 5
+// metacritic: 88
+// platforms: "Xbox One"
+// released: "11-06-08"
+
+  startChat = async (el) => {
     let { roomId } = this.state
     console.log('starting trade', roomId);
-    const { user_id: userId } = this.state.props.user
-    const { user_id: traderId } = this.state
-    const { cover_art: gameTrade } = this.state.game
-    const data = { userId, traderId, gameTrade }
+    const { user_id: userId } = this.props.user
+    const { user_id: traderId, user_points: traderPoints, user_rating: traderRating, username: traderName, profile_pic: traderProfilePic } = el
+    const { background_image: gameTrade, game_name: gameName } = this.state.game[0]
+    const data = { userId, traderId, gameTrade, roomId, traderPoints, traderRating, traderName, traderProfilePic, gameName }
      console.log("starting trade data:", data);
      await sockets.emit('join room', data)
-     window.location.href = `http://localhost:4200/#/trader/${roomId}`
+     this.props.history.push(`/trader/${roomId}`)
   }
   getTradesForUser = () => {
     axios.get(`/api/getTrades/${this.props.match.params.game_id}`).then(res => {
@@ -74,7 +104,9 @@ class Trades extends Component {
 
 
   render() {
-    console.log(this.state.trades);
+    const { trades, game } = this.state
+    console.log({trades});
+    console.log({game});
     return (
       <div className="Trades_Outer">
         <div className="Profile_NavBar">
@@ -107,8 +139,8 @@ class Trades extends Component {
         <div className="bottomSide">
           {this.state.trades.length > 0
             ? this.state.trades.map((el, i) => (
-                <div key={i} className="userInfo">
-                <div className="user-rating">{el.user_rating}</div>
+                <div key={i} className="userInfo" onClick={() => this.combineAwait(el)}>
+                <div className="user-rating">{el.user_rating}%</div>
                 <img className='profile-pic' src={el.profile_pic} alt=""/>
                 <h3 className='username'>{el.username}</h3>
               </div>
@@ -127,5 +159,5 @@ const mapStateToProps = reduxState => {
 
 export default connect(
   mapStateToProps,
-  null
+  {logout}
 )(Trades);
