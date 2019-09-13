@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
-import { Power, FormSearch } from "grommet-icons";
+import {Home, Power, FormSearch } from "grommet-icons";
 import "./Trades.css";
 class Trades extends Component {
   state = {

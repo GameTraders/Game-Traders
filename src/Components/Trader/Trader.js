@@ -7,26 +7,65 @@ import SellerGames from '../GameContainers/SellerGames'
 import { AddCircle, Up, Down, Home, Power } from 'grommet-icons';
 import {Link} from 'react-router-dom'
 import {logout} from '../../ducks/userReducer'
+import socket from '../../sockets'
+const moment = require('moment')
 
 class Trader extends Component {
   constructor() {
     super();
     this.state = {
+      profile_pic: "https://robohash.org/hello",
+      roomId: 44,
+      obj: {},
       username: 'Blake',
+      userId: 8,
+      message: '',
       messages: [{
         username: 'Blake',
-        content: 'Hello, I would Like to trade games with you?',
+        message: 'Hello, I would Like to trade games with you?',
         profile_pic: "https://robohash.org/hello"
       },{
         username: 'Danny',
-        content: 'Yes of course, what do you have to trade?',
+        message: 'Yes of course, what do you have to trade?',
         profile_pic: "https://robohash.org/world"
       },{
         username: 'Blake',
-        content: 'I have Halo 4 that I would like to trade for your Destiny 2.',
+        message: 'I have Halo 4 that I would like to trade for your Destiny 2.',
         profile_pic: "https://robohash.org/hello"
       }]
     };
+  }
+
+  componentDidMount(){
+
+        const {roomId} = this.state
+        const {userId} = this.state
+        const traderId = 7
+        const gameImg = "https://media.rawg.io/media/games/278/2783e31b00d7b87905e5346a1df1ccfb.jpg"
+        const data = { roomId, userId, traderId, gameImg }
+        socket.emit('join room', data)
+        socket.on('room joined', data => {
+          this.setState({ obj: data })
+        })
+        socket.on('message received', data => {
+          console.log('message received:', data);
+          // createdAt: "a few seconds ago"
+          // message: "bonjerno"
+          // roomId: 44
+          // userId: 8
+          // const { message, username, createdAt, profile_pic } = data
+          // this.setState({
+          //   messages: data
+          //  })
+          const {messages} = this.state
+          let messagesArray = [...messages]
+          console.log({messages});
+          messagesArray.push(data)
+          this.setState({
+            messages: messagesArray
+          })
+        })
+
   }
 
   logout = ()=> {
@@ -34,7 +73,23 @@ class Trader extends Component {
           this.props.history.push("/")
   }
 
+  sendMessage = (e) => {
+    e.preventDefault()
+    const message = e.target.elements.chatInput.value
+    const {roomId, userId, username, profile_pic} = this.state
+    socket.emit('send out message', {
+      message,
+      roomId,
+      userId,
+      username,
+      profile_pic,
+      createdAt: moment().startOf('minutes').fromNow()
+    })
+    document.getElementsByClassName('chat-input')[0].value=null
+  }
+
   render() {
+    console.log('data:', this.state.obj);
     const {user} = this.props
 
     let messages = this.state.messages.map((e, i) => {
@@ -43,12 +98,14 @@ class Trader extends Component {
         {e.username === this.state.username ?
           <div className="each-user-message">
             <img className="chat-profile-pic" alt="" src={e.profile_pic} />
-            <div className="message-content" >{e.content}</div>
+            <div className="message-content" >{e.message}</div>
+            <div className="time-stamp">{e.createdAt}</div>
           </div>
           :
           <div className="each-seller-message">
             <img className="chat-seller-profile-pic" alt="" src={e.profile_pic} />
-            <div className="message-content" >{e.content}</div>
+            <div className="message-content" >{e.message}</div>
+            <div className="time-stamp">{e.createdAt}</div>
           </div>}
         </div>
       )
@@ -71,7 +128,7 @@ class Trader extends Component {
             <Link to="/home" ><h1><Home size="large" color="#AED429" /></h1></Link>
           </div>
 
-      </div>
+        </div>
 
         <div className="trade-container" >
             <div className="user-section" >
@@ -100,10 +157,16 @@ class Trader extends Component {
                 <section className="chat-messages">
                   {messages}
                 </section>
-                <form className="chat-form">
-                  <input type="text" name="chatInput" className="chat-input" placeholder="Compose Message..." />
+
+
+
+                <form onSubmit={e => this.sendMessage(e)} className="chat-form">
+                  <input type="message" name="chatInput" className="chat-input" placeholder="Compose Message..." />
                   <button className="chat-submit" >Send Message</button>
                 </form>
+
+
+
                 <br/>
                 <div className="chat-confirmation" >
                   <button className="confirm" >Confirm</button>

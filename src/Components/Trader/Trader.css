@@ -96,33 +96,47 @@
 }
 
 .chat-messages{
-    height: 100%;
+    height: calc(100% - 60px);
+    overflow-y: auto;
+}
+
+.chat-messages::-webkit-scrollbar {
+    display: none;
 }
 
 .each-user-message{
+    position: relative;
     background: #AED429;
     border-radius: 6px;
     border-bottom-left-radius: 0px;
     margin-right: 36px;
     display: flex;
-    margin-bottom: 3px;
+    margin-bottom: 21px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
 }
 
 .each-seller-message{
+    position: relative;
     background: #28AB53;
     border-radius: 6px;
     border-bottom-right-radius: 0px;
     margin-left: 36px;
     display: flex;
     flex-direction: row-reverse;
-    margin-bottom: 3px;
+    margin-bottom: 21px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
 }
 
 .message-content{
     text-align: left;
     padding-left: 9px;
+}
+
+.time-stamp{
+    position: absolute;
+    bottom: -18px;
+    left: 0px;
+    color: #22CEF9;
 }
 
 .chat-input{

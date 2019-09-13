@@ -140,6 +140,30 @@ p {
 .actualTrades > h4 {
     margin-right: 18px;
 }
+
+.userProfile::-webkit-scrollbar {
+    display: none;
+}
+
+.Profile_NavBar::-webkit-scrollbar {
+    display: none;
+}
+
+.profileContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.pastTrades::-webkit-scrollbar {
+    display: none;
+}
+
+.currentTrades::-webkit-scrollbar {
+    display: none;
+}
+
+.userFriends::-webkit-scrollbar {
+    display: none;
+}
 /* 
 .userProfile{
     display: flex;
