@@ -38,11 +38,12 @@ app.delete('/auth/logout', aCtrl.logout)
 app.get(`/api/users/:user_id`, ctrl.getUserInfo)
 app.get('/api/games/:user_id', ctrl.getUserGames)
 app.get('/api/wishlist/:user_id', ctrl.getUserWishlist)
-app.get('/api/messages/:room_id', ssl.getMessages)
+// app.get('/api/messages/:room_id', ssl.getMessages)
 app.post('/api/newGames/:user_id', ctrl.saveNewGame)
 app.post('/api/wishlist/:user_id', ctrl.addToWishlist)
 app.post('/api/gamelist/:user_id', ctrl.addToGamelist)
 app.put('/api/updateUsers/:user_id', ctrl.updateUserProfile)
+app.get('/api/getBestMatchUsers/:game_id', ctrl.getBestMatchUsers)
 
 //API REQUESTS
 app.post('/api/games', gCtrl.getGameName)
