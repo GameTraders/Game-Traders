@@ -16,11 +16,7 @@ class Trades extends Component {
       {
         username: "Blake",
         games: [
-          {
-            id: 8888,
-            cover_art:
-              "https://media.rawg.io/media/games/278/2783e31b00d7b87905e5346a1df1ccfb.jpg"
-          }
+          "https://media.rawg.io/media/games/278/2783e31b00d7b87905e5346a1df1ccfb.jpg"
         ],
         trade_count: 22,
         metacritic: 80,
@@ -30,13 +26,19 @@ class Trades extends Component {
     ],
     great: [],
     good: [],
-    myGames: []
+    myGames: [],
+    game: [],
+    trades: []
   };
+
   componentDidMount() {
-    const { user_id } = this.props.user;
-    axios.get(`/api/getBestMatchedUsers/${user_id}`).then(res => {
+    this.getGameById();
+    this.getTradesForUser();
+  }
+  getGameById = () => {
+    axios.get(`/api/game/${this.props.match.params.game_id}`).then(res => {
       this.setState({
-        myGames: res.data
+        game: res.data
       });
     });
   }
@@ -77,10 +79,17 @@ class Trades extends Component {
      await sockets.emit('join room', data)
      window.location.href = `http://localhost:4200/#/trader/${roomId}`
   }
+  getTradesForUser = () => {
+    axios.get(`/api/getTrades/${this.props.match.params.game_id}`).then(res => {
+      this.setState({
+        trades: res.data
+      });
+    });
+  };
+
 
   render() {
-    const { best, great, good } = this.state;
-    console.log(great, good, best);
+    console.log(this.state.trades);
     return (
       <div className="Trades_Outer">
         <div className="Profile_NavBar">
@@ -103,72 +112,30 @@ class Trades extends Component {
             </Link>
           </div>
         </div>
-        <div className="Trades_Best_Match">
-          <div className="Trades_Info_Display">
-            <h4 className="Trades_h4">Best Trades</h4>
-          </div>
-          <div className="Trades_Display_Users">
-            {best.length > 0 ? (
-              best.map((el, i) => (
-                <div key={i}>
-                  <h1>
-                    Oops! Try Adding some more games to your want or wish list
-                  </h1>
-                </div>
-              ))
-            ) : (
-              <h1>No Matches</h1>
-            )}
+        <div className="topSide">
+          <div className="gamePic">
+            {this.state.game.length > 0 ? (
+              <img src={this.state.game[0].background_image} alt="" />
+            ) : null}
           </div>
         </div>
-        <div className="Trades_Display_Users">
-          {best.length > 0 ? (
-            best.map((el, i) => (
-              <div key={i} className="Trades_Card_Outer">
-                <img className="profile-pic" src={el.profile_pic} alt="" />
-                <h4 className="seller-username">{el.username}</h4>
-                <h4>Rating: {el.metacritic}%</h4>
-                <h4>Trades: {el.trade_count}</h4>
-                <div className="Trades_User_games">
-                  {el.games.map((el, i) => (
-                    <div key={i} onClick={() => this.combineAwait(el)}>
-                      <img
-                        className="Trades_Individual_Games"
-                        src={el.cover_art}
-                        alt=""
-                      />
-                      <h6>Game Name</h6>
-                    </div>
-                  ))}
-                </div>
+        <div className="bottomSide">
+          {this.state.trades.length > 0
+            ? this.state.trades.map((el, i) => (
+                <div key={i} className="userInfo">
+                <div className="user-rating">{el.user_rating}</div>
+                <img className='profile-pic' src={el.profile_pic} alt=""/>
+                <h3 className='username'>{el.username}</h3>
               </div>
-            ))
-          ) : (
-            <h1>No Matches</h1>
-          )}
-        </div>
-        <div className="Trades_Good_Match">
-          <div className="Trades_Info_Display">
-            <h4 className="Trades_h4">Good Trades</h4>
-          </div>
-          <div className="Trades_Display_Users">
-            {best.length > 0 ? (
-              best.map((el, i) => (
-                <div key={i}>
-                  <h1>
-                    Oops! Try Adding some more games to your want or wish list
-                  </h1>
-                </div>
               ))
-            ) : (
-              <h1>No Matches</h1>
-            )}
-          </div>
+            : null}
         </div>
       </div>
     );
+
   }
 }
+
 const mapStateToProps = reduxState => {
   return reduxState;
 };

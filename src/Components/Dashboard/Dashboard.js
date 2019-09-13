@@ -93,7 +93,7 @@ class Dashboard extends Component {
             this.state.games.map((e, i) => {
               return (
                 <div
-                  key={i}
+                  key={e.id}
                   className="home-game-mini"
                 >
                   <h4 className="home-mini-name">
@@ -122,11 +122,13 @@ class Dashboard extends Component {
                     </div>
                     }
                     <div className="home-game-mini-points">{e.metacritic}%</div>
-                    <AddWish state={e}/>
+                    <AddWish 
+                    user={this.props.user}
+                    state={e}/> 
                   </div>
-                </div>
-              );
-            })
+                </div>  
+                );
+              })
           ) : (
             <h4>Loading</h4>
           )}
