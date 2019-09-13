@@ -1,6 +1,7 @@
 import React from "react"
 import {Link} from 'react-router-dom'
 import { Home } from 'grommet-icons';
+import GTLogo from '../../GTLogo.png'
 
 export default function About() {
             return (
@@ -8,11 +9,11 @@ export default function About() {
                 <div className="Dashboard_NavBar">
         
                                 <div className="Dashboard_Logo">
-                                    <h1>Game Traders</h1>
+                                    <img src={GTLogo} alt="Logo" />
                                 </div>
         
                                 <div className="nav-links">
-                                    <Link to="/home" ><h1><Home size="large" color="#AED429" /></h1></Link>
+                                    <Link to="/home" ><h1 className="link" ><Home size="large" color="#AED429" /></h1></Link>
                                 </div>
         
                 </div>
