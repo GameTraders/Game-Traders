@@ -8,6 +8,7 @@ import { AddCircle, Up, Down, Home, Power } from 'grommet-icons';
 import {Link} from 'react-router-dom'
 import {logout} from '../../ducks/userReducer'
 import socket from '../../sockets'
+import GTLogo from '../../GTLogo.png'
 const moment = require('moment')
 
 class Trader extends Component {
@@ -120,12 +121,12 @@ class Trader extends Component {
                 <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
         
           <div className="Trader_Logo">
-              <Link className="link" to="/about" ><h1>Game Traders</h1></Link>
+              <Link to="/about" ><img className="link"  src={GTLogo} alt="Logo" /></Link>
           </div>
 
           <div className="nav-links">
             {/* <Link className="link" to={{pathname: `/userProfile/${user.user_id}`}} ><img className="user-pic" alt="" src={user.profile_pic} /></Link> */}
-            <Link to="/home" ><h1><Home size="large" color="#AED429" /></h1></Link>
+            <Link to="/home" ><h1 className="link" ><Home size="large" color="#AED429" /></h1></Link>
           </div>
 
         </div>

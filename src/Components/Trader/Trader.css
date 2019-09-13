@@ -4,10 +4,10 @@
     box-sizing: border-box;
   }
 
-  .Trader_Logo h1{
+  .Trader_Logo img{
       position: absolute;
       left: 42%;
-      top: 18px;
+      top: -3px;
       color: #FC9B00;
   }
 

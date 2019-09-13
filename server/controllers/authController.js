@@ -54,5 +54,13 @@ module.exports = {
       req.session.destroy()
       res.status(200).send({message: 'logged out', loggedIn: false})
   },
+  checkSession: (req, res) => {
+    if (req.session.user) {
+      console.log('session exists?', req.session);
+      res.send(req.session.user)
+    } else {
+      res.status(403).send({loggedIn: false})
+    }
+  }
 
 };

@@ -4,6 +4,7 @@ import Axios from "axios"
 import swal from "sweetalert"
 import { connect } from "react-redux";
 import { login } from '../../ducks/userReducer'
+import GTLogo from '../../GTLogo.png'
 
 
 class Authentication extends Component {
@@ -75,7 +76,7 @@ class Authentication extends Component {
             <div className="Authentication_Outer">
                 <div className="Authentication_NavBar">
                     <div className="Authentication_Logo">
-                        <h1>Game Traders</h1>
+                        <img src={GTLogo} alt="Logo" />
                     </div>
                     <div className="Authentication_Login">
                         <button onClick={this.Login} className="Authentication_Button">
