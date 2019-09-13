@@ -67,11 +67,17 @@ module.exports = {
         await db.add_to_gamelist(user_id, id, points)
         res.status(200).send({ message: "game Added" })
     },
-    getBestMatchUsers: async (req, res) => {
-        const great = []
+    getTrades: async (req, res) => {
         const db = req.app.get('db')
         const {game_id} = req.params
-        db.get_trader_ids([game_id]).then(result => {
+        db.get_trades([game_id]).then(result => {
+            res.status(200).send(result)
+        })
+    },
+    getGameById: (req, res) => {
+        const db = req.app.get('db')
+        const {game_id} = req.params
+        db.get_game_by_id([game_id]).then(result => {
             res.status(200).send(result)
         })
     }
