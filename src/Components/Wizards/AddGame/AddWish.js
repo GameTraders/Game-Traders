@@ -30,7 +30,6 @@ export default class AddWish extends Component {
     }
 
     render() {
-        console.log(this.props.state)
         return (
             <div className="wishDropdown">
                 <div className="submit-games-addpoints">

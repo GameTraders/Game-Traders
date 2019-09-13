@@ -19,7 +19,7 @@ class MyGames extends Component {
     })
   }
   render() {
-    // console.log(this.state.games)
+
       let miniGames = this.state.games.map((e, i) => {
           return (
               <div key={i} className="my-game-mini">

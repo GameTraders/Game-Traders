@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
-import "./Trades.css";
-import { Home, Power } from "grommet-icons";
-import GTLogo from '../../GTLogo.png'
-import sockets from "../../sockets";
 import { logout } from "../../ducks/userReducer";
-
-
+import { Home, Power } from "grommet-icons";
+import "./Trades.css";
+import GTLogo from "../../GTLogo.png";
+import sockets from "../../sockets";
 
 class Trades extends Component {
   state = {
@@ -27,7 +25,7 @@ class Trades extends Component {
         game: res.data
       });
     });
-  }
+  };
 
   logout = () => {
     this.props.logout();
@@ -94,6 +92,19 @@ class Trades extends Component {
      await sockets.emit('join room', data)
      this.props.history.push(`/trader/${roomId}`)
   }
+
+  compare = (a, b) => {
+    const scoreA = a.user_rating;
+    const scoreB = b.user_rating;
+    let comparison = 0;
+    if (scoreA > scoreB) {
+      comparison = 1;
+    } else if (scoreA < scoreB) {
+      comparison = -1;
+    }
+    return comparison * -1;
+  }
+  
   getTradesForUser = () => {
     axios.get(`/api/getTrades/${this.props.match.params.game_id}`).then(res => {
       this.setState({
@@ -101,8 +112,10 @@ class Trades extends Component {
       });
     });
   };
-
-
+  logout = () => {
+    this.props.logout();
+    this.props.history.push("/");
+  };
   render() {
     const { trades, game } = this.state
     console.log({trades});
@@ -132,24 +145,38 @@ class Trades extends Component {
         <div className="topSide">
           <div className="gamePic">
             {this.state.game.length > 0 ? (
-              <img src={this.state.game[0].background_image} alt="" />
+              <div className="game-to-trade-outer">
+                <div className="game-to-trade">
+                  <img src={this.state.game[0].background_image} alt="" />
+                  <div>
+                    <h2>{this.state.game[0].game_name}</h2>
+                  </div>
+                  <div>
+                    <h4>
+                      Metacritic:
+                      {this.state.game[0].metacritic}
+                    </h4>
+                  </div>
+                </div>
+              </div>
             ) : null}
           </div>
         </div>
-        <div className="bottomSide">
-          {this.state.trades.length > 0
-            ? this.state.trades.map((el, i) => (
-                <div key={i} className="userInfo" onClick={() => this.combineAwait(el)}>
-                <div className="user-rating">{el.user_rating}%</div>
-                <img className='profile-pic' src={el.profile_pic} alt=""/>
-                <h3 className='username'>{el.username}</h3>
-              </div>
-              ))
-            : null}
+        <div className="bottomSide-outer">
+          <div className="bottomSide">
+            {this.state.trades.length > 0
+              ? this.state.trades.sort(this.compare).map((el, i) => (
+                  <div key={i} className="userInfo" onClick={() => this.combineAwait(el)}>
+                    <div className="user-rating">{el.user_rating}</div>
+                    <img className="profile-pic" src={el.profile_pic} alt="" />
+                    <h3 className="username">{el.username}</h3>
+                  </div>
+                ))
+              : null}
+          </div>
         </div>
       </div>
     );
-
   }
 }
 

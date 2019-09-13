@@ -28,7 +28,6 @@ module.exports = {
         //tested and working with postman
         const db = req.app.get('db')
         const {user_id} = req.params
-        console.log(req.params)
         db.get_user_wishlist([user_id]).then(result => {
             res.status(200).send(result)
         })
@@ -53,6 +52,10 @@ module.exports = {
         if (game.length == 0) {
             await db.save_new_game(id, name, background_image, released, metacritic)
         }
+        const alreadyadded = await db.search_wish_list_gameid(id)
+        if (alreadyadded.length > 0) {
+            return res.status(200).send({message: "already added"})
+        }
         await db.add_to_wishlist(user_id, id)
         res.status(200).send({ message: "game Added" })
     },
@@ -63,6 +66,10 @@ module.exports = {
         const game = await db.search_for_game(id)
         if (game.length == 0) {
             await db.save_new_game(id, name, background_image, released, metacritic)
+        }
+        const alreadyadded = await db.search_game_list_gameid(id)
+        if (alreadyadded.length > 0) {
+            return res.status(200).send({message: "already added"})
         }
         await db.add_to_gamelist(user_id, id, points)
         res.status(200).send({ message: "game Added" })
