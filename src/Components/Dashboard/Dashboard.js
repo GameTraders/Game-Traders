@@ -7,6 +7,7 @@ import { Power, FormSearch } from "grommet-icons";
 import { logout } from "../../ducks/userReducer";
 import AddWish from '../Wizards/AddGame/AddWish'
 import GTLogo from '../../GTLogo.png'
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation"
 
 class Dashboard extends Component {
   constructor() {
@@ -48,9 +49,11 @@ class Dashboard extends Component {
     });
   }
   getName = async () => {
+    this.setState({
+      games: []
+    })
     const name = this.state.gameName;
     const results = await axios.post("/api/games", { name });
-    console.log(results)
     const games = results.data.results;
     this.setState({
       games
@@ -130,7 +133,7 @@ class Dashboard extends Component {
                 );
               })
           ) : (
-            <h4>Loading</h4>
+           <LoadingAnimation/>
           )}
         </div>
         <div className="ownDropdown"></div>

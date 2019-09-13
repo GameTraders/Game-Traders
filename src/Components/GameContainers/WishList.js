@@ -16,7 +16,7 @@ class WishList extends Component {
     };
   }
   componentDidMount() {
-    // console.log(this.props.user)
+
     axios.get(`/api/wishlist/${this.props.user.user_id}`).then(res => {
       this.setState({
           wishlist: res.data
@@ -25,7 +25,7 @@ class WishList extends Component {
   }
 
   render() {
-    // console.log('wishlist', this.state.wishlist)
+
     
       let miniGames = this.state.wishlist.map((e, i) => {
           return (
