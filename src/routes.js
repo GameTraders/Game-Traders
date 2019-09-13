@@ -16,9 +16,10 @@ export default (
         <Route component = {Trader}  path = "/trader/:roomId" exact/>
         <Route component = {Search}  path = "/search" />
         <Route component = {UserProfile} path = '/userProfile/:user_id'/>
-        <Route component = {Trader} path = '/trader'/>
-        <Route component = {Trades} path = '/trades'/>
+        <Route component = {Trader} path = '/trader/:game_id/:user_id'/>
+        <Route component = {Trades} path = '/trades/:game_id'/>
         <Route component = {About} path = '/about'/>
         <Route component = {AddPoints} path = '/add-points'/>
+        <Route/>
     </Switch>
 )

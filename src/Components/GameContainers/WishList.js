@@ -2,6 +2,7 @@ import "./MyGames.css";
 import React, { Component } from "react";
 import axios from 'axios'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 class WishList extends Component {
   constructor() {
@@ -12,7 +13,7 @@ class WishList extends Component {
     };
   }
   componentDidMount() {
-    console.log(this.props.user)
+    // console.log(this.props.user)
     axios.get(`/api/wishlist/${this.props.user.user_id}`).then(res => {
       this.setState({
           wishlist: res.data
@@ -21,10 +22,11 @@ class WishList extends Component {
   }
 
   render() {
-    console.log('wishlist', this.state.wishlist)
+    // console.log('wishlist', this.state.wishlist)
+    
       let miniGames = this.state.wishlist.map((e, i) => {
           return (
-              <div key={i} className="my-game-mini">
+              <div key={i} className="my-game-mini" onClick={() => this.props.history.push(`/trades/${e.game_id}`)}>
                       <h4 className="mini-name">
                           {e.game_name.length > 5 ? `${e.game_name.substring(0, 6)}...` : `${e.game_name}` }
                       </h4>
@@ -55,7 +57,7 @@ const mapStateToProps = reduxState => {
   return reduxState;
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(WishList);
+export default connect(mapStateToProps,null)(withRouter(WishList));
+  
+  
+
