@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
+import { logout } from "../../ducks/userReducer";
 import {Home, Power, FormSearch } from "grommet-icons";
 import "./Trades.css";
 class Trades extends Component {
@@ -43,6 +44,10 @@ class Trades extends Component {
       });
     });
   };
+  logout = () => {
+    this.props.logout();
+    this.props.history.push("/");
+  };
   render() {
     console.log(this.state.trades);
     return (
@@ -72,7 +77,7 @@ class Trades extends Component {
         <div className="bottomSide">
           {this.state.trades.length > 0
             ? this.state.trades.map((el, i) => (
-                <div key={i} className="userInfo">
+                <div key={i} className="userInfo" onClick={() => this.props.history.push(`/trader/${this.props.history.match.game_id}/${el.user_id}`)}>
                 <div className="user-rating">{el.user_rating}</div>
                 <img className='profile-pic' src={el.profile_pic} alt=""/>
                 <h3 className='username'>{el.username}</h3>
@@ -82,75 +87,6 @@ class Trades extends Component {
         </div>
       </div>
     );
-//     <div
-//     key={el.i}
-//     onClick={() =>
-//       this.props.history.push(
-//         `/trader/${this.props.match.params.game_id}/${el.user_id}`
-//       )
-//     }
-//   >
-//     <img src={el.profile_pic} alt="" />
-//   </div>
-
-
-
-
-
-    //     const { best } = this.state
-    //     return (
-
-    //         <div className="Trades_Outer">
-
-    //             <div className="Trades_Best_Match">
-    //                 <div className="Trades_Info_Display">
-    //                     <h4 className="Trades_h4" >Best Trades</h4>
-    //                 </div>
-    //                 <div className="Trades_Display_Users">
-    //                     {best.length > 0 ? best.map((el, i) => (
-    //                         <div key={i}>
-    //                             <h1>Oops! Try Adding some more games to your want or wish list</h1>
-    //                         </div>
-    //                     )) : <h1>No Matches</h1>}
-    //                 </div>
-    //             </div>
-    //             <div className="Trades_Great_Match">
-    //                 <div className="Trades_Info_Display">
-    //                     <h4 className="Trades_h4" >Great Trades</h4>
-    //                 </div>
-    //                 <div className="Trades_Display_Users">
-    //                     {best.length > 0 ? best.map((el, i) => (
-    //                         <div key={i} className="Trades_Card_Outer">
-    //                             <img className="profile-pic" src={el.profile_pic} alt="" />
-    //                             <h4 className="seller-username">{el.username}</h4>
-    //                             <h4>Rating: {el.metacritic}%</h4>
-    //                             <h4>Trades: {el.trade_count}</h4>
-    //                             <div className="Trades_User_games">
-    //                                 {el.games.map((el,i) => (
-    //                                     <div key={i}>
-    //                                         <img className="Trades_Individual_Games" src={el} alt="" />
-    //                                         <h6>Game Name</h6>
-    //                                     </div>
-    //                                 ))}
-    //                             </div>
-    //                         </div>
-    //                     )) : <h1>No Matches</h1>}
-    //                 </div>
-    //             </div>
-    //             <div className="Trades_Good_Match">
-    //                 <div className="Trades_Info_Display">
-    //                     <h4 className="Trades_h4" >Good Trades</h4>
-    //                 </div>
-    //                 <div className="Trades_Display_Users">
-    //                     {best.length > 0 ? best.map((el, i) => (
-    //                         <div key={i}>
-    //                             <h1>Oops! Try Adding some more games to your want or wish list</h1>
-    //                         </div>
-    //                     )) : <h1>No Matches</h1>}
-    //                 </div>
-    //             </div>
-    //         </div>
-    // )
   }
 }
 const mapStateToProps = reduxState => {
@@ -159,5 +95,5 @@ const mapStateToProps = reduxState => {
 
 export default connect(
   mapStateToProps,
-  null
+  {logout}
 )(Trades);
