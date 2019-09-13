@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import { logout } from "../../ducks/userReducer";
 import {Link} from 'react-router-dom'
 import './UserProfile.css'
+import GTLogo from '../../GTLogo.png'
 
 class UserProfile extends Component {
     constructor() {
@@ -110,11 +111,11 @@ logout = () => {
                         <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
 
                       <div className="Profile_Logo">
-                          <Link className="link" to="/about" ><h1>Game Traders</h1></Link>
+                          <Link to="/about" ><img className="link" src={GTLogo} alt="Logo" /></Link>
                       </div>
 
                       <div className="nav-links">
-                          <Link to="/home" ><h1><Home size="large" color="#AED429" /></h1></Link>
+                          <Link to="/home" ><h1 className="link" ><Home size="large" color="#AED429" /></h1></Link>
                       </div>
 
       </div>

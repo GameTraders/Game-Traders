@@ -1,5 +1,37 @@
-.Trades_Outer{
+
+
+.Trades_Outer {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
     background-color: #2E2E2E;
+}
+
+.Trades_Best_Match {
+    padding-top: 100px;
+    height: 30vh;
+    width: 100vw;
+    background-color: #2E2E2E;
+    border-bottom: 2px solid whitesmoke;
+    display: flex;
+    align-items: space-between;
+    border-top: 2px solid whitesmoke;
+}
+
+.Trades_Great_Match {
+    height: 30vh;
+    width: 100vw;
+    background-color: #2E2E2E;
+    border-bottom: 2px solid whitesmoke;
+    display: flex;
+    align-items: space-between;
+}
+
+.Trades_Good_Match {
+    height: 30vh;
+    width: 100vw;
 }
 .Trades_Test {
     position: relative;
@@ -15,24 +47,51 @@
     justify-content: space-between;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
 }
-/* .topSide{
-    margin-top: 69px
-} */
-.gamePic {
-
-}
-.gamePic > img{
+.game-to-trade > img{
     width: 200px;
-    height: 200px;
+    height: 30vh;
+    padding: 5px;
+    border-radius: 10px;
 }
-/* .Trades_Outer {
-    height: 100vh;
-    width: 100vw;
+.bottomSide-outer {
+    height: 50vh;
+    border: 3px solid #28AB53; 
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: scroll;
+}
+.bottomSide {
     display: flex;
-    flex-direction: column;
-} */
+    width: 80vw;
+}
 .bottomSide > img {
     width: 200px;
     height: 200px;
+}
+.game-to-trade {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 30vw;
+    height: 30vh;
+    background-color: #2E2E2E;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    text-shadow: 2px 1px #2E2E2E;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+    border: 2px solid orange;
+}
+.game-to-trade h2 {
+    margin-top: 8vh;
+    margin-right: 1vw;
+    color: #FC9B00;
+}
+.game-to-trade h4 {
+    margin-bottom: 14vh;
+    color: #28AB53;
 }
 
