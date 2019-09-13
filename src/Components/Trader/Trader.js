@@ -10,43 +10,41 @@ import {logout} from '../../ducks/userReducer'
 import socket from '../../sockets'
 import GTLogo from '../../GTLogo.png'
 const moment = require('moment')
+// const dummyMessage = {
+//   username: this.state.username,
+//   message: 'Hello, I would Like to trade games with you?',
+//   profile_pic: this.state.profilePic
+// }
 
 class Trader extends Component {
   constructor() {
     super();
     this.state = {
-      profile_pic: "https://robohash.org/hello",
-      roomId: 44,
+      profilePic: "",
+      roomId: "",
       obj: {},
-      username: 'Blake',
-      userId: 8,
+      username: "",
+      userId: "",
       message: '',
-      messages: [{
-        username: 'Blake',
-        message: 'Hello, I would Like to trade games with you?',
-        profile_pic: "https://robohash.org/hello"
-      },{
-        username: 'Danny',
-        message: 'Yes of course, what do you have to trade?',
-        profile_pic: "https://robohash.org/world"
-      },{
-        username: 'Blake',
-        message: 'I have Halo 4 that I would like to trade for your Destiny 2.',
-        profile_pic: "https://robohash.org/hello"
-      }]
+      messages: []
     };
   }
 
   componentDidMount(){
-
-        const {roomId} = this.state
-        const {userId} = this.state
-        const traderId = 7
-        const gameImg = "https://media.rawg.io/media/games/278/2783e31b00d7b87905e5346a1df1ccfb.jpg"
-        const data = { roomId, userId, traderId, gameImg }
-        socket.emit('join room', data)
+        const { username, user_id, profile_pic } = this.props.user
+        this.setState({
+          username,
+          profilePic: profile_pic,
+          userId: user_id
+        })
         socket.on('room joined', data => {
-          this.setState({ obj: data })
+          console.log({data});
+          const {roomId} = this.props.match.params
+          console.log({roomId});
+          this.setState({ 
+            obj: data,
+            roomId 
+          })
         })
         socket.on('message received', data => {
           console.log('message received:', data);
@@ -69,6 +67,11 @@ class Trader extends Component {
 
   }
 
+  componentWillMount() {
+    socket.emit('disconnect', this.state.roomId)
+  }
+  
+
   logout = ()=> {
       this.props.logout()
           this.props.history.push("/")
@@ -77,13 +80,18 @@ class Trader extends Component {
   sendMessage = (e) => {
     e.preventDefault()
     const message = e.target.elements.chatInput.value
-    const {roomId, userId, username, profile_pic} = this.state
+     console.log({message});
+    const {roomId, userId, username, profilePic} = this.state
+    console.log("roomId:", roomId);
+    console.log("userId:", userId);
+    console.log("username:", username);
+    console.log("profilePic:", profilePic);
     socket.emit('send out message', {
       message,
       roomId,
       userId,
       username,
-      profile_pic,
+      profilePic,
       createdAt: moment().startOf('minutes').fromNow()
     })
     document.getElementsByClassName('chat-input')[0].value=null
@@ -91,20 +99,21 @@ class Trader extends Component {
 
   render() {
     console.log('data:', this.state.obj);
-    const {user} = this.props
+    const { username, profilePic, userId } = this.state
+    const { gameTrade, traderPoints, traderRating, traderName, traderProfilePic, gameName } = this.state.obj
 
     let messages = this.state.messages.map((e, i) => {
       return (
         <div key={i}> 
         {e.username === this.state.username ?
           <div className="each-user-message">
-            <img className="chat-profile-pic" alt="" src={e.profile_pic} />
+            <img className="chat-profile-pic" alt="" src={e.profilePic} />
             <div className="message-content" >{e.message}</div>
             <div className="time-stamp">{e.createdAt}</div>
           </div>
           :
           <div className="each-seller-message">
-            <img className="chat-seller-profile-pic" alt="" src={e.profile_pic} />
+            <img className="chat-seller-profile-pic" alt="" src={e.profilePic} />
             <div className="message-content" >{e.message}</div>
             <div className="time-stamp">{e.createdAt}</div>
           </div>}
@@ -134,8 +143,8 @@ class Trader extends Component {
         <div className="trade-container" >
             <div className="user-section" >
                 <div className="user-rating" >96%</div>
-                <Link className="link" to={{pathname: `/userProfile/${user.user_id}`}} ><img className="profile-pic" alt="" src={user.profile_pic} /></Link>
-                <h3 className="username">{user.username}</h3>
+                <Link className="link" to={{pathname: `/userProfile/${userId}`}} ><img className="profile-pic" alt="" src={profilePic} /></Link>
+                <h3 className="username">{username}</h3>
                 <p className="trade-count">22 Trades</p>
                 <div className="user-points">
                     <h1>44</h1>
@@ -156,7 +165,7 @@ class Trader extends Component {
               </div>
               <div className="trade-chat" >
                 <section className="chat-messages">
-                  {messages}
+                  {messages.length > 0 ? <div>{messages}</div> : null}
                 </section>
 
 
@@ -175,17 +184,17 @@ class Trader extends Component {
                 </div>
               </div>
               <div className="selected-trade" >
-                <h3 className='game-title' >Destiny 2</h3>
-                <img className="selected-game" alt="" src="https://images-na.ssl-images-amazon.com/images/I/5159Nq1DabL.jpg" />
+                <h3 className='game-title' >{gameName}</h3>
+                <img className="selected-game" alt="" src={gameTrade} />
                 <div className="game-points" >
-                  50<span>pts</span>
+                  {traderPoints}<span>pts</span>
                 </div>
               </div>
             </div>
             <div className="seller-section" >
-            <div className="user-rating" >80%</div>
-                <img className="profile-pic" alt="" src="https://robohash.org/hello" />
-                <h3 className="seller-username">Danny</h3>
+            <div className="user-rating" >{traderRating}%</div>
+                <img className="profile-pic" alt="" src={traderProfilePic} />
+                <h3 className="seller-username">{traderName}</h3>
                 <p className="trade-count">18 Trades</p>
             </div>
         </div>
