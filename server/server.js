@@ -43,7 +43,8 @@ app.post('/api/newGames/:user_id', ctrl.saveNewGame)
 app.post('/api/wishlist/:user_id', ctrl.addToWishlist)
 app.post('/api/gamelist/:user_id', ctrl.addToGamelist)
 app.put('/api/updateUsers/:user_id', ctrl.updateUserProfile)
-app.get('/api/getBestMatchUsers/:game_id', ctrl.getBestMatchUsers)
+app.get('/api/game/:game_id', ctrl.getGameById)
+app.get('/api/getTrades/:game_id', ctrl.getTrades)
 
 //API REQUESTS
 app.post('/api/games', gCtrl.getGameName)

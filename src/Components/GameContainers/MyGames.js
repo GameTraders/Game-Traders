@@ -1,86 +1,45 @@
 import "./MyGames.css";
 import React, { Component } from "react";
 import { Add } from 'grommet-icons';
-import { Link } from "react-router-dom";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
+import axios from 'axios'
 
 class MyGames extends Component {
   constructor() {
     super();
     this.state = {
-      games: [{
-          name: "Halo Infinite",
-          cover: "https://i.redd.it/uk00vkrvfkb11.png",
-          points: 40
-      },{
-        name: "Rocket League",
-        cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-        points: 50
-    },{
-        name: "GTA 5",
-        cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-        points: 45
-    },{
-        name: "Zelda",
-        cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-        points: 60
-    },{
-        name: "Halo Infinite",
-        cover: "https://i.redd.it/uk00vkrvfkb11.png",
-        points: 40
-    },{
-      name: "Rocket League",
-      cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-      points: 50
-  },{
-      name: "GTA 5",
-      cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-      points: 45
-  },{
-      name: "Zelda",
-      cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-      points: 60
-  },{
-    name: "Halo Infinite",
-    cover: "https://i.redd.it/uk00vkrvfkb11.png",
-    points: 40
-},{
-  name: "Rocket League",
-  cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-  points: 50
-},{
-  name: "GTA 5",
-  cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-  points: 45
-},{
-  name: "Zelda",
-  cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-  points: 60
-}]
+      games: []
     };
   }
-
+  componentDidMount(){
+    axios.get(`/api/games/${this.props.user.user_id}`).then(res => {
+      this.setState({
+        games: res.data
+      })
+    })
+  }
   render() {
+    // console.log(this.state.games)
       let miniGames = this.state.games.map((e, i) => {
           return (
               <div key={i} className="my-game-mini">
                       <h4 className="mini-name">
-                          {e.name.length > 5 ? `${e.name.substring(0, 6)}...` : `${e.name}` }
+                          {e.game_name.length > 5 ? `${e.game_name.substring(0, 6)}...` : `${e.game_name}` }
                       </h4>
-                      <h4 className="mini-name-hover">{e.name}</h4>
+                      <h4 className="mini-name-hover">{e.game_name}</h4>
                       <div className="home-mini-dispay">
-                        <img className="mini-cover-art" alt="" src={e.cover} />
-                        <div className="game-mini-points">{e.points}</div>
+                        <img className="mini-cover-art" alt="" src={e.background_image} />
+                        <div className="game-mini-points">{e.metacritic}</div>
                       </div>
               </div>
           )
       })
     return (
       <div className="MyGames">
-          <div className="game-mini-add">
-              <h4 className="mini-name">Game</h4>
-              <Link to="/home" ><div className="add-game" ><Add color='#FC9B00' size='large' className="add-game-icon" /></div></Link>
-          </div>
+          {/* <div className="game-mini-add"> */}
+          {/* <h4 className="mini-name">Game</h4>
+              <div className="add-game" ><Add color='#FC9B00' size='large' className="add-game-icon" /></div>
+          </div> */}
           {miniGames}
           <div className="my-game-box">My Games</div>
       </div>
@@ -88,13 +47,13 @@ class MyGames extends Component {
   }
 }
 
-export default MyGames
 
-// const mapStateToProps = reduxState => {
-//   return reduxState;
-// };
 
-// export default connect(
-//   mapStateToProps,
-//   null
-// )(Trader);
+const mapStateToProps = reduxState => {
+  return reduxState;
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(MyGames);
