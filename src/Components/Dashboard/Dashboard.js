@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Power, FormSearch } from "grommet-icons";
 import { logout } from "../../ducks/userReducer";
 import AddWish from '../Wizards/AddGame/AddWish'
+import GTLogo from '../../GTLogo.png'
 
 class Dashboard extends Component {
   constructor() {
@@ -75,10 +76,10 @@ class Dashboard extends Component {
                 <div className="Dashboard_NavBar">
                         <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
                         <div className="Dashboard_Logo">
-                            <Link className="link" to="/about" ><h1>Game Traders</h1></Link>
+                            <Link className="link" to="/about" ><img src={GTLogo} alt="Logo" /></Link>
                         </div>
                         <div className="nav-links">
-                            <Link className="link" to={{pathname: `/userProfile/${this.props.user.user_id}`}} ><img className="user-pic" alt="" src={profile_pic} /></Link>
+                            <Link to={{pathname: `/userProfile/${this.props.user.user_id}`}} ><img className="user-pic" alt="" src={profile_pic} /></Link>
                             {/* <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1> */}
                             {/* <Link to={{pathname: `/userProfile/${this.props.user.user_id}`, state: this.props.user}} ><h1 className="link" ><User size="large" color="#28AB53" /></h1></Link> */}
                         </div>

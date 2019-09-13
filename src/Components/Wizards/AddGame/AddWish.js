@@ -24,7 +24,7 @@ export default class AddWish extends Component {
                         <input
                           type="checkbox"
                           checked={ps4Checked}
-                          onChange={() => this.setState({ console: "Playstation 4", ps4Checked: !ps4Checked, xboxChecked: false, switchChecked: false})}
+                          onChange={() => this.setState({ console: "Playstation 4", ps4Checked: true, xboxChecked: false, switchChecked: false})}
                         />
                         <img className="console-icon" alt="" src={ps4Icon} />
                   </div>
@@ -32,7 +32,7 @@ export default class AddWish extends Component {
                         <input
                           type="checkbox"
                           checked={xboxChecked}
-                          onChange={() => this.setState({ console: "Xbox One", xboxChecked: !xboxChecked, ps4Checked: false, switchChecked: false })}
+                          onChange={() => this.setState({ console: "Xbox One", xboxChecked: true, ps4Checked: false, switchChecked: false })}
                         />
                         <img className="console-icon" alt="" src={xboxIcon} />
                   </div>
@@ -40,7 +40,7 @@ export default class AddWish extends Component {
                         <input
                           type="checkbox"
                           checked={switchChecked}
-                          onChange={() => this.setState({ console: "Nintendo Switch", switchChecked: !switchChecked, ps4Checked: false, xboxChecked: false })}
+                          onChange={() => this.setState({ console: "Nintendo Switch", switchChecked: true, ps4Checked: false, xboxChecked: false })}
                         />
                         <img className="console-icon" alt="" src={switchIcon} />
                   </div>

@@ -1,11 +1,4 @@
-.Trades_Header {
-    height: calc(10vh - 8px);
-    width: 100vw;
-    display: flex;
-    justify-content: space-around;
-    color: #FC9B00;
-    background-color: #2E2E2E;
-}
+
 
 .Trades_Outer {
     height: 100vh;
@@ -15,6 +8,7 @@
 }
 
 .Trades_Best_Match {
+    padding-top: 100px;
     height: 30vh;
     width: 100vw;
     background-color: #2E2E2E;

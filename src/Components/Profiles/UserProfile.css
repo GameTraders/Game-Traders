@@ -20,10 +20,10 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
 }
 
-.Profile_Logo h1{
+.Profile_Logo img{
     position: fixed;
     left: 42%;
-    top: 18px;
+    top: 3px;
     color: #FC9B00;
 }
 .add-points-btn:hover {
