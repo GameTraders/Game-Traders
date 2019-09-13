@@ -53,6 +53,11 @@ module.exports = {
         if (game.length == 0) {
             await db.save_new_game(id, name, background_image, released, metacritic)
         }
+        const alreadyadded = await db.search_wish_list_gameid(id)
+        if (alreadyadded.length > 0) {
+            console.log('game already in users list')
+            return res.status(200).send({message: "already added"})
+        }
         await db.add_to_wishlist(user_id, id)
         res.status(200).send({ message: "game Added" })
     },
@@ -63,6 +68,11 @@ module.exports = {
         const game = await db.search_for_game(id)
         if (game.length == 0) {
             await db.save_new_game(id, name, background_image, released, metacritic)
+        }
+        const alreadyadded = await db.search_game_list_gameid(id)
+        if (alreadyadded.length > 0) {
+            console.log('game already in users list')
+            return res.status(200).send({message: "already added"})
         }
         await db.add_to_gamelist(user_id, id, points)
         res.status(200).send({ message: "game Added" })
