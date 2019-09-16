@@ -60,9 +60,12 @@ p {
     flex-direction: column;
     margin: 18px 3px 18px 3px
 }
+.userProfile{
+    height: 100vh;
+}
 .profileContainer{
     background: #2E2E2E;
-    height: 56vh;
+    height: 64vh;
     display: flex;
     justify-content: space-between;
     padding-top: 69px;
@@ -135,37 +138,12 @@ p {
     background: #28AB53;
       display: flex;
       justify-content: space-between;
-      /* height: calc(44vh - 69px); */
+      height: calc(46vh - 69px);
 }
 .actualTrades > h4 {
     margin-right: 18px;
 }
 
-.userProfile::-webkit-scrollbar {
+*::-webkit-scrollbar {
     display: none;
 }
-
-.Profile_NavBar::-webkit-scrollbar {
-    display: none;
-}
-
-.profileContainer::-webkit-scrollbar {
-    display: none;
-}
-
-.pastTrades::-webkit-scrollbar {
-    display: none;
-}
-
-.currentTrades::-webkit-scrollbar {
-    display: none;
-}
-
-.userFriends::-webkit-scrollbar {
-    display: none;
-}
-/* 
-.userProfile{
-    display: flex;
-    flex-direction: column;
-} */

@@ -57,5 +57,8 @@
       "src/star",
       "public/star"
     ]
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
   }
 }
