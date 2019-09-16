@@ -20,11 +20,8 @@ class Trader extends Component {
   constructor() {
     super();
     this.state = {
-      profilePic: "",
       roomId: "",
       obj: {},
-      username: "",
-      userId: "",
       message: '',
       messages: [],
       myTrade: {},
@@ -34,12 +31,6 @@ class Trader extends Component {
   }
 
   componentDidMount(){
-        const { username, user_id, profile_pic } = this.props.user
-        this.setState({
-          username,
-          profilePic: profile_pic,
-          userId: user_id
-        })
         socket.on('room joined', data => {
           console.log({data});
           const {roomId} = this.props.match.params
@@ -102,16 +93,17 @@ class Trader extends Component {
     console.log("params:", this.props.match.params);
     const {roomId} = this.props.match.params
     console.log({roomId});
+    const { username: myName, profile_pic: myPic, user_points: myPoints, user_rating: myRating, user_id: myId } = this.props.user
     const { background_image, game_name, points } = this.state.myTrade
-    const { username, profilePic, userId } = this.state
     const { gameTrade, traderPoints, traderRating, traderName, traderProfilePic, gameName } = this.state.obj
 
     let messages = this.state.messages.map((e, i) => {
+      console.log("element:", e);
       return (
         <div key={i}> 
         {e.username === this.state.username ?
           <div className="each-user-message">
-            <img className="chat-profile-pic" alt="" src={e.profilePic} />
+            <img className="chat-profile-pic" alt="" src={myPic} />
             <div className="message-content" >{e.message}</div>
             <div className="time-stamp">{e.createdAt}</div>
           </div>
@@ -146,12 +138,12 @@ class Trader extends Component {
 
         <div className="trade-container" >
             <div className="user-section" >
-                <div className="user-rating" >96%</div>
-                <Link className="link" to={{pathname: `/userProfile/${userId}`}} ><img className="profile-pic" alt="" src={profilePic} /></Link>
-                <h3 className="username">{username}</h3>
+                <div className="user-rating" >{myRating}%</div>
+                <Link className="link" to={{pathname: `/userProfile/${myId}`}} ><img className="profile-pic" alt="" src={myPic} /></Link>
+                <h3 className="username">{myName}</h3>
                 <p className="trade-count">22 Trades</p>
                 <div className="user-points">
-                    <h1>44</h1>
+                    <h1>{myPoints}</h1>
                     <div className="point-adder">
                         <p>Points</p>
                         <div className="add-points-btn" ><AddCircle color='rgb(252, 155, 0)' size='medium' /></div>
