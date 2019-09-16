@@ -10,54 +10,38 @@ import {logout} from '../../ducks/userReducer'
 import socket from '../../sockets'
 import GTLogo from '../../GTLogo.png'
 const moment = require('moment')
+// const dummyMessage = {
+//   username: this.state.username,
+//   message: 'Hello, I would Like to trade games with you?',
+//   profile_pic: this.state.profilePic
+// }
 
 class Trader extends Component {
   constructor() {
     super();
     this.state = {
-      profile_pic: "https://robohash.org/hello",
-      roomId: 44,
+      roomId: "",
       obj: {},
-      username: 'Blake',
-      userId: 8,
       message: '',
-      messages: [{
-        username: 'Blake',
-        message: 'Hello, I would Like to trade games with you?',
-        profile_pic: "https://robohash.org/hello"
-      },{
-        username: 'Danny',
-        message: 'Yes of course, what do you have to trade?',
-        profile_pic: "https://robohash.org/world"
-      },{
-        username: 'Blake',
-        message: 'I have Halo 4 that I would like to trade for your Destiny 2.',
-        profile_pic: "https://robohash.org/hello"
-      }]
+      messages: [],
+      myTrade: {},
+      myConfirmed: false,
+      theirConfirmed: false
     };
   }
 
   componentDidMount(){
-
-        const {roomId} = this.state
-        const {userId} = this.state
-        const traderId = 7
-        const gameImg = "https://media.rawg.io/media/games/278/2783e31b00d7b87905e5346a1df1ccfb.jpg"
-        const data = { roomId, userId, traderId, gameImg }
-        socket.emit('join room', data)
         socket.on('room joined', data => {
-          this.setState({ obj: data })
+          console.log({data});
+          const {roomId} = this.props.match.params
+          console.log({roomId});
+          this.setState({ 
+            obj: data,
+            roomId 
+          })
         })
         socket.on('message received', data => {
           console.log('message received:', data);
-          // createdAt: "a few seconds ago"
-          // message: "bonjerno"
-          // roomId: 44
-          // userId: 8
-          // const { message, username, createdAt, profile_pic } = data
-          // this.setState({
-          //   messages: data
-          //  })
           const {messages} = this.state
           let messagesArray = [...messages]
           console.log({messages});
@@ -66,8 +50,18 @@ class Trader extends Component {
             messages: messagesArray
           })
         })
+        socket.on('trade received', myTrade => {
+          console.log('element:', myTrade)
+          this.setState({ myTrade })
+          
+        })
 
   }
+
+  componentWillMount() {
+    socket.emit('disconnect', this.state.roomId)
+  }
+  
 
   logout = ()=> {
       this.props.logout()
@@ -77,13 +71,18 @@ class Trader extends Component {
   sendMessage = (e) => {
     e.preventDefault()
     const message = e.target.elements.chatInput.value
-    const {roomId, userId, username, profile_pic} = this.state
+     console.log({message});
+    const {roomId, userId, username, profilePic} = this.state
+    console.log("roomId:", roomId);
+    console.log("userId:", userId);
+    console.log("username:", username);
+    console.log("profilePic:", profilePic);
     socket.emit('send out message', {
       message,
       roomId,
       userId,
       username,
-      profile_pic,
+      profilePic,
       createdAt: moment().startOf('minutes').fromNow()
     })
     document.getElementsByClassName('chat-input')[0].value=null
@@ -91,20 +90,26 @@ class Trader extends Component {
 
   render() {
     console.log('data:', this.state.obj);
-    const {user} = this.props
+    console.log("params:", this.props.match.params);
+    const {roomId} = this.props.match.params
+    console.log({roomId});
+    const { username: myName, profile_pic: myPic, user_points: myPoints, user_rating: myRating, user_id: myId } = this.props.user
+    const { background_image, game_name, points } = this.state.myTrade
+    const { gameTrade, traderPoints, traderRating, traderName, traderProfilePic, gameName } = this.state.obj
 
     let messages = this.state.messages.map((e, i) => {
+      console.log("element:", e);
       return (
         <div key={i}> 
         {e.username === this.state.username ?
           <div className="each-user-message">
-            <img className="chat-profile-pic" alt="" src={e.profile_pic} />
+            <img className="chat-profile-pic" alt="" src={myPic} />
             <div className="message-content" >{e.message}</div>
             <div className="time-stamp">{e.createdAt}</div>
           </div>
           :
           <div className="each-seller-message">
-            <img className="chat-seller-profile-pic" alt="" src={e.profile_pic} />
+            <img className="chat-seller-profile-pic" alt="" src={e.profilePic} />
             <div className="message-content" >{e.message}</div>
             <div className="time-stamp">{e.createdAt}</div>
           </div>}
@@ -133,12 +138,12 @@ class Trader extends Component {
 
         <div className="trade-container" >
             <div className="user-section" >
-                <div className="user-rating" >96%</div>
-                <Link className="link" to={{pathname: `/userProfile/${user.user_id}`}} ><img className="profile-pic" alt="" src={user.profile_pic} /></Link>
-                <h3 className="username">{user.username}</h3>
+                <div className="user-rating" >{myRating}%</div>
+                <Link className="link" to={{pathname: `/userProfile/${myId}`}} ><img className="profile-pic" alt="" src={myPic} /></Link>
+                <h3 className="username">{myName}</h3>
                 <p className="trade-count">22 Trades</p>
                 <div className="user-points">
-                    <h1>44</h1>
+                    <h1>{myPoints}</h1>
                     <div className="point-adder">
                         <p>Points</p>
                         <div className="add-points-btn" ><AddCircle color='rgb(252, 155, 0)' size='medium' /></div>
@@ -147,16 +152,16 @@ class Trader extends Component {
             </div>
             <div className="trade-section" >
               <div className="selected-trade" >
-                <h3 className='game-title' >Halo 4</h3>
-                <img className="selected-game" alt="" src="https://hips.hearstapps.com/digitalspyuk.cdnds.net/12/20/gaming_halo_4_cover_art.jpg?resize=480:*" />
+                <h3 className='game-title' >{game_name}</h3>
+                <img className="selected-game" alt="" src={background_image} />
                 <div className="game-points" >
                   <div className="up-down-pts" ><Up className="up" color='#E5E5E5'/><Down className="down" color='#E5E5E5'/></div>
-                  40<span>pts</span>
+                  {points}<span>pts</span>
                 </div>
               </div>
               <div className="trade-chat" >
                 <section className="chat-messages">
-                  {messages}
+                  {messages.length > 0 ? <div>{messages}</div> : null}
                 </section>
 
 
@@ -170,27 +175,39 @@ class Trader extends Component {
 
                 <br/>
                 <div className="chat-confirmation" >
-                  <button className="confirm" >Confirm</button>
-                  <button className="confirm" >Confirm</button>
+
+                  <div className="confirm-box">
+                    {this.state.myConfirmed === false ?
+                    <div className="confirm" onClick={() => this.setState({myConfirmed: true})}>Confirm</div>
+                  :
+                    <button className="confirm-pressed" onClick={() => this.setState({myConfirmed: false})}>Confirmed</button>}
+                  </div>
+                  <div className="confirm-box">
+                    {this.state.theirConfirmed === false ?
+                    <div className="confirm" onClick={() => this.setState({theirConfirmed: true})}>Confirm</div>
+                  :
+                    <button className="confirm-pressed" onClick={() => this.setState({theirConfirmed: false})}>Confirmed</button>}
+                  </div>
+
                 </div>
               </div>
               <div className="selected-trade" >
-                <h3 className='game-title' >Destiny 2</h3>
-                <img className="selected-game" alt="" src="https://images-na.ssl-images-amazon.com/images/I/5159Nq1DabL.jpg" />
+                <h3 className='game-title' >{gameName}</h3>
+                <img className="selected-game" alt="" src={gameTrade} />
                 <div className="game-points" >
-                  50<span>pts</span>
+                  {traderPoints}<span>pts</span>
                 </div>
               </div>
             </div>
             <div className="seller-section" >
-            <div className="user-rating" >80%</div>
-                <img className="profile-pic" alt="" src="https://robohash.org/hello" />
-                <h3 className="seller-username">Danny</h3>
+            <div className="user-rating" >{traderRating}%</div>
+                <img className="profile-pic" alt="" src={traderProfilePic} />
+                <h3 className="seller-username">{traderName}</h3>
                 <p className="trade-count">18 Trades</p>
             </div>
         </div>
         <section className="games" >
-            <MyGames />
+            <MyGames room = {roomId}/>
             <SellerGames />
         </section>
       </div>

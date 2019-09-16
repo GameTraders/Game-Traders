@@ -11,7 +11,7 @@
       color: #FC9B00;
   }
 
-  .add-points-btn:hover, .confirm:hover, .chat-submit:hover, .up:hover, .down:hover, .game-search-submit:hover, .link:hover{
+  .add-points-btn:hover, .confirm:hover, .chat-submit:hover, .up:hover, .down:hover, .game-search-submit:hover, .link:hover, .deselect-game:hover{
     transform: scale(1.1);
   }
 
@@ -63,6 +63,13 @@
       height: calc(100% - 21px);
       border-radius: 9px;
       box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+  }
+
+  .deselect-game{
+    display: block;
+    position: absolute;
+    top: -6px;
+    left: 0;
   }
 
   .game-points{
@@ -164,15 +171,36 @@
 .chat-confirmation{
     display: flex;
     justify-content: space-around; 
+    height: 39px;
 }
 
 .confirm{
+    height: 27px;
+    width: 90%;
     padding: 3px;
     border-radius: 6px;
     border: 1px solid #22CEF9;
     background: rgba(0, 0, 0, 0);
     color: #22CEF9;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+}
+
+.confirm-pressed{
+    height: 27px;
+    width: 90%;
+    font-size: 18px;
+    padding: 3px;
+    border-radius: 6px;
+    border: 1px solid #22CEF9;
+    background: rgba(0, 0, 0, 0);
+    color: #FC9B00;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+}
+
+.confirm-box{
+    width: 50%;
+    display: flex;
+    justify-content: center;
 }
 
 span{
