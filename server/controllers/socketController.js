@@ -19,6 +19,11 @@ module.exports = {
             io.to(room).emit('trade received', el)
         })
 
+        // CONFIRM TRADE
+        socket.on("send confirmation", roomId => {
+            io.to(roomId).emit('confirmation received')
+        })
+
         // DISCONNECT
         socket.on('disconnect', roomId => {
             socket.leave(roomId)
