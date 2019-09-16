@@ -26,7 +26,10 @@ class Trader extends Component {
       username: "",
       userId: "",
       message: '',
-      messages: []
+      messages: [],
+      myTrade: {},
+      myConfirmed: false,
+      theirConfirmed: false
     };
   }
 
@@ -48,14 +51,6 @@ class Trader extends Component {
         })
         socket.on('message received', data => {
           console.log('message received:', data);
-          // createdAt: "a few seconds ago"
-          // message: "bonjerno"
-          // roomId: 44
-          // userId: 8
-          // const { message, username, createdAt, profile_pic } = data
-          // this.setState({
-          //   messages: data
-          //  })
           const {messages} = this.state
           let messagesArray = [...messages]
           console.log({messages});
@@ -63,6 +58,11 @@ class Trader extends Component {
           this.setState({
             messages: messagesArray
           })
+        })
+        socket.on('trade received', myTrade => {
+          console.log('element:', myTrade)
+          this.setState({ myTrade })
+          
         })
 
   }
@@ -99,6 +99,10 @@ class Trader extends Component {
 
   render() {
     console.log('data:', this.state.obj);
+    console.log("params:", this.props.match.params);
+    const {roomId} = this.props.match.params
+    console.log({roomId});
+    const { background_image, game_name, points } = this.state.myTrade
     const { username, profilePic, userId } = this.state
     const { gameTrade, traderPoints, traderRating, traderName, traderProfilePic, gameName } = this.state.obj
 
@@ -156,11 +160,11 @@ class Trader extends Component {
             </div>
             <div className="trade-section" >
               <div className="selected-trade" >
-                <h3 className='game-title' >Halo 4</h3>
-                <img className="selected-game" alt="" src="https://hips.hearstapps.com/digitalspyuk.cdnds.net/12/20/gaming_halo_4_cover_art.jpg?resize=480:*" />
+                <h3 className='game-title' >{game_name}</h3>
+                <img className="selected-game" alt="" src={background_image} />
                 <div className="game-points" >
                   <div className="up-down-pts" ><Up className="up" color='#E5E5E5'/><Down className="down" color='#E5E5E5'/></div>
-                  40<span>pts</span>
+                  {points}<span>pts</span>
                 </div>
               </div>
               <div className="trade-chat" >
@@ -179,8 +183,20 @@ class Trader extends Component {
 
                 <br/>
                 <div className="chat-confirmation" >
-                  <button className="confirm" >Confirm</button>
-                  <button className="confirm" >Confirm</button>
+
+                  <div className="confirm-box">
+                    {this.state.myConfirmed === false ?
+                    <div className="confirm" onClick={() => this.setState({myConfirmed: true})}>Confirm</div>
+                  :
+                    <button className="confirm-pressed" onClick={() => this.setState({myConfirmed: false})}>Confirmed</button>}
+                  </div>
+                  <div className="confirm-box">
+                    {this.state.theirConfirmed === false ?
+                    <div className="confirm" onClick={() => this.setState({theirConfirmed: true})}>Confirm</div>
+                  :
+                    <button className="confirm-pressed" onClick={() => this.setState({theirConfirmed: false})}>Confirmed</button>}
+                  </div>
+
                 </div>
               </div>
               <div className="selected-trade" >
@@ -199,7 +215,7 @@ class Trader extends Component {
             </div>
         </div>
         <section className="games" >
-            <MyGames />
+            <MyGames room = {roomId}/>
             <SellerGames />
         </section>
       </div>
