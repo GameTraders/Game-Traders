@@ -16,6 +16,15 @@ module.exports = {
             io.to(roomId).emit('message received', data )
         })
 
+        // SEND TRADE
+        socket.on('send out trade', data => {
+            console.log("just data:", data);
+            console.log("data:", data.data.el, data.data.room);
+            const {el, room} = data.data
+            console.log('here:', room);
+            io.to(room).emit('trade received', el)
+        })
+
         // DISCONNECT
         socket.on('disconnect', roomId => {
             socket.leave(roomId)
