@@ -32,7 +32,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -57,8 +57,5 @@
       "src/star",
       "public/star"
     ]
-  },
-  "devDependencies": {
-    "jest": "^24.9.0"
   }
 }
