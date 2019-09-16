@@ -55,6 +55,10 @@ class Trader extends Component {
           this.setState({ myTrade })
           
         })
+        socket.on("confirmation received", () => {
+          console.log('using sockets');
+          this.setState({myConfirmed: !this.state.myConfirmed})
+        })
 
   }
 
@@ -66,6 +70,10 @@ class Trader extends Component {
   logout = ()=> {
       this.props.logout()
           this.props.history.push("/")
+  }
+
+  sendConfirmation = () => {
+    socket.emit("send confirmation", this.state.roomId)
   }
 
   sendMessage = (e) => {
@@ -178,15 +186,15 @@ class Trader extends Component {
 
                   <div className="confirm-box">
                     {this.state.myConfirmed === false ?
-                    <div className="confirm" onClick={() => this.setState({myConfirmed: true})}>Confirm</div>
+                    <div className="confirm" onClick={() => this.sendConfirmation()}>Confirm</div>
                   :
-                    <button className="confirm-pressed" onClick={() => this.setState({myConfirmed: false})}>Confirmed</button>}
+                    <button className="confirm-pressed" onClick={() => this.sendConfirmation()}>Confirmed</button>}
                   </div>
                   <div className="confirm-box">
                     {this.state.theirConfirmed === false ?
-                    <div className="confirm" onClick={() => this.setState({theirConfirmed: true})}>Confirm</div>
+                    <div className="confirm" >Confirm</div>
                   :
-                    <button className="confirm-pressed" onClick={() => this.setState({theirConfirmed: false})}>Confirmed</button>}
+                    <button className="confirm-pressed" >Confirmed</button>}
                   </div>
 
                 </div>
