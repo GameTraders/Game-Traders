@@ -76,35 +76,33 @@ class UserProfile extends Component {
         };
     }
 
-componentDidMount(){
-this.getUserInfo()
-}
+// componentDidMount(){
+// // this.getUserInfo()
+// // console.log( 'state:', this.state.user)
+// // console.log('redux state:', this.props.user)
+// }
+
 toggleChange = () => {
+  const {user_id} = this.props.user
   this.setState({points: !this.state.points})
+  this.props.history.push(`/userProfile/${user_id}`)
 }
-getUserInfo = () => {
-  axios.get(`/api/users/${this.props.match.params.user_id}`).then(res => {
-    this.setState({
-      username: res.data.username,
-      email: res.data.email,
-      profile_pic: res.data.profile_pic,
-      user_points: res.data.user_points,
-      user_rating: res.data.user_rating,
-      city: res.data.city,
-      state: res.data.state,
-      street: res.data.street,
-      zip: res.data.zip
-    });
-  });
-};
+// getUserInfo = async () => {
+//   await this.setState({user: this.props.user})
+// };
 logout = () => {
   this.props.logout();
   this.props.history.push("/");
 };
   
   render() {
-    console.log(this.state.points)
+    // console.log(this.state.points)
     // const {user} = this.props
+    // if (this.props.user.username) {
+      const {username, user_points, profile_pic, user_rating} = this.props.user
+    // } else {
+    //   var username, user_points, profile_pic, user_rating
+    // }
     let miniGames = this.state.games.map((e, i) => {
         return (
             <div key={i} className="my-game-mini">
@@ -136,12 +134,12 @@ logout = () => {
         <div className="profileContainer">
           <div className="userInfo">
             
-            <div className="user-rating">{this.props.user.user_rating}%</div>
-            <img className='profile-pic' src={this.props.user.profile_pic} alt=""/>
-            <h3 className='username'>{this.props.user.username}</h3>
+            <div className="user-rating">{user_rating}%</div>
+            <img className='profile-pic' src={profile_pic} alt=""/>
+            <h3 className='username'>{username}</h3>
             <p className='trade-count'>22 Trades</p>
             <div className='pointsHave'>
-                <h1>{this.props.user.user_points}</h1>
+                <h1>{user_points}</h1>
                 <div className='pointsAdd'>
                     <p>Points</p>
     {this.state.points === false ?<div className="add-points-btn"> <AddCircle color='rgb(252, 155, 0' size='medium' onClick={() => this.setState({points: !this.state.points})}/> </div>: <Stripe user_id={this.props.match.params.user_id} toggleChange={this.toggleChange}/>}

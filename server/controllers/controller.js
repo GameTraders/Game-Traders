@@ -19,7 +19,8 @@ module.exports = {
     getUserGames: (req, res) => {
         //tested and working with postman
         const db = req.app.get('db')
-        const { user_id } = req.params
+        const { user_id } = req.session.user
+        console.log('session:',req.session.user)
         db.get_user_games([user_id]).then(result => {
             res.status(200).send(result)
         })
@@ -27,7 +28,7 @@ module.exports = {
     getUserWishlist: (req, res) => {
         //tested and working with postman
         const db = req.app.get('db')
-        const {user_id} = req.params
+        const {user_id} = req.session.user
         db.get_user_wishlist([user_id]).then(result => {
             res.status(200).send(result)
         })

@@ -9,9 +9,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log('hit cdu in app');
-    if (this.props.location.pathname !== "/"){
       this.props.refreshUser()
-    }
   }
 
   render() {
