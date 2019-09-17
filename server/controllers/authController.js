@@ -90,5 +90,8 @@ module.exports = {
         res.status(403).send({ loggedIn: false });
       }
     }
+  },
+  getUser: (req,res) => {
+    res.status(200).send(req.session.user)
   }
 };
