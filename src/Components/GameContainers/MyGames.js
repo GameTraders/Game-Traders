@@ -4,6 +4,7 @@ import { Add } from 'grommet-icons';
 import { connect } from "react-redux";
 import axios from 'axios'
 import socket from '../../sockets'
+import { Link } from "react-router-dom";
 
 class MyGames extends Component {
   constructor() {
@@ -49,7 +50,7 @@ class MyGames extends Component {
       <div className="MyGames">
           <div className="game-mini-add">
           <h4 className="mini-name">Game</h4>
-              <div className="add-game" ><Add color='#FC9B00' size='large' className="add-game-icon" /></div>
+          <Link to="/home" ><div className="add-game" ><h1 className="add-game-plus-icon">+</h1></div></Link>
           </div>
           {miniGames}
           <div className="my-game-box">My Games</div>
