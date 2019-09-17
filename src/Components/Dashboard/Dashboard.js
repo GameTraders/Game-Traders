@@ -34,7 +34,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getName();
-    this.getUser()
+    // this.props.currentPoints()
   }
 
   // getName = async () => {
