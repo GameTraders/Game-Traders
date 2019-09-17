@@ -8,11 +8,22 @@ import { logout } from "../../ducks/userReducer";
 import {Link} from 'react-router-dom'
 import './UserProfile.css'
 import GTLogo from '../../GTLogo.png'
+import Stripe from '../Stripe/Stripe'
 
 class UserProfile extends Component {
     constructor() {
         super();
         this.state = {
+          points: false,
+          username: '',
+          email: '',
+          profile_pic: '',
+          user_points: 0,
+          user_rating: 0,
+          city: '',
+          state: '',
+          street: '',
+          zip: '',
           games: [{
               name: "Halo Infinite",
               cover: "https://i.redd.it/uk00vkrvfkb11.png",
@@ -66,7 +77,10 @@ class UserProfile extends Component {
     }
 
 componentDidMount(){
-  console.log('profile');
+this.getUserInfo()
+}
+toggleChange = () => {
+  this.setState({points: !this.state.points})
 }
 getUserInfo = () => {
   axios.get(`/api/users/${this.props.match.params.user_id}`).then(res => {
@@ -90,7 +104,8 @@ logout = () => {
 };
   
   render() {
-    const {user} = this.props
+    console.log(this.state.points)
+    // const {user} = this.props
     let miniGames = this.state.games.map((e, i) => {
         return (
             <div key={i} className="my-game-mini">
@@ -121,16 +136,16 @@ logout = () => {
       </div>
         <div className="profileContainer">
           <div className="userInfo">
-            User Info
-            <div className="user-rating">96%</div>
-            <img className='profile-pic' src="https://robohash.org/hello" alt=""/>
-            <h3 className='username'>{user.username}</h3>
+            
+            <div className="user-rating">{this.props.user.user_rating}%</div>
+            <img className='profile-pic' src={this.props.user.profile_pic} alt=""/>
+            <h3 className='username'>{this.props.user.username}</h3>
             <p className='trade-count'>22 Trades</p>
             <div className='pointsHave'>
-                <h1>44</h1>
+                <h1>{this.props.user.user_points}</h1>
                 <div className='pointsAdd'>
                     <p>Points</p>
-                    <div className="add-points-btn"><AddCircle color='rgb(252, 155, 0' size='medium'/></div>
+    {this.state.points === false ?<div className="add-points-btn"> <AddCircle color='rgb(252, 155, 0' size='medium' onClick={() => this.setState({points: !this.state.points})}/> </div>: <Stripe user_id={this.props.match.params.user_id} toggleChange={this.toggleChange}/>}
                 </div>
             </div>
           </div>

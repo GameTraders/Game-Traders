@@ -28,7 +28,7 @@ module.exports = {
         //tested and working with postman
         const db = req.app.get('db')
         const {user_id} = req.params
-        console.log(req.params)
+        // console.log(req.params)
         db.get_user_wishlist([user_id]).then(result => {
             res.status(200).send(result)
         })
