@@ -1,0 +1,79 @@
+.About_Outer_Main {
+    height: 100vh;
+    width: 100vw;
+    background-color: #2E2E2E;
+    opacity: 1;
+}
+
+.About_Outer {
+    height: calc(100vh -69px);
+    width: 100vw;
+    background-color: #2E2E2E;
+}
+
+.About_Creators {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.About_Rob {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+    width: 20vw;
+    background: linear-gradient(80deg, #FC9B00, rgb(223, 108, 0));
+}
+
+.About_Danny {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+    width: 20vw;
+    background: linear-gradient(80deg, #22CEF9, rgb(34, 102, 249));
+}
+
+.About_Blake {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+    width: 20vw;
+    background: linear-gradient(80deg, #28AB53, rgb(7, 104, 15));
+}
+
+.About_Rob_Text_Container {
+    display: flex;
+    align-items: center;
+}
+
+.About_Rob_Knowles {
+    opacity: 1;
+    margin: 0;
+    text-shadow: 2px 2px #2E2E2E;
+}
+
+.Space {
+    margin: 0 10px 0 0;
+}
+
+.About_Blake_Text_Container {
+    opacity: 1;
+    text-shadow: 2px 2px #2E2E2E;
+}
+
+.About_Danny_Text_Container {
+    display: flex;
+    align-items: center;
+    opacity: 1;
+    margin: 0;
+    text-shadow: 2px 2px #2E2E2E;
+}
+
+.Github {
+    color: whitesmoke;
+    text-decoration: underline
+}
