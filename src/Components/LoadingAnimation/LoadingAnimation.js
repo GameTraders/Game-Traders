@@ -6,8 +6,9 @@ import {TweenMax, Power3, Bounce} from "gsap/all"
 export default function LoadingAnimation() {
 
     useEffect(()=> {
-        TweenMax.to(document.getElementsByClassName("Loading_Box"), 5, {repeat: -1, yoyo: true, rotation: 360})
-        TweenMax.to(document.getElementsByClassName("Loading_text"), 5, {repeat: -1, yoyo: true, rotation: -360, opacity: .2})
+        TweenMax.to(document.getElementsByClassName("Loading_Box"), 5.2, {repeat: -1, yoyo: true, rotation: 360,})
+        TweenMax.to(document.getElementsByClassName("Loading_text"), 5.2, { repeat: -1, yoyo: true, rotation: -360})
+       
     }, [])
 
     return(

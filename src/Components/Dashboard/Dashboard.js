@@ -14,6 +14,7 @@ class Dashboard extends Component {
     super();
     this.state = {
       gameName: "",
+      user: '',
       // mRatedCheckBox: true,
       // x360CheckBox: true,
       // xOneCheckBox: true,
@@ -33,6 +34,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getName();
+    this.getUser()
   }
 
   // getName = async () => {
@@ -42,6 +44,12 @@ class Dashboard extends Component {
   //     games: results.data.results
   //   });
   // };
+  getUser = async () => {
+    const user = await  axios.get('/auth/user')
+    this.setState({
+      user
+    })
+    }
 
   handleChange(key, e) {
     this.setState({

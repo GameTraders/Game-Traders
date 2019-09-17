@@ -37,7 +37,7 @@ export function refreshUser() {
         type: REFRESH,
         payload: user
     }
-}
+ }
 
 export default function(state = initialState, action) {
     let{type, payload} = action

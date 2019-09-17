@@ -46,6 +46,7 @@ app.post('/api/gamelist/:user_id', ctrl.addToGamelist)
 app.put('/api/updateUsers/:user_id', ctrl.updateUserProfile)
 app.get('/api/game/:game_id', ctrl.getGameById)
 app.get('/api/getTrades/:game_id', ctrl.getTrades)
+app.get('/auth/user', aCtrl.getUser)
 
 //API REQUESTS
 app.post('/api/games', gCtrl.getGameName)
