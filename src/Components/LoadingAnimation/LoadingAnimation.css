@@ -1,0 +1,20 @@
+.Loading_Container {
+    height: 330px;
+    width: 330px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+    left: 30%;
+    top: 50%;
+}
+
+.Loading_Box {
+    height: 100px;
+    width: 100px;
+    background-color: #FC9B00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}

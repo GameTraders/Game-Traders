@@ -84,7 +84,6 @@ toggleChange = () => {
 }
 getUserInfo = () => {
   axios.get(`/api/users/${this.props.match.params.user_id}`).then(res => {
-    console.log(res.data);
     this.setState({
       username: res.data.username,
       email: res.data.email,
