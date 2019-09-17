@@ -33,6 +33,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getName();
+    // this.props.currentPoints()
   }
 
   // getName = async () => {

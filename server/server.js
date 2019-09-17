@@ -7,6 +7,7 @@ const gCtrl = require('./controllers/gameController')
 const ctrl = require('./controllers/controller')
 const socket = require('socket.io')
 const ssl = require('./controllers/socketController')
+const strctrl = require('./controllers/stripeController')
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env || 4400
 
 const app = express()
@@ -46,6 +47,7 @@ app.post('/api/gamelist/:user_id', ctrl.addToGamelist)
 app.put('/api/updateUsers/:user_id', ctrl.updateUserProfile)
 app.get('/api/game/:game_id', ctrl.getGameById)
 app.get('/api/getTrades/:game_id', ctrl.getTrades)
+app.post('/api/payment/:user_id',strctrl.pay)
 
 //API REQUESTS
 app.post('/api/games', gCtrl.getGameName)
