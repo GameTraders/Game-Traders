@@ -76,22 +76,17 @@ class UserProfile extends Component {
     };
   }
 
-// componentDidMount(){
-// // this.getUserInfo()
-// // console.log( 'state:', this.state.user)
-// // console.log('redux state:', this.props.user)
-// }
-componentDidUpdate(){
-  this.props.refreshUser()
+componentDidUpdate(prevProps, prevState){
+  const {user_id} = this.props.user
+  if (prevProps.user.user_id !== user_id) {
+    this.props.history.push(`/userProfile/${user_id}`)
+  }
 }
 toggleChange = () => {
   const {user_id} = this.props.user
   this.setState({points: !this.state.points})
   this.props.history.push(`/userProfile/${user_id}`)
 }
-// getUserInfo = async () => {
-//   await this.setState({user: this.props.user})
-// };
 logout = () => {
   this.props.logout();
   this.props.history.push("/");
