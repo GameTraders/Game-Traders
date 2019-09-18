@@ -64,11 +64,12 @@ class Trades extends Component {
     console.log('starting trade', roomId);
     const { user_id: userId } = this.props.user
     const { user_id: traderId, user_points: traderPoints, user_rating: traderRating, username: traderName, profile_pic: traderProfilePic } = el
-    const { background_image: gameTrade, game_name: gameName } = this.state.game[0]
-    const data = { userId, traderId, gameTrade, roomId, traderPoints, traderRating, traderName, traderProfilePic, gameName }
-    console.log("starting trade data:", data);
-    await sockets.emit('join room', data)
-    this.props.history.push(`/trader/${roomId}`)
+    const { background_image: gameTrade, game_name: gameName, game_id: gameId } = this.state.game[0]
+    const data = { userId, traderId, gameTrade, roomId, traderPoints, traderRating, traderName, traderProfilePic, gameName, gameId }
+     console.log("starting trade data:", data);
+     await sockets.emit('join new room', data)
+     await sockets.emit('add room to db', data)
+     this.props.history.push(`/trader/${roomId}`)
   }
 
   compare = (a, b) => {

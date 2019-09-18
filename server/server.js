@@ -15,7 +15,7 @@ app.use(express.json())
 
 app.use(session({
     secret: SESSION_SECRET,
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 3 }
 }))
@@ -37,6 +37,7 @@ app.post('/auth/register', aCtrl.register)
 app.post('/auth/login', aCtrl.login)
 app.delete('/auth/logout', aCtrl.logout)
 app.get('/api/checkSession', aCtrl.checkSession)
+app.get('/api/test', aCtrl.testSession)
 app.get(`/api/users/:user_id`, ctrl.getUserInfo)
 app.get('/api/games/:user_id', ctrl.getUserGames)
 app.get('/api/wishlist/:user_id', ctrl.getUserWishlist)

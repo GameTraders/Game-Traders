@@ -82,9 +82,9 @@ console.log('no session found')
      return res.status(400).send({message:'no user on session'})
     }
     const db = req.app.get("db");
-    const { user_id } = req.session.user;
+    // const { user_id } = req.session.user;
     if (req.session.user) {
-      let user = await db.get_user_info([user_id]);
+      let user = await db.get_user_info([req.session.user.user_id]);
       if (user.length === 0) {
         return res.status(400).send({ message: "user not found" });
       }
@@ -99,5 +99,8 @@ console.log('no session found')
   },
   getUser: (req,res) => {
     res.status(200).send(req.session.user)
+  },
+  testSession: (req, res) => {
+    console.log("test:", req.session.user);
   }
 };

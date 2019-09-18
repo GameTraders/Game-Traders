@@ -12,7 +12,6 @@ import GTLogo from '../../GTLogo.png'
 import Stripe from '../Stripe/Stripe'
 const moment = require('moment')
 
-
 class Trader extends Component {
   constructor() {
     super();
@@ -29,6 +28,7 @@ class Trader extends Component {
   }
 
   componentDidMount(){
+
         socket.on('room joined', data => {
           console.log({data});
           const {roomId} = this.props.match.params
@@ -53,9 +53,15 @@ class Trader extends Component {
           this.setState({ myTrade })
           
         })
-        socket.on("confirmation received", () => {
-          console.log('using sockets');
-          this.setState({myConfirmed: !this.state.myConfirmed})
+        socket.on("confirmation received", (userId) => {
+          console.log("props:", this.props.user);
+          console.log("userId confirmation:", userId);
+          const {user_id: myId} = this.props.user
+          if (userId === myId){
+            this.setState({myConfirmed: !this.state.myConfirmed})
+          } else {
+          this.setState({theirConfirmed: !this.state.theirConfirmed})
+          }
         })
 
   }
@@ -73,14 +79,19 @@ class Trader extends Component {
     this.setState({points: !this.state.points})
   }
   sendConfirmation = () => {
-    socket.emit("send confirmation", this.state.roomId)
+    const {user_id: userId} = this.props.user
+    const { roomId } = this.props.match.params
+    const confirmation = { userId, roomId }
+    socket.emit("send confirmation", confirmation)
   }
 
   sendMessage = (e) => {
     e.preventDefault()
     const message = e.target.elements.chatInput.value
      console.log({message});
-    const {roomId, userId, username, profilePic} = this.state
+     console.log('props for message:', this.props.user);
+    const {roomId} = this.props.match.params
+    const { user_id: userId, username, profile_pic: profilePic } = this.props.user
     console.log("roomId:", roomId);
     console.log("userId:", userId);
     console.log("username:", username);
@@ -109,7 +120,7 @@ class Trader extends Component {
       console.log("element:", e);
       return (
         <div key={i}> 
-        {e.username === this.state.username ?
+        {e.username === myName ?
           <div className="each-user-message">
             <img className="chat-profile-pic" alt="" src={myPic} />
             <div className="message-content" >{e.message}</div>

@@ -67,6 +67,7 @@ export default function(state = initialState, action) {
         case LOGIN + "_REJECTED":
             return { ...state }
         case LOGIN + "_FULFILLED":
+            console.log({payload});
             return { user: payload, loggedIn: true }
         case LOGOUT:
             return { ...state, user: {}, loggedIn: false }
