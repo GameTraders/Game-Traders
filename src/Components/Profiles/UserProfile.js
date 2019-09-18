@@ -77,7 +77,7 @@ class UserProfile extends Component {
   }
 
 // componentDidMount(){
-// // this.getUserInfo()
+// this.getUserInfo()
 // // console.log( 'state:', this.state.user)
 // // console.log('redux state:', this.props.user)
 // }
