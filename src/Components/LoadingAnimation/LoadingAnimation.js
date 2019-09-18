@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react"
+import React, {useEffect} from "react"
 import "./LoadingAnimation.css"
 
 import {TweenMax, Power3, Bounce} from "gsap/all"
