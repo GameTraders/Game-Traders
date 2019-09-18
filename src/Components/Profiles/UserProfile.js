@@ -3,9 +3,9 @@ import axios from "axios";
 import { AddCircle, Transaction, Home, Power } from 'grommet-icons';
 import MyGames from '../GameContainers/MyGames'
 import WishList from '../GameContainers/WishList'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { logout } from "../../ducks/userReducer";
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './UserProfile.css'
 import socket from '../../sockets'
 import GTLogo from '../../GTLogo.png'
@@ -17,66 +17,9 @@ class UserProfile extends Component {
         this.state = {
           rooms: [],
           points: false,
-          username: '',
-          email: '',
-          profile_pic: '',
-          user_points: 0,
-          user_rating: 0,
-          city: '',
-          state: '',
-          street: '',
-          zip: '',
-          games: [{
-              name: "Halo Infinite",
-              cover: "https://i.redd.it/uk00vkrvfkb11.png",
-              points: 40
-          },{
-            name: "Rocket League",
-            cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-            points: 50
-        },{
-            name: "GTA 5",
-            cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-            points: 45
-        },{
-            name: "Zelda",
-            cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-            points: 60
-        },{
-            name: "Halo Infinite",
-            cover: "https://i.redd.it/uk00vkrvfkb11.png",
-            points: 40
-        },{
-          name: "Rocket League",
-          cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-          points: 50
-      },{
-          name: "GTA 5",
-          cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-          points: 45
-      },{
-          name: "Zelda",
-          cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-          points: 60
-      },{
-        name: "Halo Infinite",
-        cover: "https://i.redd.it/uk00vkrvfkb11.png",
-        points: 40
-    },{
-      name: "Rocket League",
-      cover: "https://cdn0.spong.com/pack/r/o/rocketleag434170l/_-Rocket-League-Xbox-One-_.jpg",
-      points: 50
-    },{
-      name: "GTA 5",
-      cover: "https://www.gtabase.com/igallery/601-700/GTA_V_Cover_XboxOne-652-1920.jpg",
-      points: 45
-    },{
-      name: "Zelda",
-      cover: "https://vgboxart.com/boxes/WiiU/75322-zelda-breath-of-the-wild-nintendo-switch.png",
-      points: 60
-    }]
-        };
-    }
+          games: []
+    };
+  }
 
 componentDidMount(){
   console.log('hit cdm in profile');
@@ -86,9 +29,6 @@ componentDidMount(){
   socket.on('found rooms', rooms => {
     this.setState({rooms})
   })
-// this.getUserInfo()
-// console.log( 'state:', this.state.user)
-// console.log('redux state:', this.props.user)
 }
 
 joinRoom = (roomId) => {
@@ -101,82 +41,58 @@ toggleChange = () => {
   this.setState({points: !this.state.points})
   this.props.history.push(`/userProfile/${user_id}`)
 }
-// getUserInfo = async () => {
-//   await this.setState({user: this.props.user})
-// };
+
 logout = () => {
   this.props.logout();
   this.props.history.push("/");
 };
-
-// game_id: 1234
-// game_trade: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Halo-_Reach_box_art.png/220px-Halo-_Reach_box_art.png"
-// id: 1
-// room_id: "8:7:1234"
-// trader_id: 7
-// user_id: 8
   
   render() {
     console.log('rooms:', this.state.rooms);
-    // console.log(this.state.points)
-    // const {user} = this.props
-    // if (this.props.user.username) {
       const {username, user_points, profile_pic, user_rating} = this.props.user
-    // } else {
-    //   var username, user_points, profile_pic, user_rating
-    // }
-    // let pastTrades = this.state.rooms.map((el, i) => {
-    //   return (
-    //     <div key={i} className='pastTradeBox'>
-    //         <div className="home-mini-dispay"><img className="mini-cover-art" alt="" src={el.game_trade} /></div>
-    //         <div className='tradeArrows'><Transaction color='AED429' size='small'/></div>
-    //         <div className="home-mini-dispay"><img className="mini-cover-art" alt="" src={el.game_trade} /></div>
-    //     </div>
-    //   )
-    // })
-
     let pastTradeMinis = this.state.rooms.map((e, i) => {
       return (
-          <div key={i} className="my-game-mini" onClick={() => this.joinRoom(e.room_id)}>
-                  <h4 className="mini-name">
-                      {e.room_id}
-                  </h4>
-                  <div className="home-mini-dispay">
-                    <img className="mini-cover-art" alt="" src={e.game_trade} />
-                  </div>
+          <div key={i} className="pastTradeBox" onClick={() => this.joinRoom(e.room_id)}>
+
+              <div key={i} className="my-game-mini">
+                <h4 className="mini-name">
+                  {e.username.length > 5 ? `${e.username.substring(0, 6)}...` : `${e.username}`}
+                </h4>
+                <h4 className="mini-name-hover">{e.username}</h4>
+                <div className="home-mini-dispay">
+                  <img className="mini-cover-art" alt="" src={e.profile_pic} />
+                </div>
+              </div>
+
+          <div className='tradeArrows'><Transaction color='#AED429' size='small' /></div>
+
+              <div key={i} className="my-game-mini">
+                <h4 className="mini-name">
+                  {e.room_id.length > 5 ? `${e.room_id.substring(0, 6)}...` : `${e.room_id}`}
+                </h4>
+                <h4 className="mini-name-hover">{e.room_id}</h4>
+                <div className="home-mini-dispay">
+                  <img className="mini-cover-art" alt="" src={e.game_trade} />
+                </div>
+              </div>
+
           </div>
       )
   })
-
-    
-    let miniGames = this.state.games.map((e, i) => {
-        return (
-            <div key={i} className="my-game-mini">
-                    <h4 className="mini-name">
-                        {e.name.length > 5 ? `${e.name.substring(0, 6)}...` : `${e.name}` }
-                    </h4>
-                    <h4 className="mini-name-hover">{e.name}</h4>
-                    <div className="home-mini-dispay">
-                      <img className="mini-cover-art" alt="" src={e.cover} />
-                      <div className="game-mini-points">{e.points}</div>
-                    </div>
-            </div>
-        )
-    })
     return (
       <div className="userProfile">
-      <div className="Profile_NavBar">
-                        <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
+        <div className="Profile_NavBar">
+          <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
 
-                      <div className="Profile_Logo">
-                          <Link to="/about" ><img className="link" src={GTLogo} alt="Logo" /></Link>
-                      </div>
+          <div className="Profile_Logo">
+            <Link to="/about" ><img className="link" src={GTLogo} alt="Logo" /></Link>
+          </div>
 
-                      <div className="nav-links">
-                          <Link to="/home" ><h1 className="link" ><Home size="large" color="#AED429" /></h1></Link>
-                      </div>
+          <div className="nav-links">
+            <Link to="/home" ><h1 className="link" ><Home size="large" color="#AED429" /></h1></Link>
+          </div>
 
-      </div>
+        </div>
         <div className="profileContainer">
           <div className="userInfo">
             
@@ -195,52 +111,33 @@ logout = () => {
           <div className='secondDiv'>
           <div className="pastTrades">
             <h3>Past Trades</h3>
-             {/* dummy data */}
             <div className='actualTrades'>
                 {pastTradeMinis}
                 <h4>Date</h4>
+                </div>
             </div>
-            {/* dummy data */}
-            {/* <div className='actualTrades'>
-                <div className='pastTradeBox'>
-                <div className='Title1'>{miniGames[3]}</div>
-                <div className='tradeArrows'><Transaction color='#AED429' size='small'/></div>
-                <div>{miniGames[4]}</div>
-                </div>
-                <h4>Date</h4>
-            </div> */}
-            {/* dummy data */}
-            {/* <div className='actualTrades'>
-                <div className='pastTradeBox'>
-                <div className='Title1'>{miniGames[2]}</div>
-                <div className='tradeArrows'><Transaction color='AED429' size='small'/></div>
-                <div>{miniGames[5]}</div>
-                </div>
-                <h4>Date</h4>
-            </div> */}
-          </div>
-          <div className="currentTrades">
+            <div className="currentTrades">
               <h3>Current Trades</h3>
-              </div>
-          <div className="userFriends">
+            </div>
+            <div className="userFriends">
               <h3>Friends</h3>
               <div className='friendDiv'>
-                  <div className='friend'>Friend 1</div>
-                  <div className='friend'>Friend 2</div>
+                <div className='friend'>Friend 1</div>
+                <div className='friend'>Friend 2</div>
               </div>
+            </div>
+
           </div>
-          
         </div>
-      </div>
-          <section className="bottom-section" ><MyGames/><WishList/></section>
+        <section className="bottom-section" ><MyGames /><WishList /></section>
       </div>
     );
   }
 }
-  
+
 
 
 const mapStateToProps = (reduxState) => {
   return reduxState
 }
-export default connect(mapStateToProps, {logout})(UserProfile)
+export default connect(mapStateToProps, { logout })(UserProfile)

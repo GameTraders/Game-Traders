@@ -1,11 +1,9 @@
-
-
 .Trades_Outer {
     height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
-    align-items: center;   
+    align-items: center;
     background-color: #2E2E2E;
 }
 
@@ -33,6 +31,7 @@
     height: 30vh;
     width: 100vw;
 }
+
 .Trades_Test {
     position: relative;
     align-items: center;
@@ -47,35 +46,40 @@
     justify-content: space-between;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
 }
-.game-to-trade > img{
+
+.game-to-trade>img {
     width: 200px;
     height: 30vh;
     padding: 5px;
     border-radius: 10px;
 }
+
 .bottomSide-outer {
     height: 50vh;
-    border: 3px solid #28AB53; 
+    border: 3px solid #28AB53;
     border-radius: 5px;
     margin-top: 10px;
     overflow: scroll;
 }
+
 .bottomSide {
     display: flex;
     width: 80vw;
 }
-.bottomSide > img {
+
+.bottomSide>img {
     width: 200px;
     height: 200px;
 }
+
 .game-to-trade {
     margin-top: 100px;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     justify-content: space-evenly;
+    align-items: center;
     width: 30vw;
-    height: 30vh;
+    height: 35vh;
     background-color: #2E2E2E;
     border-radius: 5px;
     border-top-left-radius: 0px;
@@ -84,14 +88,35 @@
     justify-content: space-between;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
     border: 2px solid orange;
+    text-align: center;
 }
+
+#game-to-trade-name {
+    margin: 0px;
+}
+
+.game-to-trade-metacritic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    position: relative;
+    bottom: 55px;
+    left: 75px;
+    background-color: rgba(41, 41, 41, 0.842);
+    color: #2E2E2E;
+    font-size: 2rem;
+    border-radius: 10px;
+}
+
 .game-to-trade h2 {
     margin-top: 8vh;
     margin-right: 1vw;
     color: #FC9B00;
 }
+
 .game-to-trade h4 {
     margin-bottom: 14vh;
     color: #28AB53;
 }
-
