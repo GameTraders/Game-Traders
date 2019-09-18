@@ -67,6 +67,7 @@ module.exports = {
     } else {
       return res.status(401).send({ message: "failed login" });
     }
+    
   },
   logout: (req, res) => {
     // tested in post man and correctly destroys the session
@@ -85,7 +86,7 @@ module.exports = {
       if (user) {
         delete user[0].hash;
         req.session.user = user[0];
-        res.send(req.session.user);
+        res.send(user);
       } else {
         res.status(403).send({ loggedIn: false });
       }

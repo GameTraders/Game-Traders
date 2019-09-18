@@ -4,7 +4,7 @@ import { AddCircle, Transaction, Home, Power } from 'grommet-icons';
 import MyGames from '../GameContainers/MyGames'
 import WishList from '../GameContainers/WishList'
 import { connect } from 'react-redux'
-import { logout } from "../../ducks/userReducer";
+import { logout, refreshUser } from "../../ducks/userReducer";
 import { Link } from 'react-router-dom'
 import './UserProfile.css'
 import GTLogo from '../../GTLogo.png'
@@ -81,7 +81,9 @@ class UserProfile extends Component {
 // // console.log( 'state:', this.state.user)
 // // console.log('redux state:', this.props.user)
 // }
-
+componentDidUpdate(){
+  this.props.refreshUser()
+}
 toggleChange = () => {
   const {user_id} = this.props.user
   this.setState({points: !this.state.points})
@@ -201,4 +203,4 @@ logout = () => {
 const mapStateToProps = (reduxState) => {
   return reduxState
 }
-export default connect(mapStateToProps, { logout })(UserProfile)
+export default connect(mapStateToProps, { logout, refreshUser })(UserProfile)

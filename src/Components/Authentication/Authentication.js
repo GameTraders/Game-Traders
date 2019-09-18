@@ -36,7 +36,7 @@ class Authentication extends Component {
     Login = () => {
         const { username, password } = this.state
         this.props.login(username, password).then(
-            this.props.history.push("/home")
+            // this.props.history.push("/home")
         ).catch(res => {
             this.props.history.push('/')
             swal("Sorry!", "Invalid username or password", "error")
