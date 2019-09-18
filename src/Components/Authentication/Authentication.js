@@ -33,14 +33,12 @@ class Authentication extends Component {
             [key]: e
         })
     }
-    Login = () => {
+    Login = async () => {
         const { username, password } = this.state
-        this.props.login(username, password).then(
-            // this.props.history.push("/home")
-        ).catch(res => {
-            this.props.history.push('/')
-            swal("Sorry!", "Invalid username or password", "error")
-        })
+       const variable = await this.props.login(username, password)
+       console.log(variable)
+       variable.value ? this.props.history.push('/home') : swal('login failed', 'incorrect username or password, please try again', 'error')
+   
     }
     Register = () => {
         const { usernameReg, passwordReg, profile_pic, email,

@@ -9,7 +9,7 @@ class App extends Component {
 
   componentDidMount = async () => {
     console.log('hit cdu in app');
-      this.props.refreshUser()
+    this.props.refreshUser()
   }
 
   render() {
