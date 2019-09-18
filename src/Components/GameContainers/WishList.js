@@ -34,7 +34,7 @@ class WishList extends Component {
                           {e.game_name.length > 5 ? `${e.game_name.substring(0, 6)}...` : `${e.game_name}` }
                       </h4>
                       <h4 className="mini-name-hover">{e.game_name}</h4>
-                      <div className="home-mini-dispay">
+                      <div className="home-mini-display">
                         <img className="mini-cover-art" alt="" src={e.background_image} />
                         <div className="game-mini-points">{e.metacritic}</div>
                       </div>

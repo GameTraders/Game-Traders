@@ -4,7 +4,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Power, FormSearch } from "grommet-icons";
-import { logout } from "../../ducks/userReducer";
+import { logout, refreshUser } from "../../ducks/userReducer";
 import AddWish from '../Wizards/AddGame/AddWish'
 import GTLogo from '../../GTLogo.png'
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation"
@@ -14,6 +14,7 @@ class Dashboard extends Component {
     super();
     this.state = {
       gameName: "",
+      user: '',
       // mRatedCheckBox: true,
       // x360CheckBox: true,
       // xOneCheckBox: true,
@@ -33,6 +34,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getName();
+    // this.props.currentPoints()
   }
 
   // getName = async () => {
@@ -42,6 +44,12 @@ class Dashboard extends Component {
   //     games: results.data.results
   //   });
   // };
+  getUser = async () => {
+    const user = await  axios.get('/auth/user')
+    this.setState({
+      user
+    })
+    }
 
   handleChange(key, e) {
     this.setState({
@@ -148,5 +156,5 @@ const mapStateToProps = reduxState => {
 
 export default connect(
   mapStateToProps,
-  { logout }
+  { logout, refreshUser }
 )(Dashboard);

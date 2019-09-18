@@ -9,17 +9,14 @@ import {Link} from 'react-router-dom'
 import {logout} from '../../ducks/userReducer'
 import socket from '../../sockets'
 import GTLogo from '../../GTLogo.png'
+import Stripe from '../Stripe/Stripe'
 const moment = require('moment')
-// const dummyMessage = {
-//   username: this.state.username,
-//   message: 'Hello, I would Like to trade games with you?',
-//   profile_pic: this.state.profilePic
-// }
 
 class Trader extends Component {
   constructor() {
     super();
     this.state = {
+      points: false,
       roomId: "",
       obj: {},
       message: '',
@@ -31,6 +28,7 @@ class Trader extends Component {
   }
 
   componentDidMount(){
+
         socket.on('room joined', data => {
           console.log({data});
           const {roomId} = this.props.match.params
@@ -55,9 +53,15 @@ class Trader extends Component {
           this.setState({ myTrade })
           
         })
-        socket.on("confirmation received", () => {
-          console.log('using sockets');
-          this.setState({myConfirmed: !this.state.myConfirmed})
+        socket.on("confirmation received", (userId) => {
+          console.log("props:", this.props.user);
+          console.log("userId confirmation:", userId);
+          const {user_id: myId} = this.props.user
+          if (userId === myId){
+            this.setState({myConfirmed: !this.state.myConfirmed})
+          } else {
+          this.setState({theirConfirmed: !this.state.theirConfirmed})
+          }
         })
 
   }
@@ -71,9 +75,14 @@ class Trader extends Component {
       this.props.logout()
           this.props.history.push("/")
   }
-
+  toggleChange = () => {
+    this.setState({points: !this.state.points})
+  }
   sendConfirmation = () => {
-    socket.emit("send confirmation", this.state.roomId)
+    const {user_id: userId} = this.props.user
+    const { roomId } = this.state
+    const confirmation = { userId, roomId }
+    socket.emit("send confirmation", confirmation)
   }
 
   sendMessage = (e) => {
@@ -146,15 +155,15 @@ class Trader extends Component {
 
         <div className="trade-container" >
             <div className="user-section" >
-                <div className="user-rating" >{myRating}%</div>
-                <Link className="link" to={{pathname: `/userProfile/${myId}`}} ><img className="profile-pic" alt="" src={myPic} /></Link>
-                <h3 className="username">{myName}</h3>
+                <div className="user-rating" >{this.props.user.user_rating}%</div>
+                <Link className="link" to={{pathname: `/userProfile/${myId}`}} ><img className="profile-pic" alt="" src={this.props.user.profile_pic} /></Link>
+                <h3 className="username">{this.props.user.username}</h3>
                 <p className="trade-count">22 Trades</p>
                 <div className="user-points">
-                    <h1>{myPoints}</h1>
+                    <h1>{this.props.user.user_points}</h1>
                     <div className="point-adder">
                         <p>Points</p>
-                        <div className="add-points-btn" ><AddCircle color='rgb(252, 155, 0)' size='medium' /></div>
+                        {this.state.points === false ?<div className="add-points-btn"> <AddCircle color='rgb(252, 155, 0' size='medium' onClick={() => this.setState({points: !this.state.points})}/> </div>: <Stripe user_id={this.props.match.params.user_id} toggleChange={this.toggleChange}/>}
                     </div>
                 </div>
             </div>

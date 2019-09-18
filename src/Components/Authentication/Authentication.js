@@ -95,42 +95,42 @@ class Authentication extends Component {
                 <div className="Authentication_Register">
                     <h1>New User? No problem! Registration is simple</h1>
                     <div className="Authentication_User_Left">
-                        <div className="Authentication_Container2">
+                        <div className="Authentication_Container21">
                             <h4>Username</h4>
                             <input onChange={(e) => { this.handleChange("usernameReg", e.target.value) }} className="Authentication_Input" type="text" placeholder="Username" />
                         </div>
-                        <div className="Authentication_Container2">
+                        <div className="Authentication_Container22">
                             <h4>Email</h4>
                             <input onChange={(e) => { this.handleChange("email", e.target.value) }} className="Authentication_Input" type="text" placeholder="Email" />
                         </div>
-                        <div className="Authentication_Container2">
+                        <div className="Authentication_Container23">
                             <h4>Password</h4>
                             <input onChange={(e) => { this.handleChange("passwordReg", e.target.value) }} className="Authentication_Input" type="password" placeholder="Password" />
                         </div>
-                        <div className="Authentication_Container2">
+                        <div className="Authentication_Container24">
                             <h4>Confirm Password</h4>
                             {passwordReg === confirm_passwordReg ? null : <h6 className="passwords_Dont_Match">Passwords Do not match</h6>}
                             <input onChange={(e) => { this.handleChange("confirm_passwordReg", e.target.value) }} className="Authentication_Input" type="Password" placeholder="Confirm" />
                         </div>
-                        <div className="Authentication_Container2">
+                        <div className="Authentication_Container25">
                             <h4>Profile Url</h4>
                             <input onChange={(e) => { this.handleChange("profile_pic", e.target.value) }} className="Authentication_Input" type="text" placeholder="Profile Pic Url" />
                         </div>
                     </div>
                     <div className="Authentication_User_Right">
-                        <div className="Authentication_Container2">
+                        <div className="Authentication_Container26">
                             <h4>Street</h4>
                             <input onChange={(e) => { this.handleChange("street", e.target.value) }} className="Authentication_Input" type="text" placeholder="Street Address" />
                         </div>
-                        <div className="Authentication_Container2">
+                        <div className="Authentication_Container27">
                             <h4>City</h4>
                             <input onChange={(e) => { this.handleChange("city", e.target.value) }} className="Authentication_Input" type="text" placeholder="City" />
                         </div>
-                        <div className="Authentication_Container2">
+                        <div className="Authentication_Container28">
                             <h4>State</h4>
                             <input onChange={(e) => { this.handleChange("state", e.target.value) }} className="Authentication_Input" type="text" placeholder="State" />
                         </div>
-                        <div className="Authentication_Container2">
+                        <div className="Authentication_Container29">
                             <h4>Zip</h4>
                             <input onChange={(e) => { this.handleChange("zip", e.target.value) }} className="Authentication_Input" type="text" placeholder="Zip Code" />
                         </div>
