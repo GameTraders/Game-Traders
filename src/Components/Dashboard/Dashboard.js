@@ -15,15 +15,6 @@ class Dashboard extends Component {
     this.state = {
       gameName: "",
       user: '',
-      // mRatedCheckBox: true,
-      // x360CheckBox: true,
-      // xOneCheckBox: true,
-      // ps2CheckBox: true,
-      // ps3CheckBox: true,
-      // ps4CheckBox: true,
-      // wiiCheckBox: true,
-      // switchCheckBox: true,
-      // gameBoyCheckBox: true,
       ps4Checked: false,
       xboxChecked: false,
       switchChecked: false,
@@ -37,13 +28,6 @@ class Dashboard extends Component {
     // this.props.currentPoints()
   }
 
-  // getName = async () => {
-  //   const name = this.state.gameName;
-  //   const results = await axios.post("/api/games", { name });
-  //   this.setState({
-  //     games: results.data.results
-  //   });
-  // };
   getUser = async () => {
     const user = await  axios.get('/auth/user')
     this.setState({

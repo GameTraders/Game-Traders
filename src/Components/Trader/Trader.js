@@ -11,11 +11,7 @@ import socket from '../../sockets'
 import GTLogo from '../../GTLogo.png'
 import Stripe from '../Stripe/Stripe'
 const moment = require('moment')
-// const dummyMessage = {
-//   username: this.state.username,
-//   message: 'Hello, I would Like to trade games with you?',
-//   profile_pic: this.state.profilePic
-// }
+
 
 class Trader extends Component {
   constructor() {
