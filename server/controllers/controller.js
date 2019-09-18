@@ -52,7 +52,7 @@ module.exports = {
         const { user_id } = req.params
         const { id, name, background_image, released, metacritic } = req.body
         const game = await db.search_for_game(id)
-        if (game.length == 0) {
+        if (game.length === 0) {
             await db.save_new_game(id, name, background_image, released, metacritic)
         }
         const alreadyadded = await db.search_wish_list_gameid(id)
@@ -77,7 +77,7 @@ module.exports = {
         await db.add_to_gamelist(user_id, id, points)
         res.status(200).send({ message: "game Added" })
     },
-    getTrades: async (req, res) => {
+    getTrades: (req, res) => {
         const db = req.app.get('db')
         const {game_id} = req.params
         db.get_trades([game_id]).then(result => {

@@ -15,7 +15,7 @@ export default (
         <Route component = {Dashboard}  path = "/home" exact/>
         <Route component = {Trader}  path = "/trader/:roomId"/>
         <Route component = {Search}  path = "/search" />
-        <Route component = {UserProfile} path = '/userProfile/:user_id'/>
+        <Route component = {UserProfile} path = '/userProfile/:user_id' exact/>
         <Route component = {Trades} path = '/trades/:game_id'/>
         <Route component = {About} path = '/about'/>
         <Route component = {AddPoints} path = '/add-points'/>
