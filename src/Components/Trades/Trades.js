@@ -89,7 +89,7 @@ class Trades extends Component {
     const { background_image: gameTrade, game_name: gameName, game_id: gameId } = this.state.game[0]
     const data = { userId, traderId, gameTrade, roomId, traderPoints, traderRating, traderName, traderProfilePic, gameName, gameId }
      console.log("starting trade data:", data);
-     await sockets.emit('join room', data)
+     await sockets.emit('join new room', data)
      await sockets.emit('add room to db', data)
      this.props.history.push(`/trader/${roomId}`)
   }

@@ -60,7 +60,7 @@ module.exports = {
     if (result) {
       delete user[0].hash;
       req.session.user = user[0];
-      console.log("session login:", req.session.user);
+      console.log('login sesh:', req.session.user);
 
       return res
         .status(200)
@@ -75,7 +75,7 @@ module.exports = {
     res.status(200).send({ message: "logged out", loggedIn: false });
   },
   checkSession: async (req, res) => {
-    console.log("session exists?", req.session.user);
+    console.log("session exists?", req.session);
     const db = req.app.get("db");
     // const { user_id } = req.session.user;
     if (req.session.user) {
@@ -94,5 +94,8 @@ module.exports = {
   },
   getUser: (req,res) => {
     res.status(200).send(req.session.user)
+  },
+  testSession: (req, res) => {
+    console.log("test:", req.session.user);
   }
 };

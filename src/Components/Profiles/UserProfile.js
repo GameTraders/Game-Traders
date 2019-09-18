@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import { logout } from "../../ducks/userReducer";
 import {Link} from 'react-router-dom'
 import './UserProfile.css'
+import socket from '../../sockets'
 import GTLogo from '../../GTLogo.png'
 import Stripe from '../Stripe/Stripe'
 
@@ -14,6 +15,7 @@ class UserProfile extends Component {
     constructor() {
         super();
         this.state = {
+          rooms: [],
           points: false,
           username: '',
           email: '',
@@ -76,11 +78,23 @@ class UserProfile extends Component {
         };
     }
 
-// componentDidMount(){
-// // this.getUserInfo()
-// // console.log( 'state:', this.state.user)
-// // console.log('redux state:', this.props.user)
-// }
+componentDidMount(){
+  console.log('hit cdm in profile');
+  axios.get("/api/test")
+  const {user_id} = this.props.user
+  socket.emit('get rooms', user_id)
+  socket.on('found rooms', rooms => {
+    this.setState({rooms})
+  })
+// this.getUserInfo()
+// console.log( 'state:', this.state.user)
+// console.log('redux state:', this.props.user)
+}
+
+joinRoom = (roomId) => {
+  socket.emit('join existing room', roomId)
+  this.props.history.push(`/trader/${roomId}`)
+}
 
 toggleChange = () => {
   const {user_id} = this.props.user
@@ -94,8 +108,16 @@ logout = () => {
   this.props.logout();
   this.props.history.push("/");
 };
+
+// game_id: 1234
+// game_trade: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Halo-_Reach_box_art.png/220px-Halo-_Reach_box_art.png"
+// id: 1
+// room_id: "8:7:1234"
+// trader_id: 7
+// user_id: 8
   
   render() {
+    console.log('rooms:', this.state.rooms);
     // console.log(this.state.points)
     // const {user} = this.props
     // if (this.props.user.username) {
@@ -103,6 +125,30 @@ logout = () => {
     // } else {
     //   var username, user_points, profile_pic, user_rating
     // }
+    // let pastTrades = this.state.rooms.map((el, i) => {
+    //   return (
+    //     <div key={i} className='pastTradeBox'>
+    //         <div className="home-mini-dispay"><img className="mini-cover-art" alt="" src={el.game_trade} /></div>
+    //         <div className='tradeArrows'><Transaction color='AED429' size='small'/></div>
+    //         <div className="home-mini-dispay"><img className="mini-cover-art" alt="" src={el.game_trade} /></div>
+    //     </div>
+    //   )
+    // })
+
+    let pastTradeMinis = this.state.rooms.map((e, i) => {
+      return (
+          <div key={i} className="my-game-mini" onClick={() => this.joinRoom(e.room_id)}>
+                  <h4 className="mini-name">
+                      {e.room_id}
+                  </h4>
+                  <div className="home-mini-dispay">
+                    <img className="mini-cover-art" alt="" src={e.game_trade} />
+                  </div>
+          </div>
+      )
+  })
+
+    
     let miniGames = this.state.games.map((e, i) => {
         return (
             <div key={i} className="my-game-mini">
@@ -151,31 +197,27 @@ logout = () => {
             <h3>Past Trades</h3>
              {/* dummy data */}
             <div className='actualTrades'>
-                <div className='pastTradeBox'>
-                <div className='Title1'>{miniGames[0]}</div>
-                <div className='tradeArrows'><Transaction color='AED429' size='small'/></div>
-                <div>{miniGames[1]}</div>
-                </div>
+                {pastTradeMinis}
                 <h4>Date</h4>
             </div>
             {/* dummy data */}
-            <div className='actualTrades'>
+            {/* <div className='actualTrades'>
                 <div className='pastTradeBox'>
                 <div className='Title1'>{miniGames[3]}</div>
                 <div className='tradeArrows'><Transaction color='#AED429' size='small'/></div>
                 <div>{miniGames[4]}</div>
                 </div>
                 <h4>Date</h4>
-            </div>
+            </div> */}
             {/* dummy data */}
-            <div className='actualTrades'>
+            {/* <div className='actualTrades'>
                 <div className='pastTradeBox'>
                 <div className='Title1'>{miniGames[2]}</div>
                 <div className='tradeArrows'><Transaction color='AED429' size='small'/></div>
                 <div>{miniGames[5]}</div>
                 </div>
                 <h4>Date</h4>
-            </div>
+            </div> */}
           </div>
           <div className="currentTrades">
               <h3>Current Trades</h3>

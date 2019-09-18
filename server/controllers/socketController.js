@@ -1,10 +1,13 @@
 module.exports = {
     setSocketListeners: function ( socket, db, io ) {
         // JOIN ROOM
-        socket.on('join room', data => {
+        socket.on('join new room', data => {
             const { roomId } = data
             socket.join(roomId)
             io.in(roomId).emit('room joined', data)
+        })
+        socket.on('join existing room', roomId => {
+            socket.join(roomId)
         })
 
         // ADD ROOM TO DB
@@ -12,6 +15,13 @@ module.exports = {
             console.log("add room data:", data);
             const { userId, traderId, gameTrade, roomId, gameId } = data
             db.create_room( userId, traderId, gameTrade, gameId, roomId )
+        })
+
+        // GET ROOMS FROM DB
+        socket.on('get rooms', async userId => {
+            let rooms = await db.get_rooms(userId)
+            console.log("rooms returned:", rooms);
+            socket.emit('found rooms', rooms)
         })
 
         // NEW MESSAGE

@@ -34,6 +34,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getName();
+    axios.get("/api/test")
     // this.props.currentPoints()
   }
 
