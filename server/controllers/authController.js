@@ -60,6 +60,7 @@ module.exports = {
     if (result) {
       delete user[0].hash;
       req.session.user = user[0];
+      console.log("session login:", req.session.user);
 
       return res
         .status(200)
@@ -76,9 +77,9 @@ module.exports = {
   checkSession: async (req, res) => {
     console.log("session exists?", req.session.user);
     const db = req.app.get("db");
-    const { user_id } = req.session.user;
+    // const { user_id } = req.session.user;
     if (req.session.user) {
-      let user = await db.get_user_info([user_id]);
+      let user = await db.get_user_info([req.session.user.user_id]);
       if (user.length === 0) {
         return res.status(400).send({ message: "user not found" });
       }
