@@ -18,6 +18,8 @@ module.exports = {
     },
     getUserGames: (req, res) => {
         //tested and working with postman
+        console.log('hit')
+        console.log("session", req.session)
         const db = req.app.get('db')
         const { user_id } = req.session.user
         console.log('session:',req.session.user)
@@ -88,6 +90,10 @@ module.exports = {
         db.get_game_by_id([game_id]).then(result => {
             res.status(200).send(result)
         })
+    },
+    test: (req,res) => {
+        console.log('mounting dashboard')
+        console.log(req.session)
     }
 }
 

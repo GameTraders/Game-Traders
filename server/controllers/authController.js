@@ -58,8 +58,10 @@ module.exports = {
     }
     const result = bcrypt.compareSync(password, user[0].hash);
     if (result) {
+      console.log('before hash is delted', user[0])
       delete user[0].hash;
       req.session.user = user[0];
+      console.log('loggin session',req.session.user)
 
       return res
         .status(200)
@@ -74,7 +76,10 @@ module.exports = {
     res.status(200).send({ message: "logged out", loggedIn: false });
   },
   checkSession: async (req, res) => {
-    console.log("session exists?", req.session.user);
+    if (req.session.user === undefined) {
+console.log('no session found')
+     return res.status(400).send({message:'no user on session'})
+    }
     const db = req.app.get("db");
     const { user_id } = req.session.user;
     if (req.session.user) {
