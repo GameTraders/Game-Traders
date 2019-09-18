@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../../ducks/userReducer'
 import socket from '../../sockets'
 import GTLogo from '../../GTLogo.png'
+import Stripe from '../Stripe/Stripe'
 const moment = require('moment')
 
 
@@ -16,6 +17,7 @@ class Trader extends Component {
   constructor() {
     super();
     this.state = {
+      points: false,
       roomId: "",
       obj: {},
       message: '',
@@ -67,7 +69,9 @@ class Trader extends Component {
       this.props.logout()
           this.props.history.push("/")
   }
-
+  toggleChange = () => {
+    this.setState({points: !this.state.points})
+  }
   sendConfirmation = () => {
     socket.emit("send confirmation", this.state.roomId)
   }
@@ -142,15 +146,15 @@ class Trader extends Component {
 
         <div className="trade-container" >
             <div className="user-section" >
-                <div className="user-rating" >{myRating}%</div>
-                <Link className="link" to={{pathname: `/userProfile/${myId}`}} ><img className="profile-pic" alt="" src={myPic} /></Link>
-                <h3 className="username">{myName}</h3>
+                <div className="user-rating" >{this.props.user.user_rating}%</div>
+                <Link className="link" to={{pathname: `/userProfile/${myId}`}} ><img className="profile-pic" alt="" src={this.props.user.profile_pic} /></Link>
+                <h3 className="username">{this.props.user.username}</h3>
                 <p className="trade-count">22 Trades</p>
                 <div className="user-points">
-                    <h1>{myPoints}</h1>
+                    <h1>{this.props.user.user_points}</h1>
                     <div className="point-adder">
                         <p>Points</p>
-                        <div className="add-points-btn" ><AddCircle color='rgb(252, 155, 0)' size='medium' /></div>
+                        {this.state.points === false ?<div className="add-points-btn"> <AddCircle color='rgb(252, 155, 0' size='medium' onClick={() => this.setState({points: !this.state.points})}/> </div>: <Stripe user_id={this.props.match.params.user_id} toggleChange={this.toggleChange}/>}
                     </div>
                 </div>
             </div>
