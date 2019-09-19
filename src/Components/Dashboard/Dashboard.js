@@ -4,7 +4,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Power, FormSearch } from "grommet-icons";
-import { logout } from "../../ducks/userReducer";
+import { logout, refreshUser } from "../../ducks/userReducer";
 import AddWish from '../Wizards/AddGame/AddWish'
 import GTLogo from '../../GTLogo.png'
 import LoadingAnimation from "../LoadingAnimation/LoadingAnimation"
@@ -25,7 +25,6 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getName();
-    // this.props.currentPoints()
   }
 
   getUser = async () => {
@@ -140,5 +139,5 @@ const mapStateToProps = reduxState => {
 
 export default connect(
   mapStateToProps,
-  { logout }
+  { logout, refreshUser }
 )(Dashboard);

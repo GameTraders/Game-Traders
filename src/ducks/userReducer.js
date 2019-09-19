@@ -1,19 +1,27 @@
-import Axios from 'axios'
+import axios from 'axios'
 
 const initialState = {
     user: {},
     loggedIn: false,
-    points: 0
+    points: 0,
+    traderId: ''
 }
 
 const LOGIN = "LOGIN"
 const LOGOUT = "LOGOUT"
 const REFRESH = "REFRESH"
+const SAVE_TRADER_ID = "SAVE_TRADER_ID"
 const UPDATE_POINTS = 'UPDATE_POINTS'
 
+export function saveTraderId (traderId) {
+    return {
+        type: SAVE_TRADER_ID,
+        payload: traderId
+    }
+}
 
 export function login (username, password) {
-    let user = Axios
+    let user = axios
     .post("/auth/login", {username, password})
     .then(res=> res.data.user)
 
@@ -25,14 +33,14 @@ export function login (username, password) {
 }
 
 export function logout() {
-    Axios.delete('/auth/logout')
+    axios.delete('/auth/logout')
     return {
         type: LOGOUT
     }
 }
 
 export function refreshUser() {
-    let user = Axios.get("/api/checkSession")
+    let user = axios.get("/api/checkSession")
     .then(res => res.data)
     console.log({user});
     return {
@@ -67,6 +75,7 @@ export default function(state = initialState, action) {
         case LOGIN + "_REJECTED":
             return { ...state }
         case LOGIN + "_FULFILLED":
+            console.log({payload});
             return { user: payload, loggedIn: true }
         case LOGOUT:
             return { ...state, user: {}, loggedIn: false }
@@ -76,6 +85,8 @@ export default function(state = initialState, action) {
             return { ...state }
         case REFRESH + "_FULFILLED":
             return { ...state, user: payload, loggedIn: true }
+        case SAVE_TRADER_ID:
+            return { ...state, traderId: payload }
         // case UPDATE_POINTS + "_PENDING":
         //     return { ...state }
         // case UPDATE_POINTS + "_REJECTED":

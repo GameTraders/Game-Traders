@@ -27,6 +27,17 @@ module.exports = {
             res.status(200).send(result)
         })
     },
+    getTraderGames: (req, res) => {
+        //tested and working with postman
+        console.log('hit trader:', req.params)
+        const db = req.app.get('db')
+        const { traderId } = req.params
+        console.log("params:", req.params.traderId);
+        db.get_user_games([traderId]).then(result => {
+            res.status(200).send(result)
+            console.log("game results", result);
+        })
+    },
     getUserWishlist: (req, res) => {
         //tested and working with postman
         const db = req.app.get('db')
@@ -54,7 +65,7 @@ module.exports = {
         console.log('req.body on add to wishlist', req.body)
         const { id, name, background_image, released, metacritic } = req.body
         const game = await db.search_for_game(id)
-        if (game.length == 0) {
+        if (game.length === 0) {
             await db.save_new_game(id, name, background_image, released, metacritic)
         }
         const alreadyadded = await db.search_wish_list_gameid(id, user_id)
@@ -81,7 +92,7 @@ module.exports = {
         await db.add_to_gamelist(user_id, id, points)
         res.status(200).send({ message: "game Added" })
     },
-    getTrades: async (req, res) => {
+    getTrades: (req, res) => {
         const db = req.app.get('db')
         const {game_id} = req.params
         db.get_trades([game_id]).then(result => {
