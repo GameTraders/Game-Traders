@@ -36,7 +36,7 @@ class Authentication extends Component {
     Login = async () => {
         const { username, password } = this.state
        const variable = await this.props.login(username, password)
-       console.log(variable)
+       console.log('logging in',variable)
        variable.value ? this.props.history.push('/home') : swal('login failed', 'incorrect username or password, please try again', 'error')
    
     }

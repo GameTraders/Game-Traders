@@ -25,7 +25,6 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getName();
-    axios.get('/iamcheckingathing')
     // this.props.currentPoints()
   }
 

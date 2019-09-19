@@ -54,7 +54,7 @@ module.exports = {
     const { username, password } = req.body;
     const user = await db.find_email_and_hash([username]);
     if (user.length === 0) {
-      return res.status(400).send({ message: "username not found" });
+      return res.status(200).send({ message: "username not found" });
     }
     const result = bcrypt.compareSync(password, user[0].hash);
     if (result) {
