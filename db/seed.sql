@@ -65,6 +65,8 @@ CREATE TABLE gt_rooms (
     user_id INT,
     trader_id INT,
     game_trade TEXT,
-    game_id INT
+    game_id INT,
+    game_name VARCHAR(75),
+    game_points INT
 );
 SELECT * FROM gt_rooms;

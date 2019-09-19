@@ -37,7 +37,7 @@ componentDidMount(){
 }
 
 joinRequestedRoom = (e) => {
-  // console.log('element:', e)
+  console.log('element:', e)
   const { user_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: myTrade, user_points: traderPoints, user_rating: traderRating } = e
   const data = { traderProfilePic, traderName, myTrade, traderPoints, traderRating, roomId }
   this.props.saveTraderId(user_id)
@@ -46,11 +46,12 @@ joinRequestedRoom = (e) => {
 }
 
 joinMyRequestedRoom = (e) => {
-  console.log('element:', e)
-  const { user_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: myTrade, user_points: traderPoints, user_rating: traderRating } = e
-  const data = { traderProfilePic, traderName, myTrade, traderPoints, traderRating, roomId }
-  this.props.saveTraderId(user_id)
-  socket.emit('join existing room', data)
+  console.log('myElement:', e)
+  const { trader_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: theirTrade, user_points: traderPoints, user_rating: traderRating } = e
+  const data = { traderProfilePic, traderName, theirTrade, traderPoints, traderRating, roomId }
+  console.log("data is:", data);
+  this.props.saveTraderId(trader_id)
+  socket.emit('join new room', data)
   this.props.history.push(`/trader/${roomId}`)
 }
 

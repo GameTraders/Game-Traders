@@ -22,9 +22,9 @@ app.use(session({
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
-
+    
     const io = socket(app.listen(SERVER_PORT, () => console.log(`Cruising on PORT ${SERVER_PORT}`)))
-
+    
     // SOCKETS
     io.on('connection', socket => {
         console.log(('A new user just connected'));
