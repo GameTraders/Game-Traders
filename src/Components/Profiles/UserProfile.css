@@ -29,6 +29,10 @@
 .add-points-btn:hover {
     transform: scale(1.1);
 }
+
+.user-points{
+    color: #FC9B00;
+}
 h1{
     color: #E5E5E5;
 }
