@@ -54,20 +54,20 @@ module.exports = {
     const { username, password } = req.body;
     const user = await db.find_email_and_hash([username]);
     if (user.length === 0) {
-      return res.status(400).send({ message: "username not found" });
+      return res.status(200).send({ message: "username not found" });
     }
     const result = bcrypt.compareSync(password, user[0].hash);
     if (result) {
-      console.log('before hash is delted', user[0])
+     
       delete user[0].hash;
       req.session.user = user[0];
-      console.log('loggin session',req.session.user)
+     
 
       return res
         .status(200)
         .send({ message: "logged in", user: req.session.user, loggedIn: true });
     } else {
-      return res.status(401).send({ message: "failed login" });
+      return res.status(200).send({ message: "failed login" });
     }
     
   },
@@ -77,9 +77,8 @@ module.exports = {
     res.status(200).send({ message: "logged out", loggedIn: false });
   },
   checkSession: async (req, res) => {
-    if (req.session.user === undefined) {
-console.log('no session found')
-     return res.status(400).send({message:'no user on session'})
+    if (req.session.user === undefined) { 
+     return res.status(200).send({message:'no user on session'})
     }
     const db = req.app.get("db");
     // const { user_id } = req.session.user;
@@ -101,6 +100,6 @@ console.log('no session found')
     res.status(200).send(req.session.user)
   },
   testSession: (req, res) => {
-    console.log("test:", req.session.user);
+
   }
 };

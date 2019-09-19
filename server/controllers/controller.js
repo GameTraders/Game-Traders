@@ -18,7 +18,6 @@ module.exports = {
     },
     getUserGames: (req, res) => {
         //tested and working with postman
-        console.log('hit')
         console.log("session", req.session)
         const db = req.app.get('db')
         const { user_id } = req.session.user
@@ -61,16 +60,20 @@ module.exports = {
     addToWishlist: async (req, res) => {
         const db = req.app.get('db')
         const { user_id } = req.params
+        console.log('user_id on wishlist add', user_id)
+        console.log('req.body on add to wishlist', req.body)
         const { id, name, background_image, released, metacritic } = req.body
         const game = await db.search_for_game(id)
         if (game.length === 0) {
             await db.save_new_game(id, name, background_image, released, metacritic)
         }
-        const alreadyadded = await db.search_wish_list_gameid(id)
+        const alreadyadded = await db.search_wish_list_gameid(id, user_id)
+        console.log('game already added to wishlist',alreadyadded)
         if (alreadyadded.length > 0) {
             return res.status(200).send({message: "already added"})
         }
-        await db.add_to_wishlist(user_id, id)
+      let added =  await db.add_to_wishlist(user_id, id)
+      console.log("game added",added)
         res.status(200).send({ message: "game Added" })
     },
     addToGamelist: async (req, res) => {
@@ -81,7 +84,7 @@ module.exports = {
         if (game.length == 0) {
             await db.save_new_game(id, name, background_image, released, metacritic)
         }
-        const alreadyadded = await db.search_game_list_gameid(id)
+        const alreadyadded = await db.search_game_list_gameid(id, user_id)
         if (alreadyadded.length > 0) {
             return res.status(200).send({message: "already added"})
         }
@@ -105,6 +108,10 @@ module.exports = {
     test: (req,res) => {
         console.log('mounting dashboard')
         console.log(req.session)
+    },
+    addTradePoints: (req, res) => {
+        console.log('trade points params:',req.params)
+        console.log('trade points body:', req.body)
     }
 }
 

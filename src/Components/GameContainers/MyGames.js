@@ -1,6 +1,6 @@
 import "./MyGames.css";
 import React, { Component } from "react";
-import { Add } from 'grommet-icons';
+// import { Add } from 'grommet-icons';
 import { connect } from "react-redux";
 import axios from 'axios'
 import socket from '../../sockets'
@@ -14,7 +14,7 @@ class MyGames extends Component {
       selectedTrade: {}
     };
   }
-  componentDidMount(){
+  componentDidMount = ()=>{
     axios.get(`/api/games/${this.props.user.user_id}`).then(res => {
       this.setState({
         games: res.data
@@ -35,7 +35,7 @@ class MyGames extends Component {
 
   sendTrade = (e, el) => {
     e.preventDefault()
-    console.log({el});
+    // console.log({el});
     const {room} = this.props
     const { username: traderName, user_rating: traderRating, profile_pic: traderProfilePic } = this.props.user
     const { background_image: myTrade, points, game_name, user_id: myId } = el
@@ -44,7 +44,7 @@ class MyGames extends Component {
   }
 
   render() {
-    console.log("props passed down:", this.props.room);
+    // console.log("props passed down:", this.props.room);
       let miniGames = this.state.games.map((el, i) => {
           return (
               <div key={i} className="my-game-mini" onClick={(e) => this.sendTrade(e, el)}>

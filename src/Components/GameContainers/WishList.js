@@ -1,6 +1,6 @@
 import "./MyGames.css";
 import React, { Component } from "react";
-import { Add } from 'grommet-icons';
+// import { Add } from 'grommet-icons';
 import { Link } from "react-router-dom";
 // import { connect } from "react-redux";
 import axios from 'axios'
@@ -16,7 +16,6 @@ class WishList extends Component {
     };
   }
   componentDidMount() {
-
     axios.get(`/api/wishlist/${this.props.user.user_id}`).then(res => {
       this.setState({
           wishlist: res.data

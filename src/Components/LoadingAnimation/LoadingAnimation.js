@@ -1,7 +1,7 @@
 import React, {useEffect} from "react"
 import "./LoadingAnimation.css"
 
-import {TweenMax, Power3, Bounce} from "gsap/all"
+import {TweenMax} from "gsap/all"
 
 export default function LoadingAnimation() {
 

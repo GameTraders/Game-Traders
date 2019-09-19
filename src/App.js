@@ -8,7 +8,7 @@ import { refreshUser } from './ducks/userReducer'
 class App extends Component {
 
   componentDidMount = async () => {
-    console.log('hit cdu in app');
+    // console.log('hit cdu in app');
     this.props.refreshUser()
   }
 

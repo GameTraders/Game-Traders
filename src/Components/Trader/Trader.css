@@ -224,12 +224,16 @@ span{
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: space-evenly;
       margin: 18px;
       padding: 9px;
       border-radius: 9px;
       box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.26) 0px 10px 10px 0px;
+    
   }
-
+#user-section {
+    overflow: scroll;
+}
   .seller-section{
       background: #22CEF9;
       background: #28AB53;

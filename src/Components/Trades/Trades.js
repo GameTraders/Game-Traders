@@ -33,13 +33,13 @@ class Trades extends Component {
   };
 
   combineAwait = async (el) => {
-    console.log('el argument being passed:', el);
+    // console.log('el argument being passed:', el);
     await this.createRoomId(el)
     this.startChat(el)
   }
 
   createRoomId = (el) => {
-    console.log({ el });
+    // console.log({ el });
     const { user_id: trader_id } = el
     const { game_id } = this.state.game[0]
     const { user_id } = this.props.user
@@ -56,13 +56,13 @@ class Trades extends Component {
       this.setState({ roomId })
     }
     this.props.saveTraderId(trader_id)
-    console.log('creating room...', roomId);
+    // console.log('creating room...', roomId);
   }
 
 
   startChat = async (el) => {
     let { roomId } = this.state
-    console.log('starting trade', roomId);
+    // console.log('starting trade', roomId);
     const { user_id: userId } = this.props.user
     const { user_id: traderId, user_points: traderPoints, user_rating: traderRating, username: traderName, profile_pic: traderProfilePic } = el
     const { background_image: theirTrade, game_name: theirGameName, game_id: gameId, points: theirGamePoints } = this.state.game[0]
@@ -98,9 +98,6 @@ class Trades extends Component {
     this.props.history.push("/");
   };
   render() {
-    const { trades, game } = this.state
-    console.log({ trades });
-    console.log({ game });
     return (
       <div className="Trades_Outer">
         <div className="Profile_NavBar">
