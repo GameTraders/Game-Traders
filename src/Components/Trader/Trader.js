@@ -185,8 +185,8 @@ resetPoints = () => {
                 <div className="user-points">
                     <h1>{this.props.user.user_points}</h1>
                     <div className="point-adder">
-                        <p>Points</p>
-                        {this.state.points === false ?<div className="add-points-btn"> <AddCircle color='rgb(252, 155, 0' size='medium' onClick={() => this.setState({points: !this.state.points})}/> </div>: <Stripe user_id={this.props.user.user_id} toggleChange={this.toggleChange}/>}
+                        <p className="user-points">Points</p>
+                        {this.state.points === false ?<div className="add-points-btn"> <AddCircle color='rgb(252, 155, 0)' size='medium' onClick={() => this.setState({points: !this.state.points})}/> </div>: <Stripe user_id={this.props.user.user_id} toggleChange={this.toggleChange}/>}
                     </div>
                 </div>
                 <br/>

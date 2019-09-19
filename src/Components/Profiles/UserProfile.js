@@ -64,6 +64,7 @@ logout = () => {
   render() {
       const {username, user_points, profile_pic, user_rating} = this.props.user
     let requestedRoomsCard = this.state.requestedRooms.map((e, i) => {
+      console.log("element:", e);
       return (
           <div key={`${i}.4`} className="pastTradeBox" onClick={() => this.joinRequestedRoom(e)}>
 
@@ -81,9 +82,9 @@ logout = () => {
 
               <div key={`${i}.6`} className="my-game-mini">
                 <h4 className="mini-name">
-                  {e.room_id.length > 5 ? `${e.room_id.substring(0, 6)}...` : `${e.room_id}`}
+                  {e.game_name.length > 5 ? `${e.game_name.substring(0, 6)}...` : `${e.game_name}`}
                 </h4>
-                <h4 className="mini-name-hover">{e.room_id}</h4>
+                <h4 className="mini-name-hover">{e.game_name}</h4>
                 <div className="home-mini-dispay">
                   <img className="mini-cover-art" alt="" src={e.game_trade} />
                 </div>
@@ -93,6 +94,7 @@ logout = () => {
       )
   })
   let myRequestedRoomsCard = this.state.myRequestedRooms.map((e, i) => {
+    console.log("my element:", e);
     return (
         <div key={`${i}.1`} className="pastTradeBox" onClick={() => this.joinMyRequestedRoom(e)}>
 
@@ -110,9 +112,9 @@ logout = () => {
 
             <div key={`${i}.3`} className="my-game-mini">
               <h4 className="mini-name">
-                {e.room_id.length > 5 ? `${e.room_id.substring(0, 6)}...` : `${e.room_id}`}
+                {e.game_name.length > 5 ? `${e.game_name.substring(0, 6)}...` : `${e.game_name}`}
               </h4>
-              <h4 className="mini-name-hover">{e.room_id}</h4>
+              <h4 className="mini-name-hover">{e.game_name}</h4>
               <div className="home-mini-dispay">
                 <img className="mini-cover-art" alt="" src={e.game_trade} />
               </div>
@@ -145,8 +147,8 @@ logout = () => {
             <div className='pointsHave'>
                 <h1>{user_points}</h1>
                 <div className='pointsAdd'>
-                    <p>Points</p>
-    {this.state.points === false ?<div className="add-points-btn"> <AddCircle color='rgb(252, 155, 0' size='medium' onClick={() => this.setState({points: !this.state.points})}/> </div>: <Stripe user_id={this.props.match.params.user_id} toggleChange={this.toggleChange}/>}
+                    <p className="user-points">Points</p>
+    {this.state.points === false ?<div className="add-points-btn"> <AddCircle color='rgb(252, 155, 0)' size='medium' onClick={() => this.setState({points: !this.state.points})}/> </div>: <Stripe user_id={this.props.match.params.user_id} toggleChange={this.toggleChange}/>}
                 </div>
             </div>
           </div>
