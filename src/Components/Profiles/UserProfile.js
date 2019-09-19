@@ -18,9 +18,10 @@ class UserProfile extends Component {
           requestedRooms: [],
           myRequestedRooms: [],
           points: false,
-          games: []
+          games: [],
     };
   }
+
 
 componentDidMount(){
   const {user_id: myId} = this.props.user
@@ -60,12 +61,11 @@ toggleChange = () => {
   this.setState({points: !this.state.points})
   this.props.history.push(`/userProfile/${user_id}`)
 }
-
 logout = () => {
   this.props.logout();
   this.props.history.push("/");
 };
-  
+
   render() {
     console.log('requested rooms:', this.state.requestedRooms);
       const {username, user_points, profile_pic, user_rating} = this.props.user
