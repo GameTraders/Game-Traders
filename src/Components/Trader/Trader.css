@@ -228,6 +228,10 @@ span{
       background: #2E2E2E;
   }
 
+  .trade-count{
+    color: #22CEF9;
+}
+
   .games{
       background: #28AB53;
       display: flex;

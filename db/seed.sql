@@ -56,3 +56,14 @@ values (1234, 'Halo Reach', 'https://upload.wikimedia.org/wikipedia/en/thumb/5/5
 
 insert into game_list (user_id, game_id, points)
 values (7, 1234, 55), (7, 3333, 40)
+
+DROP TABLE IF EXISTS gt_rooms;
+CREATE TABLE gt_rooms (
+    id SERIAL PRIMARY KEY,
+    room_id VARCHAR(9),
+    user_id INT,
+    trader_id INT,
+    game_trade TEXT,
+    game_id INT
+);
+SELECT * FROM gt_rooms;

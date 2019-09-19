@@ -27,6 +27,17 @@ module.exports = {
             res.status(200).send(result)
         })
     },
+    getTraderGames: (req, res) => {
+        //tested and working with postman
+        console.log('hit trader:', req.params)
+        const db = req.app.get('db')
+        const { traderId } = req.params
+        console.log("params:", req.params.traderId);
+        db.get_user_games([traderId]).then(result => {
+            res.status(200).send(result)
+            console.log("game results", result);
+        })
+    },
     getUserWishlist: (req, res) => {
         //tested and working with postman
         const db = req.app.get('db')
