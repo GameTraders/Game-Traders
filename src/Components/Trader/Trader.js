@@ -39,6 +39,17 @@ class Trader extends Component {
             roomId 
           })
         })
+        socket.on('trader room joined', data => {
+          console.log({data});
+          const {roomId} = this.props.match.params
+          // const {myTrade}= data
+          console.log({roomId});
+          this.setState({ 
+            obj: data,
+            roomId,
+            myTrade: data 
+          })
+        })
         socket.on('message received', data => {
           console.log('message received:', data);
           const {messages} = this.state
@@ -52,7 +63,10 @@ class Trader extends Component {
         socket.on('trade received', myTrade => {
           console.log('element:', myTrade)
           this.setState({ myTrade })
-          
+        })
+        socket.on('trade broadcast', obj => {
+          console.log("broadcast", obj);
+          this.setState({obj})
         })
         socket.on("confirmation received", (userId) => {
           console.log("props:", this.props.user);
@@ -67,7 +81,7 @@ class Trader extends Component {
 
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     socket.emit('disconnect', this.state.roomId)
   }
   
@@ -130,8 +144,8 @@ resetPoints = () => {
     const {roomId} = this.props.match.params
     console.log({roomId});
     const { username: myName, profile_pic: myPic, user_points: myPoints, user_rating: myRating, user_id: myId } = this.props.user
-    const { background_image, game_name, points } = this.state.myTrade
-    const { gameTrade, traderPoints, traderRating, traderName, traderProfilePic, gameName } = this.state.obj
+    const { myTrade, game_name, points } = this.state.myTrade
+    const { traderRating, traderName, traderId, traderProfilePic, theirGamePoints, theirTrade, theirGameName } = this.state.obj
 
     let messages = this.state.messages.map((e, i) => {
       console.log("element:", e);
@@ -199,7 +213,7 @@ resetPoints = () => {
             <div className="trade-section" >
               <div className="selected-trade" >
                 <h3 className='game-title' >{game_name}</h3>
-                <img className="selected-game" alt="" src={background_image} />
+                <img className="selected-game" alt="" src={myTrade} />
                 <div className="game-points" >
                   <div className="up-down-pts" ><Up className="up" color='#E5E5E5'/><Down className="down" color='#E5E5E5'/></div>
                   {points}<span>pts</span>
@@ -238,10 +252,10 @@ resetPoints = () => {
                 </div>
               </div>
               <div className="selected-trade" >
-                <h3 className='game-title' >{gameName}</h3>
-                <img className="selected-game" alt="" src={gameTrade} />
+                <h3 className='game-title' >{theirGameName}</h3>
+                <img className="selected-game" alt="" src={theirTrade} />
                 <div className="game-points" >
-                  {traderPoints}<span>pts</span>
+                  {theirGamePoints}<span>pts</span>
                 </div>
               </div>
             </div>
@@ -255,7 +269,7 @@ resetPoints = () => {
         </div>
         <section className="games" >
             <MyGames room = {roomId}/>
-            <SellerGames />
+            <SellerGames traderName={traderName} />
         </section>
       </div>
     );

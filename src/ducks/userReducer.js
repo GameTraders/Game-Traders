@@ -3,14 +3,22 @@ import axios from 'axios'
 const initialState = {
     user: {},
     loggedIn: false,
-    points: 0
+    points: 0,
+    traderId: ''
 }
 
 const LOGIN = "LOGIN"
 const LOGOUT = "LOGOUT"
 const REFRESH = "REFRESH"
+const SAVE_TRADER_ID = "SAVE_TRADER_ID"
 const UPDATE_POINTS = 'UPDATE_POINTS'
 
+export function saveTraderId (traderId) {
+    return {
+        type: SAVE_TRADER_ID,
+        payload: traderId
+    }
+}
 
 export function login (username, password) {
     let user = axios
@@ -77,6 +85,8 @@ export default function(state = initialState, action) {
             return { ...state }
         case REFRESH + "_FULFILLED":
             return { ...state, user: payload, loggedIn: true }
+        case SAVE_TRADER_ID:
+            return { ...state, traderId: payload }
         // case UPDATE_POINTS + "_PENDING":
         //     return { ...state }
         // case UPDATE_POINTS + "_REJECTED":

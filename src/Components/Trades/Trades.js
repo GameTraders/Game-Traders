@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
-import { logout } from "../../ducks/userReducer";
+import { logout, saveTraderId } from "../../ducks/userReducer";
 import { Home, Power } from "grommet-icons";
 import "./Trades.css";
 import GTLogo from "../../GTLogo.png";
@@ -55,6 +55,7 @@ class Trades extends Component {
       roomId = userString.concat(colon, traderString, colon, gameString)
       this.setState({ roomId })
     }
+    this.props.saveTraderId(trader_id)
     console.log('creating room...', roomId);
   }
 
@@ -64,8 +65,8 @@ class Trades extends Component {
     console.log('starting trade', roomId);
     const { user_id: userId } = this.props.user
     const { user_id: traderId, user_points: traderPoints, user_rating: traderRating, username: traderName, profile_pic: traderProfilePic } = el
-    const { background_image: gameTrade, game_name: gameName, game_id: gameId } = this.state.game[0]
-    const data = { userId, traderId, gameTrade, roomId, traderPoints, traderRating, traderName, traderProfilePic, gameName, gameId }
+    const { background_image: theirTrade, game_name: gameName, game_id: gameId } = this.state.game[0]
+    const data = { userId, traderId, theirTrade, roomId, traderPoints, traderRating, traderName, traderProfilePic, gameName, gameId }
      console.log("starting trade data:", data);
      await sockets.emit('join new room', data)
      await sockets.emit('add room to db', data)
@@ -143,7 +144,7 @@ class Trades extends Component {
             {this.state.trades.length > 0
               ? this.state.trades.sort(this.compare).map((el, i) => (
                 <div key={i} className="userInfo" onClick={() => this.combineAwait(el)}>
-                  <div className="user-rating">{el.user_rating}</div>
+                  <div className="user-rating">{el.user_rating}%</div>
                   <img className="profile-pic" src={el.profile_pic} alt="" />
                   <h3 className="username">{el.username}</h3>
                 </div>
@@ -162,5 +163,5 @@ const mapStateToProps = reduxState => {
 
 export default connect(
   mapStateToProps,
-  { logout }
+  { logout, saveTraderId }
 )(Trades);
