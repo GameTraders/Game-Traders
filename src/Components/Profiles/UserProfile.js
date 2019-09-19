@@ -4,7 +4,7 @@ import { AddCircle, Transaction, Home, Power } from 'grommet-icons';
 import MyGames from '../GameContainers/MyGames'
 import WishList from '../GameContainers/WishList'
 import { connect } from 'react-redux'
-import { logout } from "../../ducks/userReducer";
+import { logout, refreshUser } from "../../ducks/userReducer";
 import { Link } from 'react-router-dom'
 import './UserProfile.css'
 import socket from '../../sockets'
@@ -17,9 +17,10 @@ class UserProfile extends Component {
         this.state = {
           rooms: [],
           points: false,
-          games: []
+          games: [],
     };
   }
+
 
 componentDidMount(){
   console.log('hit cdm in profile');
@@ -41,12 +42,11 @@ toggleChange = () => {
   this.setState({points: !this.state.points})
   this.props.history.push(`/userProfile/${user_id}`)
 }
-
 logout = () => {
   this.props.logout();
   this.props.history.push("/");
 };
-  
+
   render() {
     console.log('rooms:', this.state.rooms);
       const {username, user_points, profile_pic, user_rating} = this.props.user
@@ -140,4 +140,4 @@ logout = () => {
 const mapStateToProps = (reduxState) => {
   return reduxState
 }
-export default connect(mapStateToProps, { logout })(UserProfile)
+export default connect(mapStateToProps, { logout, refreshUser })(UserProfile)

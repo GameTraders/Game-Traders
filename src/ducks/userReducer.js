@@ -1,4 +1,4 @@
-import Axios from 'axios'
+import axios from 'axios'
 
 const initialState = {
     user: {},
@@ -13,7 +13,7 @@ const UPDATE_POINTS = 'UPDATE_POINTS'
 
 
 export function login (username, password) {
-    let user = Axios
+    let user = axios
     .post("/auth/login", {username, password})
     .then(res=> res.data.user)
 
@@ -25,14 +25,14 @@ export function login (username, password) {
 }
 
 export function logout() {
-    Axios.delete('/auth/logout')
+    axios.delete('/auth/logout')
     return {
         type: LOGOUT
     }
 }
 
 export function refreshUser() {
-    let user = Axios.get("/api/checkSession")
+    let user = axios.get("/api/checkSession")
     .then(res => res.data)
     console.log({user});
     return {
