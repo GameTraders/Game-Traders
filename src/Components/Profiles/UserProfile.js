@@ -24,7 +24,6 @@ class UserProfile extends Component {
 
 componentDidMount(){
   const {user_id: myId} = this.props.user
-  // console.log('hit cdm in profile');
   const {user_id} = this.props.user
   socket.emit('get requested rooms', user_id)
   socket.on('found requested rooms', requestedRooms => {
@@ -37,19 +36,16 @@ componentDidMount(){
 }
 
 joinRequestedRoom = (e) => {
-  console.log('element:', e)
-  const { user_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: myTrade, user_points: traderPoints, user_rating: traderRating } = e
-  const data = { traderProfilePic, traderName, myTrade, traderPoints, traderRating, roomId }
+  const { user_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: myTrade, user_points: traderPoints, user_rating: traderRating, game_name, game_points: points } = e
+  const data = { traderProfilePic, traderName, myTrade, traderPoints, traderRating, roomId, game_name, points }
   this.props.saveTraderId(user_id)
   socket.emit('join existing room', data)
   this.props.history.push(`/trader/${roomId}`)
 }
 
 joinMyRequestedRoom = (e) => {
-  console.log('myElement:', e)
-  const { trader_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: theirTrade, user_points: traderPoints, user_rating: traderRating } = e
-  const data = { traderProfilePic, traderName, theirTrade, traderPoints, traderRating, roomId }
-  console.log("data is:", data);
+  const { trader_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: theirTrade, user_points: traderPoints, user_rating: traderRating, game_name: theirGameName, game_points: theirGamePoints } = e
+  const data = { traderProfilePic, traderName, theirTrade, traderPoints, traderRating, roomId, theirGameName, theirGamePoints }
   this.props.saveTraderId(trader_id)
   socket.emit('join new room', data)
   this.props.history.push(`/trader/${roomId}`)
@@ -66,7 +62,6 @@ logout = () => {
 };
 
   render() {
-    // console.log('requested rooms:', this.state.requestedRooms);
       const {username, user_points, profile_pic, user_rating} = this.props.user
     let requestedRoomsCard = this.state.requestedRooms.map((e, i) => {
       return (
@@ -160,21 +155,17 @@ logout = () => {
             <h3>Requested Trades</h3>
             <div className='actualTrades'>
                 {requestedRoomsCard}
-                <h4>Date</h4>
                 </div>
             </div>
             <div className="currentTrades">
               <h3>My Requests</h3>
             <div className='actualTrades'>
                 {myRequestedRoomsCard}
-                <h4>Date</h4>
                 </div>
             </div>
             <div className="userFriends">
               <h3>Completed Trades</h3>
               <div className='friendDiv'>
-                <div className='friend'>Friend 1</div>
-                <div className='friend'>Friend 2</div>
               </div>
             </div>
 

@@ -81,7 +81,6 @@ module.exports = {
      return res.status(200).send({message:'no user on session'})
     }
     const db = req.app.get("db");
-    // const { user_id } = req.session.user;
     if (req.session.user) {
       let user = await db.get_user_info([req.session.user.user_id]);
       if (user.length === 0) {
