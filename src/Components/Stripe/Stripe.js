@@ -15,11 +15,11 @@ class Stripe extends Component {
   }
 
   onOpened = () => {
-    console.log("this is opened");
+    // console.log("this is opened");
   };
 
   onClosed = () => {
-    console.log("this is closed");
+    // console.log("this is closed");
   };
 // setAmount = e => {
 //     this.setState({amount: +e.target.value * 100})
@@ -29,10 +29,9 @@ class Stripe extends Component {
 //     this.props.onToken(amount)
 // }
 onToken = token => {
-    console.log(token);
-    let { amount } = this.state;
+    // console.log(token);
     // amount /= 100
-    console.log(amount);
+    // console.log(amount);
     token.card = void 0;
     axios
       .post(`/api/payment/${this.props.user_id}`, { token, amount: this.state.amount * 100})
