@@ -64,7 +64,7 @@ module.exports = {
         if (alreadyadded.length > 0) {
             return res.status(200).send({message: "already added"})
         }
-      let added =  await db.add_to_wishlist(user_id, id)
+      db.add_to_wishlist(user_id, id)
         res.status(200).send({ message: "game Added" })
     },
     addToGamelist: async (req, res) => {
@@ -72,7 +72,7 @@ module.exports = {
         const { user_id } = req.params
         const { id, points, name, background_image, released, metacritic } = req.body
         const game = await db.search_for_game(id)
-        if (game.length == 0) {
+        if (game.length === 0) {
             await db.save_new_game(id, name, background_image, released, metacritic)
         }
         const alreadyadded = await db.search_game_list_gameid(id, user_id)
