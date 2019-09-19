@@ -10,6 +10,7 @@ import socket from '../../sockets'
 import GTLogo from '../../GTLogo.png'
 import Stripe from '../Stripe/Stripe'
 import axios from 'axios'
+import swal from "sweetalert";
 const moment = require('moment')
 
 class Trader extends Component {
@@ -62,6 +63,7 @@ class Trader extends Component {
           this.setState({obj})
         })
         socket.on("confirmation received", (userId) => {
+          console.log('received')
           const {user_id: myId} = this.props.user
           if (userId === myId){
             this.setState({myConfirmed: !this.state.myConfirmed})
@@ -78,6 +80,10 @@ class Trader extends Component {
         
   }
 componentDidUpdate(){
+  console.log(this.state.myConfirmed, this.state.theirConfirmed)
+  if (this.state.myConfirmed === true && this.state.theirConfirmed === true) {
+    swal('Trade Confirmed! ^.^', 'Shipping instrutions have been emailed to you', 'success')
+  }
   this.tradePoints(this.state.tradePoints2)
 }
   componentWillUnmount() {
@@ -136,6 +142,7 @@ resetPoints = () => {
   })
 }
   render() {
+    console.log('state:', this.state)
     const {roomId} = this.props.match.params
     const { username: myName, profile_pic: myPic,  user_id: myId } = this.props.user
     const { myTrade, game_name, points } = this.state.myTrade
