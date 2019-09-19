@@ -17,8 +17,8 @@ module.exports = {
         // ADD ROOM TO DB
         socket.on('add room to db', data => {
             console.log("add room data:", data);
-            const { userId, traderId, theirTrade, roomId, gameId } = data
-            db.create_room( userId, traderId, theirTrade, gameId, roomId )
+            const { userId, traderId, theirTrade, roomId, gameId, gameName, points } = data
+            db.create_room( userId, traderId, theirTrade, gameId, gameName, points, roomId )
         })
 
         // GET ROOMS FROM DB

@@ -65,8 +65,9 @@ class Trades extends Component {
     console.log('starting trade', roomId);
     const { user_id: userId } = this.props.user
     const { user_id: traderId, user_points: traderPoints, user_rating: traderRating, username: traderName, profile_pic: traderProfilePic } = el
-    const { background_image: theirTrade, game_name: gameName, game_id: gameId } = this.state.game[0]
-    const data = { userId, traderId, theirTrade, roomId, traderPoints, traderRating, traderName, traderProfilePic, gameName, gameId }
+    const { background_image: theirTrade, game_name: theirGameName, game_id: gameId, points: theirGamePoints } = this.state.game[0]
+    console.log('game stuff:', this.state.game[0]);
+    const data = { userId, traderId, theirTrade, roomId, traderPoints, traderRating, traderName, traderProfilePic, theirGameName, gameId, theirGamePoints }
      console.log("starting trade data:", data);
      await sockets.emit('join new room', data)
      await sockets.emit('add room to db', data)
