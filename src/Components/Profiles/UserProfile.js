@@ -64,7 +64,6 @@ logout = () => {
   render() {
       const {username, user_points, profile_pic, user_rating} = this.props.user
     let requestedRoomsCard = this.state.requestedRooms.map((e, i) => {
-      console.log("element:", e);
       return (
           <div key={`${i}.4`} className="pastTradeBox" onClick={() => this.joinRequestedRoom(e)}>
 
@@ -94,7 +93,6 @@ logout = () => {
       )
   })
   let myRequestedRoomsCard = this.state.myRequestedRooms.map((e, i) => {
-    console.log("my element:", e);
     return (
         <div key={`${i}.1`} className="pastTradeBox" onClick={() => this.joinMyRequestedRoom(e)}>
 
