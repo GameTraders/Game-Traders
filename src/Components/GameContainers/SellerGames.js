@@ -2,7 +2,6 @@ import "./SellerGames.css";
 import React, { Component } from "react";
 import axios from 'axios'
 import { connect } from "react-redux";
-// import { connect } from "react-redux";
 
 class SellerGames extends Component {
   constructor() {
@@ -17,7 +16,6 @@ class SellerGames extends Component {
         games: res.data
       })
     })
-    // console.log('traderId:', this.props.traderId)
   }
 
   render() {

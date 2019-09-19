@@ -59,12 +59,10 @@ class Dashboard extends Component {
         const {user_id} = this.props.user
         const {id: game_id, game_name, background_image, released, platforms, genre, metacritic } = e
          await axios.post(`/api/newGames/${user_id}`, {game_id, game_name, background_image, released, platforms, genre, metacritic })
-        //  await axios.post(`/api/wishList/${user_id}`, {id})
     }
 
     render() {
         const {profile_pic} = this.props.user
-        // const {mRatedCheckBox, x360CheckBox, xOneCheckBox, ps2CheckBox, ps3CheckBox, ps4CheckBox, wiiCheckBox, switchCheckBox, gameBoyCheckBox } = this.state
         return(
             <div className="Dashboard">
                 <div className="Dashboard_NavBar">
@@ -74,8 +72,6 @@ class Dashboard extends Component {
                         </div>
                         <div className="nav-links">
                             <Link to={{pathname: `/userProfile/${this.props.user.user_id}`}} ><img className="user-pic" alt="" src={profile_pic} /></Link>
-                            {/* <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1> */}
-                            {/* <Link to={{pathname: `/userProfile/${this.props.user.user_id}`, state: this.props.user}} ><h1 className="link" ><User size="large" color="#28AB53" /></h1></Link> */}
                         </div>
                         <div className="Dashboard-search-container">
                                 <button onClick={this.getName} className="game-search-submit"><FormSearch color="#FC9B00" /></button>

@@ -1,7 +1,6 @@
 import "./Trader.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AddPoints from '../Wizards/AddPoints/AddPoints'
 import MyGames from '../GameContainers/MyGames'
 import SellerGames from '../GameContainers/SellerGames'
 import { AddCircle, Up, Down, Home, Power } from 'grommet-icons';
@@ -33,19 +32,15 @@ class Trader extends Component {
   componentDidMount(){
 
         socket.on('room joined', data => {
-          // console.log({data});
           const {roomId} = this.props.match.params
-          // console.log({roomId});
           this.setState({ 
             obj: data,
             roomId 
           })
         })
         socket.on('trader room joined', data => {
-          // console.log({data});
+          console.log({data});
           const {roomId} = this.props.match.params
-          // const {myTrade}= data
-          // console.log({roomId});
           this.setState({ 
             obj: data,
             roomId,
@@ -53,26 +48,20 @@ class Trader extends Component {
           })
         })
         socket.on('message received', data => {
-          // console.log('message received:', data);
           const {messages} = this.state
           let messagesArray = [...messages]
-          // console.log({messages});
           messagesArray.push(data)
           this.setState({
             messages: messagesArray
           })
         })
         socket.on('trade received', myTrade => {
-          // console.log('element:', myTrade)
           this.setState({ myTrade })
         })
         socket.on('trade broadcast', obj => {
-          // console.log("broadcast", obj);
           this.setState({obj})
         })
         socket.on("confirmation received", (userId) => {
-          // console.log("props:", this.props.user);
-          // console.log("userId confirmation:", userId);
           const {user_id: myId} = this.props.user
           if (userId === myId){
             this.setState({myConfirmed: !this.state.myConfirmed})
@@ -89,7 +78,6 @@ class Trader extends Component {
         
   }
 componentDidUpdate(){
-  // console.log('CDM:',this.state.obj, this.state.obj.userId, this.state.obj.traderId, this.state.tradePoints2)
   this.tradePoints(this.state.tradePoints2)
 }
   componentWillUnmount() {
@@ -113,14 +101,8 @@ componentDidUpdate(){
   sendMessage = (e) => {
     e.preventDefault()
     const message = e.target.elements.chatInput.value
-    //  console.log({message});
-    //  console.log('props for message:', this.props.user);
     const {roomId} = this.props.match.params
     const { user_id: userId, username, profile_pic: profilePic } = this.props.user
-    // console.log("roomId:", roomId);
-    // console.log("userId:", userId);
-    // console.log("username:", username);
-    // console.log("profilePic:", profilePic);
     socket.emit('send out message', {
       message,
       roomId,
@@ -129,10 +111,9 @@ componentDidUpdate(){
       profilePic,
       createdAt: moment().startOf('minutes').fromNow()
     })
-    document.getElementsByClassName('chat-input')[0].value=null
+    document.getElementsByClassName('chat-input')[1].value=null
   }
 tradePoints = (body) => {
-  // console.log('body from front end:', body)
   if (this.state.myConfirmed === true && this.state.theirConfirmed === true && +this.state.tradePoints2 > 0) {
     axios.post(`/api/trader/points/${this.state.obj.user_id}/${this.state.obj.trader_id}`, {body})
   } else {
@@ -155,19 +136,12 @@ resetPoints = () => {
   })
 }
   render() {
-    // console.log('myTrade Data:',this.state.myTrade)
-    // console.log('data:', this.state.obj);
-    // console.log("params:", this.props.match.params);
-    console.log('State:',this.state)
-    console.log('props:', this.props.match.params.user_id, this.props.match.params.trader_id)
     const {roomId} = this.props.match.params
-    // console.log({roomId});
     const { username: myName, profile_pic: myPic,  user_id: myId } = this.props.user
     const { myTrade, game_name, points } = this.state.myTrade
     const { traderRating, traderName, traderProfilePic, theirGamePoints, theirTrade, theirGameName } = this.state.obj
 
     let messages = this.state.messages.map((e, i) => {
-      // console.log("element:", e);
       return (
         <div key={i}> 
         {e.username === myName ?
@@ -189,8 +163,6 @@ resetPoints = () => {
     return (
       <div className="Trader">
 
-      <AddPoints />
-
         <div className="Dashboard_NavBar">
                 <h1 className="link" onClick={this.logout}><Power size="large" color="#AED429" /></h1>
         
@@ -199,7 +171,6 @@ resetPoints = () => {
           </div>
 
           <div className="nav-links">
-            {/* <Link className="link" to={{pathname: `/userProfile/${user.user_id}`}} ><img className="user-pic" alt="" src={user.profile_pic} /></Link> */}
             <Link to="/home" ><h1 className="link" ><Home size="large" color="#AED429" /></h1></Link>
           </div>
 

@@ -7,7 +7,6 @@ import UserProfile from './Components/Profiles/UserProfile'
 import Trader from './Components/Trader/Trader'
 import Trades from './Components/Trades/Trades'
 import About from './Components/About/About'
-import AddPoints from './Components/Wizards/AddPoints/AddPoints'
 
 export default (
     <Switch>
@@ -18,7 +17,6 @@ export default (
         <Route component = {UserProfile} path = '/userProfile/:user_id' exact/>
         <Route component = {Trades} path = '/trades/:game_id'/>
         <Route component = {About} path = '/about'/>
-        <Route component = {AddPoints} path = '/add-points'/>
         <Route/>
     </Switch>
 )

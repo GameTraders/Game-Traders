@@ -18,23 +18,18 @@ module.exports = {
     },
     getUserGames: (req, res) => {
         //tested and working with postman
-        console.log("session", req.session)
         const db = req.app.get('db')
         const { user_id } = req.session.user
-        console.log('session:',req.session.user)
         db.get_user_games([user_id]).then(result => {
             res.status(200).send(result)
         })
     },
     getTraderGames: (req, res) => {
         //tested and working with postman
-        console.log('hit trader:', req.params)
         const db = req.app.get('db')
         const { traderId } = req.params
-        console.log("params:", req.params.traderId);
         db.get_user_games([traderId]).then(result => {
             res.status(200).send(result)
-            console.log("game results", result);
         })
     },
     getUserWishlist: (req, res) => {
@@ -60,20 +55,16 @@ module.exports = {
     addToWishlist: async (req, res) => {
         const db = req.app.get('db')
         const { user_id } = req.params
-        console.log('user_id on wishlist add', user_id)
-        console.log('req.body on add to wishlist', req.body)
         const { id, name, background_image, released, metacritic } = req.body
         const game = await db.search_for_game(id)
         if (game.length === 0) {
             await db.save_new_game(id, name, background_image, released, metacritic)
         }
         const alreadyadded = await db.search_wish_list_gameid(id, user_id)
-        console.log('game already added to wishlist',alreadyadded)
         if (alreadyadded.length > 0) {
             return res.status(200).send({message: "already added"})
         }
       let added =  await db.add_to_wishlist(user_id, id)
-      console.log("game added",added)
         res.status(200).send({ message: "game Added" })
     },
     addToGamelist: async (req, res) => {
