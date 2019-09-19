@@ -132,7 +132,7 @@ componentDidUpdate(){
     document.getElementsByClassName('chat-input')[0].value=null
   }
 tradePoints = (body) => {
-  console.log('body from front end:', body)
+  // console.log('body from front end:', body)
   if (this.state.myConfirmed === true && this.state.theirConfirmed === true && +this.state.tradePoints2 > 0) {
     axios.post(`/api/trader/points/${this.state.obj.user_id}/${this.state.obj.trader_id}`, {body})
   } else {
