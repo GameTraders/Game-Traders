@@ -16,7 +16,6 @@ class WishList extends Component {
     };
   }
   componentDidMount() {
-
     axios.get(`/api/wishlist/${this.props.user.user_id}`).then(res => {
       this.setState({
           wishlist: res.data

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { AddCircle, Transaction, Home, Power } from 'grommet-icons';
 import MyGames from '../GameContainers/MyGames'
 import WishList from '../GameContainers/WishList'

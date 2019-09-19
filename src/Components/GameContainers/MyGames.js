@@ -14,7 +14,7 @@ class MyGames extends Component {
       selectedTrade: {}
     };
   }
-  componentDidMount(){
+  componentDidMount = ()=>{
     axios.get(`/api/games/${this.props.user.user_id}`).then(res => {
       this.setState({
         games: res.data

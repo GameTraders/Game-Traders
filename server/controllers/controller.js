@@ -18,7 +18,6 @@ module.exports = {
     },
     getUserGames: (req, res) => {
         //tested and working with postman
-        console.log('hit')
         console.log("session", req.session)
         const db = req.app.get('db')
         const { user_id } = req.session.user

@@ -145,7 +145,7 @@ resetPoints = () => {
     // console.log({roomId});
     const { username: myName, profile_pic: myPic,  user_id: myId } = this.props.user
     const { myTrade, game_name, points } = this.state.myTrade
-    const { traderRating, traderName, traderId, traderProfilePic, theirGamePoints, theirTrade, theirGameName } = this.state.obj
+    const { traderRating, traderName, traderProfilePic, theirGamePoints, theirTrade, theirGameName } = this.state.obj
 
     let messages = this.state.messages.map((e, i) => {
       // console.log("element:", e);
