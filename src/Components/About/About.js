@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react"
 import { Link } from 'react-router-dom'
 import { Home } from 'grommet-icons';
 import GTLogo from '../../GTLogo.png'
-import { TweenMax, Power3, Elastic } from "gsap/all"
+import { TweenMax, Elastic } from "gsap/all"
 import "./About.css"
 
 

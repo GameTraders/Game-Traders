@@ -25,8 +25,7 @@ class UserProfile extends Component {
 
 componentDidMount(){
   const {user_id: myId} = this.props.user
-  console.log('hit cdm in profile');
-  axios.get("/api/test")
+  // console.log('hit cdm in profile');
   const {user_id} = this.props.user
   socket.emit('get requested rooms', user_id)
   socket.on('found requested rooms', requestedRooms => {
@@ -39,16 +38,16 @@ componentDidMount(){
 }
 
 joinRequestedRoom = (e) => {
-  console.log('element:', e)
-  // const { user_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: myTrade, user_points: traderPoints, user_rating: traderRating } = e
-  // const data = { traderProfilePic, traderName, myTrade, traderPoints, traderRating, roomId }
-  // this.props.saveTraderId(user_id)
-  // socket.emit('join existing room', data)
-  // this.props.history.push(`/trader/${roomId}`)
+  // console.log('element:', e)
+  const { user_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: myTrade, user_points: traderPoints, user_rating: traderRating } = e
+  const data = { traderProfilePic, traderName, myTrade, traderPoints, traderRating, roomId }
+  this.props.saveTraderId(user_id)
+  socket.emit('join existing room', data)
+  this.props.history.push(`/trader/${roomId}`)
 }
 
 joinMyRequestedRoom = (e) => {
-  console.log('element:', e)
+  // console.log('element:', e)
   // const { user_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: myTrade, user_points: traderPoints, user_rating: traderRating } = e
   // const data = { traderProfilePic, traderName, myTrade, traderPoints, traderRating, roomId }
   // this.props.saveTraderId(user_id)
@@ -67,13 +66,13 @@ logout = () => {
 };
 
   render() {
-    console.log('requested rooms:', this.state.requestedRooms);
+    // console.log('requested rooms:', this.state.requestedRooms);
       const {username, user_points, profile_pic, user_rating} = this.props.user
     let requestedRoomsCard = this.state.requestedRooms.map((e, i) => {
       return (
-          <div key={i} className="pastTradeBox" onClick={() => this.joinRequestedRoom(e)}>
+          <div key={`${i}.4`} className="pastTradeBox" onClick={() => this.joinRequestedRoom(e)}>
 
-              <div key={i} className="my-game-mini">
+              <div key={`${i}.5`} className="my-game-mini">
                 <h4 className="mini-name">
                   {e.username.length > 5 ? `${e.username.substring(0, 6)}...` : `${e.username}`}
                 </h4>
@@ -85,7 +84,7 @@ logout = () => {
 
           <div className='tradeArrows'><Transaction color='#AED429' size='small' /></div>
 
-              <div key={i} className="my-game-mini">
+              <div key={`${i}.6`} className="my-game-mini">
                 <h4 className="mini-name">
                   {e.room_id.length > 5 ? `${e.room_id.substring(0, 6)}...` : `${e.room_id}`}
                 </h4>
@@ -100,9 +99,9 @@ logout = () => {
   })
   let myRequestedRoomsCard = this.state.myRequestedRooms.map((e, i) => {
     return (
-        <div key={i} className="pastTradeBox" onClick={() => this.joinMyRequestedRoom(e)}>
+        <div key={`${i}.1`} className="pastTradeBox" onClick={() => this.joinMyRequestedRoom(e)}>
 
-            <div key={i} className="my-game-mini">
+            <div key={`${i}.2`} className="my-game-mini">
               <h4 className="mini-name">
                 {e.username.length > 5 ? `${e.username.substring(0, 6)}...` : `${e.username}`}
               </h4>
@@ -114,7 +113,7 @@ logout = () => {
 
         <div className='tradeArrows'><Transaction color='#AED429' size='small' /></div>
 
-            <div key={i} className="my-game-mini">
+            <div key={`${i}.3`} className="my-game-mini">
               <h4 className="mini-name">
                 {e.room_id.length > 5 ? `${e.room_id.substring(0, 6)}...` : `${e.room_id}`}
               </h4>

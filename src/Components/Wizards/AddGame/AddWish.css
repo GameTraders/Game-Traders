@@ -70,6 +70,10 @@
         justify-content: center;
     }
     
+    .submit-wish:hover {
+        cursor: pointer;
+    }
+    
     .console-icon {
         width: 18px;
         margin-left: 6px;

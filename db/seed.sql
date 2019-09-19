@@ -29,6 +29,7 @@ id serial primary key);
 create table game_list (
 user_id int references gt_users(user_id),
 game_id int references games(game_id),
+points int,
 id serial primary key);
 
 create table chat (

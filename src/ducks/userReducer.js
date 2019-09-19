@@ -11,7 +11,7 @@ const LOGIN = "LOGIN"
 const LOGOUT = "LOGOUT"
 const REFRESH = "REFRESH"
 const SAVE_TRADER_ID = "SAVE_TRADER_ID"
-const UPDATE_POINTS = 'UPDATE_POINTS'
+// const UPDATE_POINTS = 'UPDATE_POINTS'
 
 export function saveTraderId (traderId) {
     return {
@@ -42,7 +42,7 @@ export function logout() {
 export function refreshUser() {
     let user = axios.get("/api/checkSession")
     .then(res => res.data)
-    console.log({user});
+    // console.log({user});
     return {
         type: REFRESH,
         payload: user
@@ -75,7 +75,7 @@ export default function(state = initialState, action) {
         case LOGIN + "_REJECTED":
             return { ...state }
         case LOGIN + "_FULFILLED":
-            console.log({payload});
+            // console.log({payload});
             return { user: payload, loggedIn: true }
         case LOGOUT:
             return { ...state, user: {}, loggedIn: false }
