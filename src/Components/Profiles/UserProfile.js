@@ -21,12 +21,7 @@ class UserProfile extends Component {
     };
   }
 
-// componentDidUpdate(prevProps, prevState){
-//   const {user_id} = this.props.user
-//   if (prevProps.user.user_id !== user_id) {
-//     this.props.history.push(`/userProfile/${user_id}`)
-//   }
-// }
+
 componentDidMount(){
   console.log('hit cdm in profile');
   axios.get("/api/test")

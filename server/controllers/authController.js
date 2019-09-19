@@ -91,7 +91,7 @@ console.log('no session found')
       if (user) {
         delete user[0].hash;
         req.session.user = user[0];
-        res.send(user);
+        res.send(req.session.user);
       } else {
         res.status(403).send({ loggedIn: false });
       }

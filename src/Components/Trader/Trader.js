@@ -10,6 +10,7 @@ import {logout} from '../../ducks/userReducer'
 import socket from '../../sockets'
 import GTLogo from '../../GTLogo.png'
 import Stripe from '../Stripe/Stripe'
+import axios from 'axios'
 const moment = require('moment')
 
 class Trader extends Component {
@@ -102,11 +103,27 @@ class Trader extends Component {
       userId,
       username,
       profilePic,
-      createdAt: moment().startOf('minutes').fromNow()
+      createdAt: moment().startOf('minutes').fromNow(),
+      tradePoints1: 0,
+      tradePoints2: 0
     })
     document.getElementsByClassName('chat-input')[0].value=null
   }
-
+tradePoints = (body) => {
+  axios.post('/api/tradePoints', body)
+}
+handleChange = e => {
+  this.setState({tradePoints1: e.target.value})
+}
+setTradePoints = () => {
+  this.setState({tradePoints2: this.state.tradePoints1})
+}
+resetPoints = () => {
+  this.setState({
+    tradePoints1: 0,
+    tradePoints2: 0
+  })
+}
   render() {
     console.log('data:', this.state.obj);
     console.log("params:", this.props.match.params);
@@ -165,8 +182,18 @@ class Trader extends Component {
                     <h1>{this.props.user.user_points}</h1>
                     <div className="point-adder">
                         <p>Points</p>
-                        {this.state.points === false ?<div className="add-points-btn"> <AddCircle color='rgb(252, 155, 0' size='medium' onClick={() => this.setState({points: !this.state.points})}/> </div>: <Stripe user_id={this.props.match.params.user_id} toggleChange={this.toggleChange}/>}
+                        {this.state.points === false ?<div className="add-points-btn"> <AddCircle color='rgb(252, 155, 0' size='medium' onClick={() => this.setState({points: !this.state.points})}/> </div>: <Stripe user_id={this.props.user.user_id} toggleChange={this.toggleChange}/>}
                     </div>
+                </div>
+                <br/>
+                <br/>
+                <div className='point-add' style={{display: 'flex', flexDirection: 'column'}}>
+                  <h3>Add Points to Trade</h3>
+                  
+                 {this.state.tradePoints2 > this.props.user.user_points ? <div><h4>Please Purchase additional Points</h4><button className='confirm' onClick={() => this.resetPoints()}>Reset</button></div> : this.state.tradePoints2 > 0 ? <div className='trader-points'>
+                   <h2>{this.state.tradePoints2}</h2><br/><button className='confirm' onClick={() => this.resetPoints()}>Reset Points</button>
+                 </div> : <div><br/><input className='chat-input' type="text" placeholder='type points here' onChange={(e) => this.handleChange(e)}/>
+                 <br/><br/><button className='confirm' onClick={() => this.setTradePoints() }>Add Points</button></div>}
                 </div>
             </div>
             <div className="trade-section" >
@@ -223,6 +250,7 @@ class Trader extends Component {
                 <img className="profile-pic" alt="" src={traderProfilePic} />
                 <h3 className="seller-username">{traderName}</h3>
                 <p className="trade-count">18 Trades</p>
+            <div>{this.state.tradePoints2 > this.props.user.user_points ? null : this.state.tradePoints2 > 0 ? <div className='trader-points'><br/><br/><h3>Points Added to Trade</h3><h2>{this.state.tradePoints2}</h2></div> : null}</div>
             </div>
         </div>
         <section className="games" >

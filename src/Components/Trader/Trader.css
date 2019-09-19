@@ -18,7 +18,18 @@
   h1{
       color: #E5E5E5;
   }
-
+.point-add h3 {
+    color: #AED429;
+}
+.point-add h4 {
+    color: red;
+}
+  .trader-points h3 {
+      color: #AED429;
+  }
+  .trader-points h2 {
+      color: #E5E5E5
+  }
   p{
       font-weight: bold;
   }
