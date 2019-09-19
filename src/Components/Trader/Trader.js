@@ -31,19 +31,19 @@ class Trader extends Component {
   componentDidMount(){
 
         socket.on('room joined', data => {
-          console.log({data});
+          // console.log({data});
           const {roomId} = this.props.match.params
-          console.log({roomId});
+          // console.log({roomId});
           this.setState({ 
             obj: data,
             roomId 
           })
         })
         socket.on('trader room joined', data => {
-          console.log({data});
+          // console.log({data});
           const {roomId} = this.props.match.params
           // const {myTrade}= data
-          console.log({roomId});
+          // console.log({roomId});
           this.setState({ 
             obj: data,
             roomId,
@@ -51,26 +51,26 @@ class Trader extends Component {
           })
         })
         socket.on('message received', data => {
-          console.log('message received:', data);
+          // console.log('message received:', data);
           const {messages} = this.state
           let messagesArray = [...messages]
-          console.log({messages});
+          // console.log({messages});
           messagesArray.push(data)
           this.setState({
             messages: messagesArray
           })
         })
         socket.on('trade received', myTrade => {
-          console.log('element:', myTrade)
+          // console.log('element:', myTrade)
           this.setState({ myTrade })
         })
         socket.on('trade broadcast', obj => {
-          console.log("broadcast", obj);
+          // console.log("broadcast", obj);
           this.setState({obj})
         })
         socket.on("confirmation received", (userId) => {
-          console.log("props:", this.props.user);
-          console.log("userId confirmation:", userId);
+          // console.log("props:", this.props.user);
+          // console.log("userId confirmation:", userId);
           const {user_id: myId} = this.props.user
           if (userId === myId){
             this.setState({myConfirmed: !this.state.myConfirmed})
@@ -103,14 +103,14 @@ class Trader extends Component {
   sendMessage = (e) => {
     e.preventDefault()
     const message = e.target.elements.chatInput.value
-     console.log({message});
-     console.log('props for message:', this.props.user);
+    //  console.log({message});
+    //  console.log('props for message:', this.props.user);
     const {roomId} = this.props.match.params
     const { user_id: userId, username, profile_pic: profilePic } = this.props.user
-    console.log("roomId:", roomId);
-    console.log("userId:", userId);
-    console.log("username:", username);
-    console.log("profilePic:", profilePic);
+    // console.log("roomId:", roomId);
+    // console.log("userId:", userId);
+    // console.log("username:", username);
+    // console.log("profilePic:", profilePic);
     socket.emit('send out message', {
       message,
       roomId,
@@ -139,16 +139,17 @@ resetPoints = () => {
   })
 }
   render() {
-    console.log('data:', this.state.obj);
-    console.log("params:", this.props.match.params);
+    // console.log('myTrade Data:',this.state.myTrade)
+    // console.log('data:', this.state.obj);
+    // console.log("params:", this.props.match.params);
     const {roomId} = this.props.match.params
-    console.log({roomId});
+    // console.log({roomId});
     const { username: myName, profile_pic: myPic, user_points: myPoints, user_rating: myRating, user_id: myId } = this.props.user
     const { myTrade, game_name, points } = this.state.myTrade
     const { traderRating, traderName, traderId, traderProfilePic, theirGamePoints, theirTrade, theirGameName } = this.state.obj
 
     let messages = this.state.messages.map((e, i) => {
-      console.log("element:", e);
+      // console.log("element:", e);
       return (
         <div key={i}> 
         {e.username === myName ?
@@ -201,13 +202,13 @@ resetPoints = () => {
                 </div>
                 <br/>
                 <br/>
-                <div className='point-add' style={{display: 'flex', flexDirection: 'column'}}>
+                <div className='point-add' style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
                   <h3>Add Points to Trade</h3>
                   
                  {this.state.tradePoints2 > this.props.user.user_points ? <div><h4>Please Purchase additional Points</h4><button className='confirm' onClick={() => this.resetPoints()}>Reset</button></div> : this.state.tradePoints2 > 0 ? <div className='trader-points'>
-                   <h2>{this.state.tradePoints2}</h2><br/><button className='confirm' onClick={() => this.resetPoints()}>Reset Points</button>
-                 </div> : <div><br/><input className='chat-input' type="text" placeholder='type points here' onChange={(e) => this.handleChange(e)}/>
-                 <br/><br/><button className='confirm' onClick={() => this.setTradePoints() }>Add Points</button></div>}
+                   <h2>{this.state.tradePoints2}</h2><button className='confirm' onClick={() => this.resetPoints()}>Reset Points</button>
+                 </div> : <div><input className='chat-input' type="text" placeholder='type points here' onChange={(e) => this.handleChange(e)}/>
+                <button className='confirm' onClick={() => this.setTradePoints() }>Add Points</button></div>}
                 </div>
             </div>
             <div className="trade-section" >
