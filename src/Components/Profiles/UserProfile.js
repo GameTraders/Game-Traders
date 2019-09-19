@@ -46,12 +46,12 @@ joinRequestedRoom = (e) => {
 }
 
 joinMyRequestedRoom = (e) => {
-  // console.log('element:', e)
-  // const { user_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: myTrade, user_points: traderPoints, user_rating: traderRating } = e
-  // const data = { traderProfilePic, traderName, myTrade, traderPoints, traderRating, roomId }
-  // this.props.saveTraderId(user_id)
-  // socket.emit('join existing room', data)
-  // this.props.history.push(`/trader/${roomId}`)
+  console.log('element:', e)
+  const { user_id, room_id: roomId, profile_pic: traderProfilePic, username: traderName, game_trade: myTrade, user_points: traderPoints, user_rating: traderRating } = e
+  const data = { traderProfilePic, traderName, myTrade, traderPoints, traderRating, roomId }
+  this.props.saveTraderId(user_id)
+  socket.emit('join existing room', data)
+  this.props.history.push(`/trader/${roomId}`)
 }
 
 toggleChange = () => {

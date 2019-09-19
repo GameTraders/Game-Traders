@@ -2,13 +2,13 @@ module.exports = {
     setSocketListeners: function ( socket, db, io ) {
         // JOIN ROOM
         socket.on('join new room', data => {
-            // console.log("room data:", data);
+            console.log("room data:", data);
             const { roomId } = data
             socket.join(roomId)
             io.in(roomId).emit('room joined', data)
         })
         socket.on('join existing room', data => {
-            // console.log("existing room data:", data);
+            console.log("existing room data:", data);
             const {roomId} = data
             socket.join(roomId)
             socket.emit('trader room joined', data)
@@ -49,7 +49,11 @@ module.exports = {
             const game = { theirTrade, theirGameName, theirGamePoints, traderName, traderRating, traderProfilePic }
             socket.to(data.room).broadcast.emit('trade broadcast', game)
         })
-
+        // SENDING POINTS
+        socket.on('send points', data => {
+            const {tradePoints1, roomId} = data
+            socket.to(roomId).broadcast.emit('points received', tradePoints1)
+        })
 
         // CONFIRM TRADE
         socket.on("send confirmation", confirmation => {

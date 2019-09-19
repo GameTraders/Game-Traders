@@ -108,6 +108,10 @@ module.exports = {
     test: (req,res) => {
         console.log('mounting dashboard')
         console.log(req.session)
+    },
+    addTradePoints: (req, res) => {
+        console.log('trade points params:',req.params)
+        console.log('trade points body:', req.body)
     }
 }
 

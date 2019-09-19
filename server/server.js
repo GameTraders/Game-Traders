@@ -49,6 +49,7 @@ app.put('/api/updateUsers/:user_id', ctrl.updateUserProfile)
 app.get('/api/game/:game_id', ctrl.getGameById)
 app.get('/api/getTrades/:game_id', ctrl.getTrades)
 app.post('/api/payment/:user_id',strctrl.pay)
+app.post('/api/trader/points/:user_id/:trader_id', ctrl.addTradePoints)
 app.get('/api/getusers', aCtrl.getUser)
 
 //API REQUESTS

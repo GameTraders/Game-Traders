@@ -24,7 +24,9 @@ class Trader extends Component {
       messages: [],
       myTrade: {},
       myConfirmed: false,
-      theirConfirmed: false
+      theirConfirmed: false,
+      tradePoints1: 0,
+      tradePoints2: 0
     };
   }
 
@@ -78,13 +80,21 @@ class Trader extends Component {
           this.setState({theirConfirmed: !this.state.theirConfirmed})
           }
         })
-
+        socket.on('points received', points => {
+          this.setState({
+            tradePoints2: points,
+            tradePoints1: points
+          })
+        })
+        
   }
-
+componentDidUpdate(){
+  // console.log('CDM:',this.state.obj, this.state.obj.userId, this.state.obj.traderId, this.state.tradePoints2)
+  this.tradePoints(this.state.tradePoints2)
+}
   componentWillUnmount() {
     socket.emit('disconnect', this.state.roomId)
   }
-  
 
   logout = ()=> {
       this.props.logout()
@@ -117,20 +127,26 @@ class Trader extends Component {
       userId,
       username,
       profilePic,
-      createdAt: moment().startOf('minutes').fromNow(),
-      tradePoints1: 0,
-      tradePoints2: 0
+      createdAt: moment().startOf('minutes').fromNow()
     })
     document.getElementsByClassName('chat-input')[0].value=null
   }
 tradePoints = (body) => {
-  axios.post('/api/tradePoints', body)
+  // console.log('body from front end:', body)
+  if (this.state.myConfirmed === true && this.state.theirConfirmed === true && +this.state.tradePoints2 > 0) {
+    axios.post(`/api/trader/points/${this.state.obj.user_id}/${this.state.obj.trader_id}`, {body})
+  } else {
+    return
+  }
 }
 handleChange = e => {
   this.setState({tradePoints1: e.target.value})
 }
 setTradePoints = () => {
   this.setState({tradePoints2: this.state.tradePoints1})
+  const {tradePoints1, roomId} = this.state
+  let data = {tradePoints1, roomId}
+  socket.emit("send points",data)
 }
 resetPoints = () => {
   this.setState({
@@ -139,8 +155,11 @@ resetPoints = () => {
   })
 }
   render() {
+    // console.log('myTrade Data:',this.state.myTrade)
     // console.log('data:', this.state.obj);
     // console.log("params:", this.props.match.params);
+    console.log('State:',this.state)
+    console.log('props:', this.props.match.params.user_id, this.props.match.params.trader_id)
     const {roomId} = this.props.match.params
     // console.log({roomId});
     const { username: myName, profile_pic: myPic,  user_id: myId } = this.props.user
@@ -187,7 +206,7 @@ resetPoints = () => {
         </div>
 
         <div className="trade-container" >
-            <div className="user-section" >
+            <div className="user-section" id='user-section' >
                 <div className="user-rating" >{this.props.user.user_rating}%</div>
                 <Link className="link" to={{pathname: `/userProfile/${myId}`}} ><img className="profile-pic" alt="" src={this.props.user.profile_pic} /></Link>
                 <h3 className="username">{this.props.user.username}</h3>
@@ -201,13 +220,13 @@ resetPoints = () => {
                 </div>
                 <br/>
                 <br/>
-                <div className='point-add' style={{display: 'flex', flexDirection: 'column'}}>
+                <div className='point-add' style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', bottom: '20px'}}>
                   <h3>Add Points to Trade</h3>
                   
                  {this.state.tradePoints2 > this.props.user.user_points ? <div><h4>Please Purchase additional Points</h4><button className='confirm' onClick={() => this.resetPoints()}>Reset</button></div> : this.state.tradePoints2 > 0 ? <div className='trader-points'>
-                   <h2>{this.state.tradePoints2}</h2><br/><button className='confirm' onClick={() => this.resetPoints()}>Reset Points</button>
-                 </div> : <div><br/><input className='chat-input' type="text" placeholder='type points here' onChange={(e) => this.handleChange(e)}/>
-                 <br/><br/><button className='confirm' onClick={() => this.setTradePoints() }>Add Points</button></div>}
+                   <h2>{this.state.tradePoints2}</h2><button className='confirm' onClick={() => this.resetPoints()}>Reset Points</button>
+                 </div> : <div><input className='chat-input' type="text" placeholder='type points here' onChange={(e) => this.handleChange(e)}/>
+                <button className='confirm' onClick={() => this.setTradePoints() }>Add Points</button></div>}
                 </div>
             </div>
             <div className="trade-section" >
