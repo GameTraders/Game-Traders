@@ -22,7 +22,7 @@ describe('username and password login', function() {
 
  //Rob 3
 describe('click to add points', function(){
-    it('click on points button', function(){
+    it('T', function(){
         cy.wait(2000)
         cy.get('.add-points-btn').click()
         cy.get('.stripe > input').type('20')

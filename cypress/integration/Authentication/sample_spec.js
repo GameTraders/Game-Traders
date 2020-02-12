@@ -8,7 +8,7 @@ describe('input user name', function () {
 // Blake 2
 describe('input user password', function () {
     it('types password into password field', function() {
-        cy.get('.Authentication_Password_Container > input').type('yellow')
+        cy.get('.Authentication_Password_Container > input').type('green')
     })
 });
 //Blake 4
