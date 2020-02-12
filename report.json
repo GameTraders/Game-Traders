@@ -1,0 +1,165 @@
+Warning: We failed to trash the existing run results.
+
+This error will not alter the exit code.
+
+Error: Command failed: /Users/robertknowles/Library/Caches/Cypress/3.8.3/Cypress.app/Contents/Resources/app/packages/server/node_modules/trash/lib/macos-trash /Users/robertknowles/Desktop/DevMtn/Group-Project/game-traders/Game-Traders/cypress/videos/Profile
+“Profile” couldn’t be moved to the trash.
+
+    at ChildProcess.exithandler (child_process.js:308:12)
+    at ChildProcess.emit (events.js:203:13)
+    at maybeClose (internal/child_process.js:1021:16)
+    at Process.ChildProcess._handle.onexit (internal/child_process.js:283:5)
+
+
+====================================================================================================
+
+  (Run Starting)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Cypress:    3.8.3                                                                              │
+  │ Browser:    Electron 78 (headless)                                                             │
+  │ Specs:      1 found (Profile/profile_test_spec.js)                                             │
+  │ Searched:   cypress/integration/Profile/profile_test_spec.js                                   │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  Profile/profile_test_spec.js                                                    (1 of 1)
+{
+  "stats": {
+    "suites": 3,
+    "tests": 5,
+    "passes": 4,
+    "pending": 0,
+    "failures": 1,
+    "start": "2020-02-07T01:17:07.737Z",
+    "end": "2020-02-07T01:17:21.798Z",
+    "duration": 14061
+  },
+  "tests": [
+    {
+      "title": "input username into username field",
+      "fullTitle": "username and password login input username into username field",
+      "duration": 1005,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "input password into password field",
+      "fullTitle": "username and password login input password into password field",
+      "duration": 328,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "click login button for authentication",
+      "fullTitle": "username and password login click login button for authentication",
+      "duration": 106,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "click on user profile picture",
+      "fullTitle": "navigate to user profile click on user profile picture",
+      "duration": 9402,
+      "currentRetry": 0,
+      "err": {
+        "message": "Timed out retrying: Expected to find element: '.user-pic', but never found it.",
+        "name": "CypressError",
+        "stack": "CypressError: Timed out retrying: Expected to find element: '.user-pic', but never found it.\n    at Object.cypressErr (http://localhost:3000/__cypress/runner/cypress_runner.js:86207:11)\n    at Object.throwErr (http://localhost:3000/__cypress/runner/cypress_runner.js:86162:18)\n    at Object.throwErrByPath (http://localhost:3000/__cypress/runner/cypress_runner.js:86194:17)\n    at retry (http://localhost:3000/__cypress/runner/cypress_runner.js:76849:16)\n    at onFailFn (http://localhost:3000/__cypress/runner/cypress_runner.js:65634:16)\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:120203:23)\n    at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:118139:31)\n    at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:118196:18)\n    at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:118241:10)\n    at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:118316:18)\n    at Async../node_modules/bluebird/js/release/async.js.Async._drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:114928:16)\n    at Async../node_modules/bluebird/js/release/async.js.Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:114938:10)\n    at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:114812:14)"
+      }
+    },
+    {
+      "title": "T",
+      "fullTitle": "click to add points T",
+      "duration": 2415,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ],
+  "pending": [],
+  "failures": [
+    {
+      "title": "click on user profile picture",
+      "fullTitle": "navigate to user profile click on user profile picture",
+      "currentRetry": 0,
+      "err": {
+        "message": "Timed out retrying: Expected to find element: '.user-pic', but never found it.",
+        "name": "CypressError",
+        "stack": "CypressError: Timed out retrying: Expected to find element: '.user-pic', but never found it.\n    at Object.cypressErr (http://localhost:3000/__cypress/runner/cypress_runner.js:86207:11)\n    at Object.throwErr (http://localhost:3000/__cypress/runner/cypress_runner.js:86162:18)\n    at Object.throwErrByPath (http://localhost:3000/__cypress/runner/cypress_runner.js:86194:17)\n    at retry (http://localhost:3000/__cypress/runner/cypress_runner.js:76849:16)\n    at onFailFn (http://localhost:3000/__cypress/runner/cypress_runner.js:65634:16)\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:120203:23)\n    at Promise._settlePromiseFromHandler (http://localhost:3000/__cypress/runner/cypress_runner.js:118139:31)\n    at Promise._settlePromise (http://localhost:3000/__cypress/runner/cypress_runner.js:118196:18)\n    at Promise._settlePromise0 (http://localhost:3000/__cypress/runner/cypress_runner.js:118241:10)\n    at Promise._settlePromises (http://localhost:3000/__cypress/runner/cypress_runner.js:118316:18)\n    at Async../node_modules/bluebird/js/release/async.js.Async._drainQueue (http://localhost:3000/__cypress/runner/cypress_runner.js:114928:16)\n    at Async../node_modules/bluebird/js/release/async.js.Async._drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:114938:10)\n    at Async.drainQueues (http://localhost:3000/__cypress/runner/cypress_runner.js:114812:14)"
+      }
+    }
+  ],
+  "passes": [
+    {
+      "title": "input username into username field",
+      "fullTitle": "username and password login input username into username field",
+      "duration": 1005,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "input password into password field",
+      "fullTitle": "username and password login input password into password field",
+      "duration": 328,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "click login button for authentication",
+      "fullTitle": "username and password login click login button for authentication",
+      "duration": 106,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "T",
+      "fullTitle": "click to add points T",
+      "duration": 2415,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ]
+}
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        5                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      1                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  1                                                                                │
+  │ Video:        true                                                                             │
+  │ Duration:     14 seconds                                                                       │
+  │ Spec Ran:     Profile/profile_test_spec.js                                                     │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  /Users/robertknowles/Desktop/DevMtn/Group-Project/game-traders/Game-Traders/cypr     (1280x720)
+     ess/screenshots/Profile/profile_test_spec.js/navigate to user profile -- click o               
+     n user profile picture (failed).png                                                            
+
+
+  (Video)
+
+  -  Started processing:  Compressing to 32 CRF                                                     
+  -  Finished processing: /Users/robertknowles/Desktop/DevMtn/Group-Project/game-trad     (1 second)
+                          ers/Game-Traders/cypress/videos/Profile/profile_test_spec.j               
+                          s.mp4                                                                     
+
+
+====================================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped  
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ✖  Profile/profile_test_spec.js             00:14        5        4        1        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ✖  1 of 1 failed (100%)                     00:14        5        4        1        -        -  
+

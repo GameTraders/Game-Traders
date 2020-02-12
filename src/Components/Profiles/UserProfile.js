@@ -110,7 +110,7 @@ logout = () => {
 
             <div key={`${i}.3`} className="my-game-mini">
               <h4 className="mini-name">
-                {e.game_name.length > 5 ? `${e.game_name.substring(0, 6)}...` : `${e.game_name}`}
+                {/* {e.game_name.length > 5 ? `${e.game_name.substring(0, 6)}...` : `${e.game_name}`} */}
               </h4>
               <h4 className="mini-name-hover">{e.game_name}</h4>
               <div className="home-mini-dispay">
